@@ -57,8 +57,7 @@ public class SheetsAndJava {
         return response.getValues();
     }
 
-    public void addEntryToSheet( String currentDate, String miles) throws IOException,
-            GeneralSecurityException {
+    public void addEntryToSheet( String currentDate, String miles) throws IOException, GeneralSecurityException {
         sheetService = getSheetService();
         ValueRange appendBody = new ValueRange()
                 .setValues( Collections.singletonList( Arrays.asList( currentDate , miles ) ) );
