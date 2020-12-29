@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 group 'org.example'
@@ -17,9 +19,17 @@ dependencies {
     compile 'com.google.apis:google-api-services-sheets:v4-rev516-1.23.0'
     compile group: 'org.decimal4j', name: 'decimal4j', version: '1.0.3'
     compile 'joda-time:joda-time:2.10.8'
+    mainClassName = 'Main'
+
 }
 
 test {
     useJUnitPlatform()
 }
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+    version = '15'
+}
+
 

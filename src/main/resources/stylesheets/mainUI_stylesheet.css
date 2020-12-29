@@ -1,0 +1,16 @@
+.parent {
+-fx-background-color: #E0FFFF;
+}
+
+.nextBtn{
+-fx-background-color: #E0FFFF;
+-fx-text-fill: #000000;
+}
+
+.nextBtn:hover{
+-fx-background-color: #FFFFFF;
+-fx-text-fill: #000000;
+-fx-border-color: #000000;
+-fx-border-width: 1px;
+-fx-border-style: solid;
+}

@@ -1,7 +1,7 @@
 package util;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -19,6 +19,8 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.decimal4j.util.DoubleRounder;
 import org.joda.time.DateTime;
 
@@ -31,9 +33,10 @@ public class SheetsAndJava {
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
 
     private static Credential auth() throws IOException, GeneralSecurityException {
-        InputStream in = SheetsAndJava.class.getResourceAsStream( "/json/credentials.json" );
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load( JacksonFactory.getDefaultInstance(),
-                new InputStreamReader( in ) );
+        final java.util.logging.Logger buggyLogger = java.util.logging.Logger.getLogger(FileDataStoreFactory.class.getName());
+        buggyLogger.setLevel(java.util.logging.Level.SEVERE);
+        InputStreamReader in = new InputStreamReader(new FileInputStream("src/main/resources/json/credentials.json"));
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load( JacksonFactory.getDefaultInstance(), in);
         List<String> scopes = Collections.singletonList( SheetsScopes.SPREADSHEETS );
         GoogleAuthorizationCodeFlow flow =
                 new GoogleAuthorizationCodeFlow.Builder( GoogleNetHttpTransport.newTrustedTransport(),
@@ -57,7 +60,23 @@ public class SheetsAndJava {
         return response.getValues();
     }
 
-    public void addEntryToSheet( String currentDate, String miles) throws IOException, GeneralSecurityException {
+    private ObservableList<String> getSheetDataAsObservableList(int columnIndex) throws IOException, GeneralSecurityException {
+        ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
+        List<List<Object>> sheet = getSheetData();
+        for ( List<Object> row : sheet ) {
+            sheetDataAsObservableList.add( row.get( columnIndex ).toString() );
+        }
+        return sheetDataAsObservableList; }
+
+    public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException {
+       return getSheetDataAsObservableList( 0 );
+    }
+
+    public ObservableList<String> getEntryMiles_AsObservableList() throws IOException, GeneralSecurityException {
+        return getSheetDataAsObservableList( 1 );
+    }
+
+    public void addEntryToSheet( String miles ) throws IOException, GeneralSecurityException {
         sheetService = getSheetService();
         ValueRange appendBody = new ValueRange()
                 .setValues( Collections.singletonList( Arrays.asList( currentDate , miles ) ) );
@@ -79,23 +98,26 @@ public class SheetsAndJava {
                 .execute();
     }
 
-    public void printSheet(List<List<Object>> spreadSheetData) {
-        for (List<Object> row : spreadSheetData) {
-            System.out.format( "\nDate Recorded : %s\nMileage : %s\n", row.get( 0 ), row.get( 1 ) );
+    public void printSheet() throws IOException, GeneralSecurityException {
+        int entryCount = 0;
+        List<List<Object>> sheet = getSheetData();
+        for (List<Object> row : sheet) {
+            entryCount++;
+            System.out.format( "\n%d. Date Recorded : %s\nMileage : %s\n", entryCount, row.get( 0 ), row.get( 1 ) );
         }
     }
 
-        private double findLastTenEntries_MileAvg() throws IOException, GeneralSecurityException {
-        double mileageTotal = 0.0;
-        ArrayList <List<Object>> previousEntries = new ArrayList <>();
-        for (List<Object> row : Reversed.reversed( getSheetData() )) {
+    public double findLastTenEntries_MileAvg() throws IOException, GeneralSecurityException {
+        double mileCount = 0.0;
+        List<List<Object>> sheet = getSheetData();
+        ArrayList<List<Object>> previousEntries = new ArrayList <>();
+        for ( List<Object> row : Reversed.reversed( getSheetData() )) {
             previousEntries.add( row );
-            if (previousEntries.size() > 10)
-                break;
-        }
+            if (previousEntries.size() + 1 > 10)
+                break; }
         for ( List<Object> row : previousEntries )
-        { mileageTotal += Double.parseDouble( row.get( 1 ).toString() ); }
-        return DoubleRounder.round(mileageTotal / previousEntries.size(), 2);
+        { mileCount += Double.parseDouble( row.get( 1 ).toString() ); }
+        return DoubleRounder.round((mileCount / 10), 2);
     }
 
     public double getLastTenEntries_MileAvg() throws IOException, GeneralSecurityException

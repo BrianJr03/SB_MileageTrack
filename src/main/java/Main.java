@@ -1,17 +1,25 @@
-import util.SheetsAndJava;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.List;
+public class Main extends Application implements EventHandler <ActionEvent> {
 
-public class Main {
+    public static void main( String[] args )
+    { launch( args ); }
 
-    static SheetsAndJava sheetsAndJava = new SheetsAndJava();
-
-    public static void main( String[] args ) throws IOException, GeneralSecurityException {
-        List<List<Object>> sheet = sheetsAndJava.getSheetData();
-        sheetsAndJava.printSheet(sheet);
-        System.out.print("\nMile average for the last 10 entries: " +
-                sheetsAndJava.findTotalMileage(sheet) + "\n");
+    @Override
+    public void start( Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
+        primaryStage.setTitle( "SB Mileage Track" );
+        primaryStage.setScene(new Scene(root,615,315));
+        primaryStage.setResizable( false );
+        primaryStage.show();
     }
+
+    @Override
+    public void handle( ActionEvent event) {}
 }

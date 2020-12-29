@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" styleClass="parent" stylesheets="@../stylesheets/mainUI_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ResultsController">
+   <Label layoutX="114.0" layoutY="115.0" prefHeight="18.0" prefWidth="107.0" text="Total Mileage Since " />
+   <Label layoutX="221.0" layoutY="115.0" prefHeight="18.0" prefWidth="67.0" text="Date" />
+   <ListView fx:id="entryHistory_ListView" layoutX="370.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" />
+   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchResultsUI" styleClass="nextBtn"
+           stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Back">
+      <font>
+         <Font name="Impact" size="12.0" />
+      </font></Button>
+</AnchorPane>
