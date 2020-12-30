@@ -31,7 +31,7 @@
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="mileAVG_Label" layoutX="26.0" layoutY="180.0" prefHeight="27.0" prefWidth="214.0" text="mileAVG">
+   <Label fx:id="mileAVG_Label" layoutX="26.0" layoutY="180.0" prefHeight="27.0" prefWidth="214.0" text="mileAVG" wrapText="true">
       <font>
          <Font size="18.0" />
       </font></Label>

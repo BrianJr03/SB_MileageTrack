@@ -30,7 +30,7 @@ public class SheetsAndJava {
     private final String currentDate = DateTime.now().toLocalDate().toString();
     private final static String APPLICATION_NAME = "SB Mileage Track";
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
-    List<List<Object>> sheet = getSheetData();
+    private final List<List<Object>> sheet = getSheetData();
 
     public SheetsAndJava() throws IOException, GeneralSecurityException {}
 
@@ -65,6 +65,7 @@ public class SheetsAndJava {
     public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
     { return getSheetDataAsObservableList( 0 ); }
 
+    @SuppressWarnings( "unused" )
     public ObservableList<String> getEntryMiles_AsObservableList() throws IOException, GeneralSecurityException
     { return getSheetDataAsObservableList( 1 ); }
 

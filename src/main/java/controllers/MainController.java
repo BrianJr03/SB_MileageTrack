@@ -42,6 +42,7 @@ public class MainController {
     public static boolean isValid_MileInput(String mile) {
         Pattern pattern = Pattern.compile("^[0-9]*(\\.)?[0-9]+$");
         Matcher matcher = pattern.matcher(mile);
+        if (mile.equals( "0" )) return false;
         return (matcher.find() && matcher.group().equals(mile));
     }
 
