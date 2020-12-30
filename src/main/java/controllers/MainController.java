@@ -20,7 +20,7 @@ public class MainController {
     public AnchorPane rootPane;
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
 
-    public MainController( ) throws IOException, GeneralSecurityException {}
+    public MainController() throws IOException, GeneralSecurityException {}
 
     public void initialize()
     { invalidMile_Label.setVisible( false ); }

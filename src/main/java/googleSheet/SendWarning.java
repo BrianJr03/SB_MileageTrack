@@ -25,9 +25,9 @@ public class SendWarning {
     public void writeNotification() throws IOException {
         File file = new File( "src/main/resources/txt/mileageWarning.txt" );
         FileWriter writer = new FileWriter(file);
-        writer.write( "\nYou've added 250+ miles! Time for a belt change?" );
+        writer.write( "\nYou've added 250+ miles! Time for a belt change." );
         writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
-        writer.write( "\n\nTeam, SB MileageTrack" );
+        writer.write( "\n\nTeam SB MileageTrack" );
         writer.close();
     }
 
