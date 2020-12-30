@@ -1,4 +1,4 @@
-package util;
+package googleSheet;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,15 +24,15 @@ import javafx.collections.ObservableList;
 import org.decimal4j.util.DoubleRounder;
 import org.joda.time.DateTime;
 
-public class SheetsAndJava {
+public class SBMT_Sheet {
 
     private Sheets sheetService;
-    private final String currentDate = DateTime.now().toLocalDate().toString();
+    public final String currentDate = DateTime.now().toLocalDate().toString();
     private final static String APPLICATION_NAME = "SB Mileage Track";
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
     private final List<List<Object>> sheet = getSheetData();
 
-    public SheetsAndJava() throws IOException, GeneralSecurityException {}
+    public SBMT_Sheet() throws IOException, GeneralSecurityException {}
 
     private static Credential auth() throws IOException, GeneralSecurityException {
         final java.util.logging.Logger buggyLogger = java.util.logging.Logger.getLogger(FileDataStoreFactory.class.getName());
@@ -69,6 +69,9 @@ public class SheetsAndJava {
     public ObservableList<String> getEntryMiles_AsObservableList() throws IOException, GeneralSecurityException
     { return getSheetDataAsObservableList( 1 ); }
 
+    public String getMileageWarningCount() throws IOException, GeneralSecurityException
+    { return getSheetDataAsObservableList( 0 ).get( 0 ); }
+
     private ObservableList<String> getSheetDataAsObservableList(int columnIndex) throws IOException, GeneralSecurityException {
         ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
         List<List<Object>> sheet = getSheetData();
@@ -102,6 +105,10 @@ public class SheetsAndJava {
                 .execute();
     }
 
+    public String getStartDate() throws IOException, GeneralSecurityException {
+        return getEntryDates_AsObservableList().get( 1 );
+    }
+
     public double getLastTenEntries_MileAvg()
     { return findLastTenEntries_MileAvg(); }
 
@@ -117,7 +124,7 @@ public class SheetsAndJava {
         return DoubleRounder.round((mileCount / 10), 2);
     }
 
-    public double findTotalMileage() {
+    public double getTotalMileage() {
         double mileageTotal = 0.0;
         if(sheet == null || sheet.isEmpty())
             { return Double.parseDouble( "No data found." ); }

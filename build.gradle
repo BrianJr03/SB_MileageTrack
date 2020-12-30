@@ -15,6 +15,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile 'com.google.api-client:google-api-client:1.23.0'
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    compile group: 'javax.mail', name: 'mail', version: '1.5.0-b01'
     compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
     compile 'com.google.apis:google-api-services-sheets:v4-rev516-1.23.0'
     compile group: 'org.decimal4j', name: 'decimal4j', version: '1.0.3'

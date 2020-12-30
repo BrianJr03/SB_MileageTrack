@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import util.SheetsAndJava;
+import googleSheet.SBMT_Sheet;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.regex.Matcher;
@@ -17,8 +17,8 @@ public class MainController {
 
     public TextField mileEntry_Field;
     public Label invalidMile_Label;
-    SheetsAndJava sheetsAndJava = new SheetsAndJava();
     public AnchorPane rootPane;
+    SBMT_Sheet sbmtSheet = new SBMT_Sheet();
 
     public MainController( ) throws IOException, GeneralSecurityException {}
 
@@ -33,7 +33,7 @@ public class MainController {
 
     public void launchResultsUI() throws IOException, GeneralSecurityException {
         if (isValid_MileInput( mileEntry_Field.getText() )) {
-            sheetsAndJava.addEntryToSheet( mileEntry_Field.getText() );
+            sbmtSheet.addEntryToSheet( mileEntry_Field.getText() );
             launchUI( "/ui/results.fxml" );
         }
         else displayPromptFor3secs( invalidMile_Label );

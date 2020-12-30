@@ -1,4 +1,3 @@
             TODO
-1. Add input validator for main
 2. Implement tableview on results
 5. Add loading animation for main (optional)

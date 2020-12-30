@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application implements EventHandler <ActionEvent> {
 
     public static void main( String[] args )
-    { launch( args ); }
+    { launch( args );  }
 
     @Override
     public void start( Stage primaryStage) throws Exception {
