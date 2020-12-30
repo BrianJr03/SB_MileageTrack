@@ -23,10 +23,10 @@ public class SendWarning {
     public SendWarning() throws IOException, GeneralSecurityException {}
 
     public void writeNotification() throws IOException {
-        File file = new File( "src/main/resources/mileageWarning.txt" );
+        File file = new File( "src/main/resources/txt/mileageWarning.txt" );
         FileWriter writer = new FileWriter(file);
         writer.write( "\nYou've added 250+ miles! Time for a belt change?" );
-        writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage );
+        writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
         writer.write( "\n\nTeam, SB MileageTrack" );
         writer.close();
     }
@@ -40,7 +40,7 @@ public class SendWarning {
         msg.setFrom(new InternetAddress(companyEmail));
         msg.addRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
         msg.setSubject("Mileage Warning!");
-        String fileName = "src/main/resources/mileageWarning.txt";
+        String fileName = "src/main/resources/txt/mileageWarning.txt";
         DataSource source = new FileDataSource(fileName);
         textBodyPart.setDataHandler(new DataHandler(source));
         emailContent.addBodyPart(textBodyPart);

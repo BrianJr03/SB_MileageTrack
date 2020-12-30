@@ -46,7 +46,7 @@ public class SBMT_Sheet {
                 .setDataStoreFactory( new FileDataStoreFactory( new java.io.File("tokens") ) )
                 .setAccessType( "offline" )
                 .build();
-        return new AuthorizationCodeInstalledApp( flow, new LocalServerReceiver() ).authorize( "user" );
+        return new AuthorizationCodeInstalledApp( flow, new LocalServerReceiver()).authorize( "user" );
     }
 
     public static Sheets getSheetService() throws IOException, GeneralSecurityException {

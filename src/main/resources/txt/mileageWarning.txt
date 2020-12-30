@@ -1,6 +1,6 @@
 
 You've added 250+ miles! Time for a belt change?
 
-Current mileage since 2020-12-30 : 250.0
+Current mileage since 2020-12-30 : 1345.0 mi
 
 Team, SB MileageTrack

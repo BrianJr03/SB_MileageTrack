@@ -35,7 +35,7 @@ public class ResultsController {
     String mileWarningCounter = sbmtSheet.getMileageWarningCount();
     double mileWarningCounterAsDouble = Double.parseDouble( mileWarningCounter );
 
-    public ResultsController( ) throws IOException, GeneralSecurityException {}
+    public ResultsController() throws IOException, GeneralSecurityException {}
 
     public void initialize() throws IOException, GeneralSecurityException, MessagingException {
         setDate_Label();
@@ -66,14 +66,14 @@ public class ResultsController {
 
     public void checkFor_HighMileage() throws IOException, MessagingException, GeneralSecurityException {
         double totalMileage = sbmtSheet.getTotalMileage();
-        if ( totalMileage >=  this.mileWarningCounterAsDouble ) {
-            sbmtSheet.updateSheet( "sbMileage!A1", String.valueOf( mileWarningCounterAsDouble + 250 ) );
+        if ( totalMileage >= this.mileWarningCounterAsDouble ) {
+            sbmtSheet.updateSheet( "sbMileage!A1", String.valueOf( mileWarningCounterAsDouble + 250 ));
             sendWarningToUser();
         }
     }
 
     public void updateTotalMileage() throws IOException, GeneralSecurityException
-    { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() ) ); }
+    { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() )); }
 
     public void sendWarningToUser() throws IOException, MessagingException
     { sendWarning.sendNotificationAsTextMSG( "219-359-6331", "Sprint" ); }
