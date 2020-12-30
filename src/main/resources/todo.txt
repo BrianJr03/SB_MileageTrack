@@ -1,5 +1,4 @@
             TODO
 1. Add input validator for main
 2. Implement tableview on results
-3. Show "avg of last 10 entries" info in results
-4. Show "total mileage since date" info in results
+5. Add loading animation for main (optional)

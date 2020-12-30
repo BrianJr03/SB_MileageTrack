@@ -5,12 +5,34 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" styleClass="parent" stylesheets="@../stylesheets/mainUI_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ResultsController">
-   <Label layoutX="114.0" layoutY="115.0" prefHeight="18.0" prefWidth="107.0" text="Total Mileage Since " />
-   <Label layoutX="221.0" layoutY="115.0" prefHeight="18.0" prefWidth="67.0" text="Date" />
-   <ListView fx:id="entryHistory_ListView" layoutX="370.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" />
-   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchResultsUI" styleClass="nextBtn"
-           stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Back">
+   <Label layoutX="26.0" layoutY="89.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
+   <Label fx:id="date_Label" layoutX="198.0" layoutY="91.0" prefHeight="24.0" prefWidth="86.0" text="Date">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+   <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchResultsUI" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Back">
       <font>
          <Font name="Impact" size="12.0" />
       </font></Button>
+   <TableView fx:id="mileageInfo_Table" layoutX="296.0" layoutY="28.0" prefHeight="262.0" prefWidth="285.0">
+     <columns>
+       <TableColumn fx:id="dateColumn" prefWidth="141.5999755859375" text="C1" />
+       <TableColumn fx:id="mileColumn" prefWidth="143.20000610351565" text="C2" />
+     </columns>
+   </TableView>
+   <Label fx:id="totalMileage_Label" layoutX="26.0" layoutY="109.0" text="Total Mileage">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
+   <Label layoutX="27.0" layoutY="159.0" prefHeight="27.0" prefWidth="214.0" text="Mile Avg for last 10 entries">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
+   <Label fx:id="mileAVG_Label" layoutX="26.0" layoutY="180.0" prefHeight="27.0" prefWidth="214.0" text="mileAVG">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
 </AnchorPane>

@@ -24,13 +24,15 @@ import javafx.collections.ObservableList;
 import org.decimal4j.util.DoubleRounder;
 import org.joda.time.DateTime;
 
-@SuppressWarnings( "unused" )
 public class SheetsAndJava {
 
     private Sheets sheetService;
-    public final String currentDate = DateTime.now().toLocalDate().toString();
+    private final String currentDate = DateTime.now().toLocalDate().toString();
     private final static String APPLICATION_NAME = "SB Mileage Track";
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
+    List<List<Object>> sheet = getSheetData();
+
+    public SheetsAndJava() throws IOException, GeneralSecurityException {}
 
     private static Credential auth() throws IOException, GeneralSecurityException {
         final java.util.logging.Logger buggyLogger = java.util.logging.Logger.getLogger(FileDataStoreFactory.class.getName());
@@ -60,26 +62,25 @@ public class SheetsAndJava {
         return response.getValues();
     }
 
+    public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
+    { return getSheetDataAsObservableList( 0 ); }
+
+    public ObservableList<String> getEntryMiles_AsObservableList() throws IOException, GeneralSecurityException
+    { return getSheetDataAsObservableList( 1 ); }
+
     private ObservableList<String> getSheetDataAsObservableList(int columnIndex) throws IOException, GeneralSecurityException {
         ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
         List<List<Object>> sheet = getSheetData();
-        for ( List<Object> row : sheet ) {
-            sheetDataAsObservableList.add( row.get( columnIndex ).toString() );
-        }
-        return sheetDataAsObservableList; }
-
-    public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException {
-       return getSheetDataAsObservableList( 0 );
+        for ( List<Object> row : sheet )
+        { sheetDataAsObservableList.add( row.get( columnIndex ).toString() ); }
+        return sheetDataAsObservableList;
     }
 
-    public ObservableList<String> getEntryMiles_AsObservableList() throws IOException, GeneralSecurityException {
-        return getSheetDataAsObservableList( 1 );
-    }
-
-    public void addEntryToSheet( String miles ) throws IOException, GeneralSecurityException {
+    public void addEntryToSheet(String miles) throws IOException, GeneralSecurityException {
         sheetService = getSheetService();
         ValueRange appendBody = new ValueRange()
                 .setValues( Collections.singletonList( Arrays.asList( currentDate , miles ) ) );
+        @SuppressWarnings( "unused" )
         AppendValuesResponse appendResult = sheetService.spreadsheets().values()
                 .append( SPREADSHEET_ID, "sbMileage", appendBody )
                 .setValueInputOption( "USER_ENTERED" )
@@ -88,30 +89,25 @@ public class SheetsAndJava {
                 .execute();
     }
 
+    @SuppressWarnings( "unused" )
     public void updateSheet(String range, String valueToAdd) throws IOException, GeneralSecurityException {
         sheetService = getSheetService();
         ValueRange body = new ValueRange()
                 .setValues( Collections.singletonList( Collections.singletonList( valueToAdd ) ) );
+        @SuppressWarnings( "unused" )
         UpdateValuesResponse result = sheetService.spreadsheets().values()
                 .update( SPREADSHEET_ID, range, body )
                 .setValueInputOption( "RAW" )
                 .execute();
     }
 
-    public void printSheet() throws IOException, GeneralSecurityException {
-        int entryCount = 0;
-        List<List<Object>> sheet = getSheetData();
-        for (List<Object> row : sheet) {
-            entryCount++;
-            System.out.format( "\n%d. Date Recorded : %s\nMileage : %s\n", entryCount, row.get( 0 ), row.get( 1 ) );
-        }
-    }
+    public double getLastTenEntries_MileAvg()
+    { return findLastTenEntries_MileAvg(); }
 
-    public double findLastTenEntries_MileAvg() throws IOException, GeneralSecurityException {
+    private double findLastTenEntries_MileAvg() {
         double mileCount = 0.0;
-        List<List<Object>> sheet = getSheetData();
         ArrayList<List<Object>> previousEntries = new ArrayList <>();
-        for ( List<Object> row : Reversed.reversed( getSheetData() )) {
+        for ( List<Object> row : Reversed.reversed( sheet )) {
             previousEntries.add( row );
             if (previousEntries.size() + 1 > 10)
                 break; }
@@ -120,15 +116,12 @@ public class SheetsAndJava {
         return DoubleRounder.round((mileCount / 10), 2);
     }
 
-    public double getLastTenEntries_MileAvg() throws IOException, GeneralSecurityException
-    { return findLastTenEntries_MileAvg(); }
-
-    public double findTotalMileage( List<List<Object>> values) {
+    public double findTotalMileage() {
         double mileageTotal = 0.0;
-        if(values == null || values.isEmpty())
-            { System.out.println("No data found."); }
-        else { for (List<Object> row : values)
-            { mileageTotal += Double.parseDouble( row.get( 1 ).toString() ); }
+        if(sheet == null || sheet.isEmpty())
+            { return Double.parseDouble( "No data found." ); }
+        else { for (List<Object> row : sheet)
+                 mileageTotal += Double.parseDouble( row.get( 1 ).toString() );
         }
         return DoubleRounder.round(mileageTotal, 2);
     }
