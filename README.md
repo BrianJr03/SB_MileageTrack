@@ -1,6 +1,7 @@
 # SB_MileageTrack
 
 This application allows one to keep track of mileage by utilizing the Google Sheets API to store / retrieve data.
+The Google Sheet being used : https://docs.google.com/spreadsheets/d/1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg/edit#gid=0
 
 To run this project: Run through Gradle: On the right-hand side of the IntelliJ window, there is a section entitled "Gradle."
 Click on this, then expand the project directory if that is not done. 
