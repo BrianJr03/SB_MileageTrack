@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application implements EventHandler <ActionEvent> {
 
     public static Stage stage;
+    public static boolean isSplashLoaded = false;
 
     public static void main( String[] args )
     { launch( args );  }
@@ -20,7 +21,6 @@ public class Main extends Application implements EventHandler <ActionEvent> {
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
         stage.setResizable( false );
-        stage.setTitle( "SB Mileage Track" );
         stage.getIcons().removeAll();
         stage.setScene(new Scene(root,615,315));
         stage.show();
