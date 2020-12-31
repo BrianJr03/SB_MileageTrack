@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application implements EventHandler <ActionEvent> {
 
@@ -14,9 +15,10 @@ public class Main extends Application implements EventHandler <ActionEvent> {
     @Override
     public void start( Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
-        primaryStage.setTitle( "SB Mileage Track" );
-        primaryStage.setScene(new Scene(root,615,315));
         primaryStage.setResizable( false );
+        primaryStage.setTitle( "SB Mileage Track" );
+        primaryStage.initStyle( StageStyle.TRANSPARENT );
+        primaryStage.setScene(new Scene(root,615,315));
         primaryStage.show();
     }
 

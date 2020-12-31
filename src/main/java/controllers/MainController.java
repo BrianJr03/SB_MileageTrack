@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import googleSheet.SBMT_Sheet;
@@ -57,4 +58,7 @@ public class MainController {
         visiblePause.setOnFinished( event -> prompt.setVisible(false) );
         visiblePause.play();
     }
+
+    public void exitProgram()
+    { System.exit( 0 ); }
 }

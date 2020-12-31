@@ -38,7 +38,7 @@ public class ResultsController {
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
     SendWarning sendWarning = new SendWarning();
     private final String mileWarningCounter = sbmtSheet.getMileageWarningCount();
-    private final double mileWarningCounterAsDouble = Double.parseDouble( mileWarningCounter );
+    private final double mileWarningCounter_AsDouble = Double.parseDouble( mileWarningCounter );
 
     public ResultsController() throws IOException, GeneralSecurityException {}
 
@@ -61,7 +61,7 @@ public class ResultsController {
         List<List<Object>> sheetData = sbmtSheet.getSheetData(); int placeHolderRow = 0;
         ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
         for ( List <Object> row : sheetData )
-        { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString()));}
+        { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString())); }
         sheetEntries.remove( placeHolderRow );
         return sheetEntries;
     }
@@ -86,9 +86,9 @@ public class ResultsController {
     { launchUI( "/ui/main.fxml" ); }
 
     public void checkFor_HighMileage() throws IOException, MessagingException, GeneralSecurityException {
-        double totalMileage = sbmtSheet.getTotalMileage();
-        if ( totalMileage >= this.mileWarningCounterAsDouble ) {
-            sbmtSheet.updateSheet( "sbMileage!A1", String.valueOf( mileWarningCounterAsDouble + 250 ));
+        double totalMileage = sbmtSheet.getTotalMileage(); String A1 = "sbMileage!A1";
+        if ( totalMileage >= this.mileWarningCounter_AsDouble ) {
+            sbmtSheet.updateSheet( A1, String.valueOf( mileWarningCounter_AsDouble + 250 ));
             sendWarningToUser();
         }
     }
@@ -98,4 +98,7 @@ public class ResultsController {
 
     public void sendWarningToUser() throws IOException, MessagingException
     { sendWarning.sendNotificationAsTextMSG( "219-359-6331", "Sprint" ); }
+
+    public void exitProgram()
+    { System.exit( 0 ); }
 }
