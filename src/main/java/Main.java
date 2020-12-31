@@ -17,7 +17,7 @@ public class Main extends Application implements EventHandler <ActionEvent> {
         Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
         primaryStage.setResizable( false );
         primaryStage.setTitle( "SB Mileage Track" );
-        primaryStage.initStyle( StageStyle.TRANSPARENT );
+        primaryStage.initStyle( StageStyle.UNDECORATED );
         primaryStage.setScene(new Scene(root,615,315));
         primaryStage.show();
     }

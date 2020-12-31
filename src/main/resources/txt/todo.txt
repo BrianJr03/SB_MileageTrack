@@ -1,3 +1,2 @@
             TODO
-2. Implement tableview on results
-5. Add loading animation for main (optional)
+Make draggable

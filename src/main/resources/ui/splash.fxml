@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SplashController">
+   <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../png/bg_image1.png"/>
+   </ImageView>
+   <Label layoutX="229.0" layoutY="128.0" text="Loading">
+      <font>
+         <Font name="Impact" size="48.0" />
+      </font>
+   </Label>
+</AnchorPane>

@@ -40,7 +40,7 @@ public class MainController {
     public void launchResultsUI() throws IOException, GeneralSecurityException {
         if (isValid_MileInput( mileEntry_Field.getText() )) {
             sbmtSheet.addEntryToSheet( mileEntry_Field.getText() );
-            launchUI( "/ui/results.fxml" );
+            launchUI( "/ui/splash.fxml" );
         }
         else displayPromptFor3secs( invalidMile_Label );
     }
