@@ -6,6 +6,11 @@ To run this project: Run through Gradle: On the right-hand side of the IntelliJ 
 Click on this, then expand the project directory if that is not done. 
 Expand Tasks > Application, and double-click on the run operation to begin running this application.
 
+To recieve a high mileage warning text to your phone number ( as opposed to mine ), goto ResultsController.sendWarningToUser() 
+and change the parameters for the method called inside sendWarningToUser(). A high mileage warning will be sent when the user's 
+total mileage reaches a certain threshold. For example, if your total mileage is 0, and overtime, it reaches 250, a warning will 
+be sent. This will occur when the user reaches 250, 500, 750 total miles and so on.
+
 There are 3 supressed "unused" warnings:
 
   - SBMT_Sheet.addEntryToSheet()
