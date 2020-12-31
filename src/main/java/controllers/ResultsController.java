@@ -1,5 +1,7 @@
 package controllers;
 
+import draggable.DragUtil;
+import main.Main;
 import googleSheet.SendWarning;
 import googleSheet.SheetEntry;
 import javafx.collections.FXCollections;
@@ -18,7 +20,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-public class ResultsController {
+public class ResultsController extends DragUtil {
 
     @FXML
     private AnchorPane rootPane;
@@ -49,6 +51,7 @@ public class ResultsController {
         updateTotalMileage();
         checkFor_HighMileage();
         setTotalMileage_Label();
+        setDraggable( rootPane, Main.stage);
     }
 
     public void setTableProperties() throws IOException, GeneralSecurityException {

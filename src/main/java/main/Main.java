@@ -1,3 +1,5 @@
+package main;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,17 +11,20 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application implements EventHandler <ActionEvent> {
 
+    public static Stage stage;
+
     public static void main( String[] args )
     { launch( args );  }
 
     @Override
-    public void start( Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
-        primaryStage.setResizable( false );
-        primaryStage.setTitle( "SB Mileage Track" );
-        primaryStage.initStyle( StageStyle.UNDECORATED );
-        primaryStage.setScene(new Scene(root,615,315));
-        primaryStage.show();
+        stage.setResizable( false );
+        stage.setTitle( "SB Mileage Track" );
+        stage.initStyle( StageStyle.TRANSPARENT );
+        stage.setScene(new Scene(root,615,315));
+        stage.show();
     }
 
     @Override

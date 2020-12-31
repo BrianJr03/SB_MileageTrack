@@ -1,12 +1,13 @@
 package controllers;
 
+import draggable.DragUtil;
+import main.Main;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import googleSheet.SBMT_Sheet;
@@ -15,7 +16,7 @@ import java.security.GeneralSecurityException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainController {
+public class MainController extends DragUtil {
 
     @FXML
     private TextField mileEntry_Field;
@@ -28,8 +29,10 @@ public class MainController {
 
     public MainController() throws IOException, GeneralSecurityException {}
 
-    public void initialize()
-    { invalidMile_Label.setVisible( false ); }
+    public void initialize() {
+        setDraggable( rootPane, Main.stage);
+        invalidMile_Label.setVisible( false );
+    }
 
     public void launchUI(String uiPath) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(uiPath));
