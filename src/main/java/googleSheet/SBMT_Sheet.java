@@ -27,7 +27,7 @@ import org.joda.time.DateTime;
 public class SBMT_Sheet {
 
     private Sheets sheetService;
-    public final String currentDate = DateTime.now().toLocalDate().toString();
+    private final String currentDate = DateTime.now().toLocalDate().toString();
     private final static String APPLICATION_NAME = "SB Mileage Track";
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
     private final List<List<Object>> sheet = getSheetData();
@@ -63,20 +63,16 @@ public class SBMT_Sheet {
     }
 
     public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList( 0 ); }
-
-    @SuppressWarnings( "unused" )
-    public ObservableList<String> getEntryMiles_AsObservableList() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList( 1 ); }
+    { return getSheetDataAsObservableList(); }
 
     public String getMileageWarningCount() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList( 0 ).get( 0 ); }
+    { return getSheetDataAsObservableList().get( 0 ); }
 
-    private ObservableList<String> getSheetDataAsObservableList(int columnIndex) throws IOException, GeneralSecurityException {
+    private ObservableList<String> getSheetDataAsObservableList() throws IOException, GeneralSecurityException {
         ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
         List<List<Object>> sheet = getSheetData();
         for ( List<Object> row : sheet )
-        { sheetDataAsObservableList.add( row.get( columnIndex ).toString() ); }
+        { sheetDataAsObservableList.add( row.get( 0 ).toString() ); }
         return sheetDataAsObservableList;
     }
 
@@ -104,22 +100,8 @@ public class SBMT_Sheet {
                 .execute();
     }
 
-//    public void delete(int rowIndex) throws IOException, GeneralSecurityException {
-//        sheetService = getSheetService();
-//        DeleteDimensionRequest deleteDimensionRequest = new DeleteDimensionRequest()
-//                .setRange( new DimensionRange()
-//                           .setSheetId( 0 )
-//                           .setDimension( "ROWS" )
-//                           .setStartIndex( rowIndex ));
-//        List<Request> requests = new ArrayList <>();
-//        requests.add( new Request().setDeleteDimension( deleteDimensionRequest ));
-//        BatchUpdateSpreadsheetRequest body = new BatchUpdateSpreadsheetRequest().setRequests( requests );
-//        sheetService.spreadsheets().batchUpdate( SPREADSHEET_ID, body ).execute();
-//    }
-
-    public String getStartDate() throws IOException, GeneralSecurityException {
-        return getEntryDates_AsObservableList().get( 1 );
-    }
+    public String getStartDate() throws IOException, GeneralSecurityException
+    { return getEntryDates_AsObservableList().get( 1 ); }
 
     public double getLastTenEntries_MileAvg()
     { return findLastTenEntries_MileAvg(); }

@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.animation.PauseTransition;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -15,9 +16,13 @@ import java.util.regex.Pattern;
 
 public class MainController {
 
-    public TextField mileEntry_Field;
-    public Label invalidMile_Label;
-    public AnchorPane rootPane;
+    @FXML
+    private TextField mileEntry_Field;
+    @FXML
+    private Label invalidMile_Label;
+    @FXML
+    private AnchorPane rootPane;
+
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
 
     public MainController() throws IOException, GeneralSecurityException {}

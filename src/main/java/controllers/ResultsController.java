@@ -22,11 +22,11 @@ public class ResultsController {
 
     @FXML
     private AnchorPane rootPane;
-    @FXML @SuppressWarnings( "unused" )
+    @FXML
     private TableView<SheetEntry> mileageInfo_Table;
-    @FXML @SuppressWarnings( "unused" )
+    @FXML
     private TableColumn<SheetEntry, String> dateColumn;
-    @FXML @SuppressWarnings( "unused" )
+    @FXML
     private TableColumn<SheetEntry, String> mileColumn;
     @FXML
     private Label date_Label;
@@ -37,8 +37,8 @@ public class ResultsController {
 
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
     SendWarning sendWarning = new SendWarning();
-    String mileWarningCounter = sbmtSheet.getMileageWarningCount();
-    double mileWarningCounterAsDouble = Double.parseDouble( mileWarningCounter );
+    private final String mileWarningCounter = sbmtSheet.getMileageWarningCount();
+    private final double mileWarningCounterAsDouble = Double.parseDouble( mileWarningCounter );
 
     public ResultsController() throws IOException, GeneralSecurityException {}
 
@@ -80,7 +80,7 @@ public class ResultsController {
     { totalMileage_Label.setText( String.valueOf( sbmtSheet.getTotalMileage())); }
 
     public void setDate_Label() throws IOException, GeneralSecurityException
-    { date_Label.setText( sbmtSheet.getEntryDates_AsObservableList().get( 1 )); }
+    { date_Label.setText( sbmtSheet.getStartDate()); }
 
     public void launchResultsUI() throws IOException
     { launchUI( "/ui/main.fxml" ); }

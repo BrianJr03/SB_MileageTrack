@@ -21,5 +21,5 @@ public class Main extends Application implements EventHandler <ActionEvent> {
     }
 
     @Override
-    public void handle( ActionEvent event) {}
+    public void handle(ActionEvent event) {}
 }
