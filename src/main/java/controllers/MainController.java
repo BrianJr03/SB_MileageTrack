@@ -1,6 +1,7 @@
 package controllers;
 
 import draggable.DragUtil;
+import javafx.fxml.Initializable;
 import main.Main;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -12,11 +13,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import googleSheet.SBMT_Sheet;
 import java.io.IOException;
+import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainController extends DragUtil {
+public class MainController extends DragUtil implements Initializable {
 
     @FXML
     private TextField mileEntry_Field;
@@ -29,8 +32,9 @@ public class MainController extends DragUtil {
 
     public MainController() throws IOException, GeneralSecurityException {}
 
-    public void initialize() {
-        setDraggable( rootPane, Main.stage);
+    @Override
+    public void initialize( URL location , ResourceBundle resources ) {
+        setDraggable(rootPane, Main.stage);
         invalidMile_Label.setVisible( false );
     }
 

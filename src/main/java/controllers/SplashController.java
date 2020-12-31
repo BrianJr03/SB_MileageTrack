@@ -30,6 +30,7 @@ public class SplashController extends DragUtil implements Initializable {
                 Thread.sleep( 100 );
 
                 Platform.runLater( () -> {
+                    setDraggable(rootPane, Main.stage);
                     Parent root = null;
                     try {
                         root = FXMLLoader.load(getClass().getResource("/ui/results.fxml"));

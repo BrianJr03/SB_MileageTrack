@@ -1,6 +1,7 @@
 package controllers;
 
 import draggable.DragUtil;
+import javafx.fxml.Initializable;
 import main.Main;
 import googleSheet.SendWarning;
 import googleSheet.SheetEntry;
@@ -17,10 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import googleSheet.SBMT_Sheet;
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ResultsController extends DragUtil {
+public class ResultsController extends DragUtil implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
@@ -44,14 +47,18 @@ public class ResultsController extends DragUtil {
 
     public ResultsController() throws IOException, GeneralSecurityException {}
 
-    public void initialize() throws IOException, GeneralSecurityException, MessagingException {
-        setDate_Label();
-        setMileAVG_Label();
-        setTableProperties();
-        updateTotalMileage();
-        checkFor_HighMileage();
-        setTotalMileage_Label();
-        setDraggable( rootPane, Main.stage);
+    @Override
+    public void initialize( URL location , ResourceBundle resources ) {
+        try {
+            setDate_Label();
+            setMileAVG_Label();
+            setTableProperties();
+            updateTotalMileage();
+            checkFor_HighMileage();
+            setTotalMileage_Label();
+            setDraggable(rootPane, Main.stage); }
+        catch ( IOException | GeneralSecurityException | MessagingException exception )
+        { exception.printStackTrace(); }
     }
 
     public void setTableProperties() throws IOException, GeneralSecurityException {
