@@ -104,18 +104,18 @@ public class SBMT_Sheet {
                 .execute();
     }
 
-    public void delete(int rowIndex) throws IOException, GeneralSecurityException {
-        sheetService = getSheetService();
-        DeleteDimensionRequest deleteDimensionRequest = new DeleteDimensionRequest()
-                .setRange( new DimensionRange()
-                           .setSheetId( 0 )
-                           .setDimension( "ROWS" )
-                           .setStartIndex( rowIndex ));
-        List<Request> requests = new ArrayList <>();
-        requests.add( new Request().setDeleteDimension( deleteDimensionRequest ));
-        BatchUpdateSpreadsheetRequest body = new BatchUpdateSpreadsheetRequest().setRequests( requests );
-        sheetService.spreadsheets().batchUpdate( SPREADSHEET_ID, body ).execute();
-    }
+//    public void delete(int rowIndex) throws IOException, GeneralSecurityException {
+//        sheetService = getSheetService();
+//        DeleteDimensionRequest deleteDimensionRequest = new DeleteDimensionRequest()
+//                .setRange( new DimensionRange()
+//                           .setSheetId( 0 )
+//                           .setDimension( "ROWS" )
+//                           .setStartIndex( rowIndex ));
+//        List<Request> requests = new ArrayList <>();
+//        requests.add( new Request().setDeleteDimension( deleteDimensionRequest ));
+//        BatchUpdateSpreadsheetRequest body = new BatchUpdateSpreadsheetRequest().setRequests( requests );
+//        sheetService.spreadsheets().batchUpdate( SPREADSHEET_ID, body ).execute();
+//    }
 
     public String getStartDate() throws IOException, GeneralSecurityException {
         return getEntryDates_AsObservableList().get( 1 );

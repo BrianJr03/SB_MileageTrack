@@ -19,8 +19,8 @@
       </font></Button>
    <TableView fx:id="mileageInfo_Table" layoutX="296.0" layoutY="28.0" prefHeight="262.0" prefWidth="285.0">
      <columns>
-       <TableColumn fx:id="dateColumn" prefWidth="141.5999755859375" text="C1" />
-       <TableColumn fx:id="mileColumn" prefWidth="143.20000610351565" text="C2" />
+       <TableColumn fx:id="dateColumn" prefWidth="141.5999755859375" text="SheetEntry Date" />
+       <TableColumn fx:id="mileColumn" prefWidth="143.20000610351565" text="Mileage" />
      </columns>
    </TableView>
    <Label fx:id="totalMileage_Label" layoutX="26.0" layoutY="109.0" text="Total Mileage">

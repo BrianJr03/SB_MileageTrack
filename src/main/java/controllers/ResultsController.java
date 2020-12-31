@@ -1,28 +1,34 @@
 package controllers;
 
 import googleSheet.SendWarning;
+import googleSheet.SheetEntry;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import googleSheet.SBMT_Sheet;
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.List;
+import java.util.Map;
 
 public class ResultsController {
 
     @FXML
     private AnchorPane rootPane;
     @FXML @SuppressWarnings( "unused" )
-    private TableView<String> mileageInfo_Table;
+    private TableView<SheetEntry> mileageInfo_Table;
     @FXML @SuppressWarnings( "unused" )
-    private TableColumn<String, String> dateColumn;
+    private TableColumn<SheetEntry, String> dateColumn;
     @FXML @SuppressWarnings( "unused" )
-    private TableColumn<String, String> mileColumn;
+    private TableColumn<SheetEntry, String> mileColumn;
     @FXML
     private Label date_Label;
     @FXML
@@ -38,11 +44,27 @@ public class ResultsController {
     public ResultsController() throws IOException, GeneralSecurityException {}
 
     public void initialize() throws IOException, GeneralSecurityException, MessagingException {
+//        System.out.println(getEntries().get( 0 ).getEntryDate());
+        setTableProperties();
         setDate_Label();
         setMileAVG_Label();
         updateTotalMileage();
         checkFor_HighMileage();
         setTotalMileage_Label();
+    }
+
+    public void setTableProperties() throws IOException, GeneralSecurityException {
+        dateColumn.setCellValueFactory( new PropertyValueFactory <>( "entryDate" ) );
+        mileColumn.setCellValueFactory( new PropertyValueFactory <>( "mileage" ) );
+        mileageInfo_Table.setItems( getEntries() );
+    }
+
+    public ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
+        List<List<Object>> sheetData = sbmtSheet.getSheetData();
+        ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
+        for ( List <Object> row : sheetData )
+        { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString()));}
+        return sheetEntries;
     }
 
     public void launchUI(String uiPath) throws IOException {

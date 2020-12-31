@@ -17,13 +17,13 @@ import java.util.Properties;
 public class SendWarning {
 
     SBMT_Sheet sbmt_sheet = new SBMT_Sheet();
-    String startDate = sbmt_sheet.getStartDate();
-    double totalMileage = sbmt_sheet.getTotalMileage();
+    private final String startDate = sbmt_sheet.getStartDate();
+    private final double totalMileage = sbmt_sheet.getTotalMileage();
+    private final File file = new File( "src/main/resources/txt/mileageWarning.txt" );
 
     public SendWarning() throws IOException, GeneralSecurityException {}
 
     public void writeNotification() throws IOException {
-        File file = new File( "src/main/resources/txt/mileageWarning.txt" );
         FileWriter writer = new FileWriter(file);
         writer.write( "\nYou've added 250+ miles! Time for a belt change." );
         writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
@@ -48,8 +48,7 @@ public class SendWarning {
         Transport.send(msg);
     }
 
-    public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException,
-            IOException {
+    public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException, IOException {
         writeNotification();
         switch (userCarrier) {
             case "AT&T" -> sendNotificationAsEmail(phoneNumber + "@mms.att.net");
