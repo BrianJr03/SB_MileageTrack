@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application implements EventHandler <ActionEvent> {
 
@@ -22,7 +21,7 @@ public class Main extends Application implements EventHandler <ActionEvent> {
         Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
         stage.setResizable( false );
         stage.setTitle( "SB Mileage Track" );
-        stage.initStyle( StageStyle.TRANSPARENT );
+        stage.getIcons().removeAll();
         stage.setScene(new Scene(root,615,315));
         stage.show();
     }

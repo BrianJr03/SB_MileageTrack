@@ -7,7 +7,7 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" styleClass="parent" stylesheets="@../stylesheets/mainUI_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ResultsController">
    <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../png/bg_image1.png"/>
+      <Image url="@../png/bg_image1.png" />
    </ImageView>
    <Label layoutX="26.0" layoutY="51.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
       <font>
@@ -17,17 +17,14 @@
       <font>
          <Font size="14.0" />
       </font></Label>
-   <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="588.0" layoutY="1.0" onMouseClicked="#exitProgram" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../png/close_icon.png" />
-   </ImageView>
    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchResultsUI" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Back">
       <font>
          <Font name="Impact" size="12.0" />
       </font></Button>
-   <TableView fx:id="mileageInfo_Table" layoutX="296.0" layoutY="28.0" prefHeight="262.0" prefWidth="285.0">
+   <TableView fx:id="mileageInfo_Table" layoutX="296.0" layoutY="28.0" prefHeight="262.0" prefWidth="291.0" stylesheets="@../stylesheets/tableView_stylesheet.css">
      <columns>
        <TableColumn fx:id="dateColumn" prefWidth="141.5999755859375" text="Entry Date" />
-       <TableColumn fx:id="mileColumn" prefWidth="143.20000610351565" text="Mileage" />
+       <TableColumn fx:id="mileColumn" prefWidth="124.99996948242188" text="Mileage" />
      </columns>
    </TableView>
    <Label fx:id="totalMileage_Label" layoutX="26.0" layoutY="75.0" text="Total Mileage">

@@ -1,8 +1,6 @@
 package controllers;
 
-import draggable.DragUtil;
 import javafx.fxml.Initializable;
-import main.Main;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +17,7 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainController extends DragUtil implements Initializable {
+public class MainController implements Initializable {
 
     @FXML
     private TextField mileEntry_Field;
@@ -34,7 +32,6 @@ public class MainController extends DragUtil implements Initializable {
 
     @Override
     public void initialize( URL location , ResourceBundle resources ) {
-        setDraggable(rootPane, Main.stage);
         invalidMile_Label.setVisible( false );
     }
 
@@ -47,7 +44,7 @@ public class MainController extends DragUtil implements Initializable {
     public void launchResultsUI() throws IOException, GeneralSecurityException {
         if (isValid_MileInput( mileEntry_Field.getText() )) {
             sbmtSheet.addEntryToSheet( mileEntry_Field.getText() );
-            launchUI( "/ui/splash.fxml" );
+            launchUI( "/ui/loading.fxml" );
         }
         else displayPromptFor3secs( invalidMile_Label );
     }
@@ -65,7 +62,4 @@ public class MainController extends DragUtil implements Initializable {
         visiblePause.setOnFinished( event -> prompt.setVisible(false) );
         visiblePause.play();
     }
-
-    public void exitProgram()
-    { System.exit( 0 ); }
 }

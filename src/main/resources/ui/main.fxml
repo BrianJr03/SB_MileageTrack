@@ -23,9 +23,6 @@
     <ImageView fitHeight="37.0" fitWidth="51.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../png/sb_Logo.png" />
     </ImageView>
-    <ImageView fitHeight="26.0" fitWidth="37.0" layoutX="588.0" layoutY="1.0" onMouseClicked="#exitProgram" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../png/close_icon.png" />
-    </ImageView>
    <Label layoutX="5.0" layoutY="38.0" text="SBMT">
       <font>
          <Font name="Impact" size="12.0" />

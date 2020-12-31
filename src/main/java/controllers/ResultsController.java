@@ -1,8 +1,6 @@
 package controllers;
 
-import draggable.DragUtil;
 import javafx.fxml.Initializable;
-import main.Main;
 import googleSheet.SendWarning;
 import googleSheet.SheetEntry;
 import javafx.collections.FXCollections;
@@ -23,7 +21,7 @@ import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ResultsController extends DragUtil implements Initializable {
+public class ResultsController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
@@ -55,8 +53,7 @@ public class ResultsController extends DragUtil implements Initializable {
             setTableProperties();
             updateTotalMileage();
             checkFor_HighMileage();
-            setTotalMileage_Label();
-            setDraggable(rootPane, Main.stage); }
+            setTotalMileage_Label(); }
         catch ( IOException | GeneralSecurityException | MessagingException exception )
         { exception.printStackTrace(); }
     }
@@ -108,7 +105,4 @@ public class ResultsController extends DragUtil implements Initializable {
 
     public void sendWarningToUser() throws IOException, MessagingException
     { sendWarning.sendNotificationAsTextMSG( "219-359-6331", "Sprint" ); }
-
-    public void exitProgram()
-    { System.exit( 0 ); }
 }
