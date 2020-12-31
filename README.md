@@ -4,6 +4,10 @@ This application allows one to keep track of mileage by utilizing the Google She
 
 The Google Sheet being used : https://docs.google.com/spreadsheets/d/1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg/edit#gid=0
 
+If you manually delete a row from any column from the Sheet, and run the program again, the sheet will display "44195" in place 
+of entry dates. I am not sure why this occurs, but a work around is re-cloning the application again, and it should show the correct 
+date. This typically happens when you need to "reset" the sheet to it's inital state.
+
 To run this project: Run through Gradle: On the right-hand side of the IntelliJ window, there is a section entitled "Gradle."
 Click on this, then expand the project directory if that is not done. 
 Expand Tasks > Application, and double-click on the run operation to begin running this application.
