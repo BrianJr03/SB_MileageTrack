@@ -17,7 +17,6 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import java.util.Map;
 
 public class ResultsController {
 
@@ -44,10 +43,9 @@ public class ResultsController {
     public ResultsController() throws IOException, GeneralSecurityException {}
 
     public void initialize() throws IOException, GeneralSecurityException, MessagingException {
-//        System.out.println(getEntries().get( 0 ).getEntryDate());
-        setTableProperties();
         setDate_Label();
         setMileAVG_Label();
+        setTableProperties();
         updateTotalMileage();
         checkFor_HighMileage();
         setTotalMileage_Label();
@@ -60,10 +58,11 @@ public class ResultsController {
     }
 
     public ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
-        List<List<Object>> sheetData = sbmtSheet.getSheetData();
+        List<List<Object>> sheetData = sbmtSheet.getSheetData(); int placeHolderRow = 0;
         ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
         for ( List <Object> row : sheetData )
         { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString()));}
+        sheetEntries.remove( placeHolderRow );
         return sheetEntries;
     }
 
