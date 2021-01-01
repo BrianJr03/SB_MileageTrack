@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 public class Main extends Application implements EventHandler <ActionEvent> {
 
     public static Stage stage;
-    public static boolean isSplashLoaded = false;
 
     public static void main( String[] args )
     { launch( args );  }
@@ -19,7 +18,7 @@ public class Main extends Application implements EventHandler <ActionEvent> {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource( "/ui/main.fxml" ));
+        Parent root = FXMLLoader.load(getClass().getResource( "/ui/welcome.fxml" ));
         stage.setResizable( false );
         stage.getIcons().removeAll();
         stage.setScene(new Scene(root,615,315));

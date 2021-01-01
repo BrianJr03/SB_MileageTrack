@@ -41,7 +41,7 @@ public class MainController implements Initializable {
         rootPane.getChildren().setAll( root );
     }
 
-    public void launchResultsUI() throws IOException, GeneralSecurityException {
+    public void launchLoadingUI() throws IOException, GeneralSecurityException {
         if (isValid_MileInput( mileEntry_Field.getText() )) {
             sbmtSheet.addEntryToSheet( mileEntry_Field.getText() );
             launchUI( "/ui/loading.fxml" );
