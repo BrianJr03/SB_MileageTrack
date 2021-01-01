@@ -9,18 +9,19 @@ import javax.sound.sampled.Clip;
 
 public class Music {
 
-    Clip clip;
+    private final Clip clip;
     public String clipStatus;
 
-    public Music(String songPath) throws UnsupportedAudioFileException, IOException,
-            LineUnavailableException {
-        AudioInputStream audioInputStream =
-                AudioSystem.getAudioInputStream( new File( songPath ).getAbsoluteFile() );
+    public Music(String songPath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                new File( songPath ).getAbsoluteFile() );
         clip = AudioSystem.getClip();
         clip.open( audioInputStream );
+        FloatControl control = ( FloatControl ) clip.getControl( FloatControl.Type.MASTER_GAIN );
+        control.setValue( -20.0f );
     }
 
-    public void play(){
+    public void play() {
         clip.start();
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         this.clipStatus = "playing";

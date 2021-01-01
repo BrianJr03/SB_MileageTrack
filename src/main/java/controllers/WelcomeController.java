@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -14,7 +15,8 @@ import java.util.ResourceBundle;
 
 public class WelcomeController implements Initializable {
 
-    public AnchorPane rootPane;
+    @FXML
+    private AnchorPane rootPane;
     Music bgMusic = new Music( "src/main/resources/music/The Deli.wav" );
 
     public WelcomeController() throws UnsupportedAudioFileException, IOException, LineUnavailableException {}
