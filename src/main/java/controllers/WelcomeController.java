@@ -20,7 +20,6 @@ public class WelcomeController implements Initializable {
 
     public WelcomeController( ) throws UnsupportedAudioFileException, IOException, LineUnavailableException {}
 
-
     @Override
     public void initialize( URL location , ResourceBundle resources ) {
         bgMusic.play();
