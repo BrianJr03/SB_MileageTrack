@@ -30,7 +30,7 @@ public class WelcomeController implements Initializable {
     class WelcomeScreen extends Thread {
         @Override
         public void run() { try {
-                Thread.sleep( 905 );
+                Thread.sleep( 1850 );
                 Platform.runLater( () -> {
                     Parent root = null;
                     try { root = FXMLLoader.load(getClass().getResource("/ui/main.fxml"));
