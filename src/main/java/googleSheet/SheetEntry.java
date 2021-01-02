@@ -5,8 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 @SuppressWarnings( "unused" )
 public class SheetEntry {
 
-    private final SimpleStringProperty entryDate;
     private final SimpleStringProperty mileage;
+    private final SimpleStringProperty entryDate;
 
     public SheetEntry( String entryDate , String mileage ) {
         this.entryDate = new SimpleStringProperty(entryDate);

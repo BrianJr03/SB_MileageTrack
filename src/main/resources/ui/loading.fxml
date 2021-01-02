@@ -10,14 +10,6 @@
    <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../png/bg_image1.png" />
    </ImageView>
-   <ImageView fitHeight="37.0" fitWidth="51.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../png/sb_Logo.png" />
-   </ImageView>
-   <Label layoutX="5.0" layoutY="38.0" text="SBMT">
-      <font>
-         <Font name="Impact" size="12.0" />
-      </font>
-   </Label>
    <Circle fill="DODGERBLUE" layoutX="240.0" layoutY="167.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="6.0" />
    <Circle fill="DODGERBLUE" layoutX="308.0" layoutY="167.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="6.0" />
    <Circle fill="DODGERBLUE" layoutX="375.0" layoutY="167.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="6.0" />

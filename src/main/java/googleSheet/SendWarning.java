@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Properties;
 
-public class SendWarning {
+public class  SendWarning {
 
     SBMT_Sheet sbmt_sheet = new SBMT_Sheet();
     private final String startDate = sbmt_sheet.getStartDate();

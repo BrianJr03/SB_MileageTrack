@@ -84,7 +84,7 @@ public class ResultsController implements Initializable {
         else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg())); }
 
     public void setTotalMileage_Label()
-    { totalMileage_Label.setText( String.valueOf( sbmtSheet.getTotalMileage())); }
+    { totalMileage_Label.setText( String.valueOf(sbmtSheet.getTotalMileage())); }
 
     public void setDate_Label() throws IOException, GeneralSecurityException
     { date_Label.setText( sbmtSheet.getStartDate()); }

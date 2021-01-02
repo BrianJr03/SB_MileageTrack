@@ -19,8 +19,7 @@ public class LoadingController implements Initializable {
 
     class LoadingScreen extends Thread {
         public void run() {
-            try {
-                Thread.sleep( 100 );
+            try { Thread.sleep( 100 );
                 Platform.runLater( () -> {
                     try { Parent root = FXMLLoader.load(getClass().getResource("/ui/results.fxml"));
                           rootPane.getChildren().setAll( root );
