@@ -44,7 +44,7 @@ public class MainController implements Initializable {
     public void launchLoadingUI() throws IOException, GeneralSecurityException {
         if (isValid_MileInput( mileEntry_Field.getText() )) {
             sbmtSheet.addEntryToSheet( mileEntry_Field.getText() );
-            launchUI( "/ui/loading.fxml" );
+            launchUI( "/ui/loadingResults.fxml" );
         }
         else displayPromptFor3secs( invalidMile_Label );
     }
@@ -64,6 +64,8 @@ public class MainController implements Initializable {
     }
 
     public void launchSettings() throws IOException {
-        launchUI( "/ui/settings.fxml" );
+        launchUI( "/ui/loadingSettings.fxml" );
     }
+
+
 }
