@@ -1,15 +1,15 @@
 package controllers;
 
-import javafx.fxml.Initializable;
+import googleSheet.SBMT_Sheet;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import googleSheet.SBMT_Sheet;
 import java.io.IOException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
@@ -61,5 +61,9 @@ public class MainController implements Initializable {
         PauseTransition visiblePause = new PauseTransition( Duration.seconds(3));
         visiblePause.setOnFinished( event -> prompt.setVisible(false) );
         visiblePause.play();
+    }
+
+    public void launchSettings() throws IOException {
+        launchUI( "/ui/settings.fxml" );
     }
 }

@@ -61,15 +61,19 @@ public class ResultsController implements Initializable {
     public void setTableProperties() throws IOException, GeneralSecurityException {
         dateColumn.setCellValueFactory( new PropertyValueFactory <>( "entryDate" ) );
         mileColumn.setCellValueFactory( new PropertyValueFactory <>( "mileage" ) );
-        mileageInfo_Table.setItems( getEntries() );
+        ObservableList<SheetEntry> entries = getEntries();
+        entries.remove( 0 );
+        mileageInfo_Table.setItems(entries);
     }
 
     public ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
-        List<List<Object>> sheetData = sbmtSheet.getSheetData(); int placeHolderRow = 0;
+        List<List<Object>> sheetData = sbmtSheet.getSheetData();
+        int placeHolderRow = 0; int phoneNumPlaceHolder = 1;
         ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
         for ( List <Object> row : sheetData )
         { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString())); }
         sheetEntries.remove( placeHolderRow );
+        sheetEntries.remove( phoneNumPlaceHolder );
         return sheetEntries;
     }
 
