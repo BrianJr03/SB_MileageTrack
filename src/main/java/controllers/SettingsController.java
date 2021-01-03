@@ -22,6 +22,8 @@ public class SettingsController {
     public void initialize() throws IOException, GeneralSecurityException {
         if (!sbmt_sheet.getEntryDates_AsObservableList().get( 1 ).equals( "0" ))
         { phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( 1 ) ); }
+        if (!sbmt_sheet.getEntryDates_AsObservableList().get( 2 ).equals( "0" ))
+        { emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( 2 ) ); }
     }
 
     public void launchMainUI() throws IOException {
