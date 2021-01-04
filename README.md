@@ -16,6 +16,12 @@ A high mileage warning will be sent when the user's total mileage reaches a 250 
 is 0, and overtime, it reaches 250, a warning will be sent. This will occur when the user reaches 250, 500, 750 total miles and so on.
 Go to settings (from the main UI) to update contact information. If you do not wish to receieve a warning, leave the fields blank.
 
+In settings:
+
+Any valid email address will be accepted. 
+The required format for a phone number is xxx-xxx-xxxx
+Sprint, Verizon, T-Mobile, and AT&T are the only supported carriers. Case-sensitive.
+
 There are 3 supressed "unused" warnings:
 
   - SBMT_Sheet.addEntryToSheet()
