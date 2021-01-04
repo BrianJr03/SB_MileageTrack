@@ -101,7 +101,7 @@ public class SBMT_Sheet {
     }
 
     public String getStartDate() throws IOException, GeneralSecurityException
-    { return getEntryDates_AsObservableList().get( 3 ); }
+    { return getEntryDates_AsObservableList().get( 4 ); }
 
     public double getLastTenEntries_MileAvg()
     { return findLastTenEntries_MileAvg(); }

@@ -14,10 +14,14 @@
         <font>
             <Font name="Impact" size="12.0" />
         </font></Button>
-   <CheckBox layoutX="169.0" layoutY="58.0" mnemonicParsing="false" text="MMS" />
-   <CheckBox layoutX="169.0" layoutY="104.0" mnemonicParsing="false" text="Email" />
-   <TextField fx:id="phoneNum_Field" layoutX="248.0" layoutY="54.0" promptText="Phone number" />
-   <TextField fx:id="emailAddress_Field" layoutX="248.0" layoutY="100.0" promptText="Email address" />
-   <Button layoutX="412.0" layoutY="54.0" mnemonicParsing="false" onAction="#updatePhoneNumber" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="OK" />
-   <Button layoutX="412.0" layoutY="100.0" mnemonicParsing="false" onAction="#updateEmailAddress" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="OK" />
+   <TextField fx:id="phoneNum_Field" layoutX="87.0" layoutY="80.0" promptText="Phone number" />
+   <TextField fx:id="emailAddress_Field" layoutX="333.0" layoutY="80.0" promptText="Email address" />
+   <Button layoutX="243.0" layoutY="80.0" mnemonicParsing="false" onAction="#updatePhoneNumber" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="OK" />
+   <Button layoutX="494.0" layoutY="80.0" mnemonicParsing="false" onAction="#updateEmailAddress" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="OK" />
+   <Label fx:id="phoneNumUpdated_Label" layoutX="241.0" layoutY="218.0" text="Phone Number Updated!" textFill="WHITE" />
+   <Label fx:id="emailUpdated_Label" layoutX="244.0" layoutY="218.0" text="Email Address Updated!" textFill="WHITE" />
+   <Label fx:id="invalidEmail_Label" layoutX="249.0" layoutY="218.0" text="Invalid Email Address!" textFill="WHITE" />
+   <Label fx:id="invalidPhoneNum_Label" layoutX="223.0" layoutY="218.0" text="Invalid Phone Number / Carrier!" textFill="WHITE" />
+   <ComboBox fx:id="carrierComboBox" layoutX="87.0" layoutY="117.0" prefHeight="26.0" prefWidth="149.0" />
+   <Label layoutX="252.0" layoutY="38.0" text="Recieve Notifications" />
 </AnchorPane>

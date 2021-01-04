@@ -100,13 +100,15 @@ public class ResultsController implements Initializable {
         double totalMileage = sbmtSheet.getTotalMileage(); String A1 = "sbMileage!A1";
         if ( totalMileage >= this.mileWarningCounter_AsDouble ) {
             sbmtSheet.updateSheet( A1, String.valueOf( mileWarningCounter_AsDouble + 250 ));
-            sendWarningToUser();
+            sendWarningToUserAsText(sbmtSheet.getEntryDates_AsObservableList().get( 1 ),
+                    sbmtSheet.getEntryDates_AsObservableList().get( 3 ));
         }
     }
 
     public void updateTotalMileage() throws IOException, GeneralSecurityException
     { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() )); }
 
-    public void sendWarningToUser() throws IOException, MessagingException
-    { sendWarning.sendNotificationAsTextMSG( "219-359-6331", "Sprint" ); }
+    public void sendWarningToUserAsText(String phoneNumber, String carrier) throws IOException, MessagingException
+    { sendWarning.sendNotificationAsTextMSG( phoneNumber, carrier ); }
+
 }
