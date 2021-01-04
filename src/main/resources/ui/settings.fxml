@@ -24,4 +24,12 @@
    <Label fx:id="invalidPhoneNum_Label" layoutX="223.0" layoutY="218.0" text="Invalid Phone Number / Carrier!" textFill="WHITE" />
    <Label layoutX="252.0" layoutY="38.0" text="Recieve Notifications" />
    <TextField fx:id="carrier_Field" layoutX="87.0" layoutY="115.0" promptText="Carrier" />
+    <ImageView fx:id="phoneNum_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="55.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../png/checkMark.png" />
+    </ImageView>
+    <ImageView fx:id="email_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="307.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../png/checkMark.png" />
+    </ImageView>
+   <Button layoutX="515.0" layoutY="236.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone" />
+   <Button layoutX="515.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email" />
 </AnchorPane>

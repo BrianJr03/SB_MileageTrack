@@ -79,7 +79,8 @@ public class ResultsController implements Initializable {
 
     private void setMileAVG_Label() throws IOException, GeneralSecurityException {
         if ( sbmtSheet.getSheetData().size() < 10) { mileAVG_Label.setText( "N/A" ); }
-        else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg())); }
+        else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg()));
+    }
 
     private void setTotalMileage_Label()
     { totalMileage_Label.setText( String.valueOf(sbmtSheet.getTotalMileage())); }
@@ -95,14 +96,22 @@ public class ResultsController implements Initializable {
         double totalMileage = sbmtSheet.getTotalMileage(); String A1 = "sbMileage!A1";
         if ( totalMileage >= this.mileWarningCounter_AsDouble ) {
             sbmtSheet.updateSheet( A1, String.valueOf( mileWarningCounter_AsDouble + 250 ));
-            sendWarningToUserAsText(sbmtSheet.getEntryDates_AsObservableList().get( 1 ),
-                    sbmtSheet.getEntryDates_AsObservableList().get( 3 ));
-        }
+            sendHighMileage_Warning(); }
     }
 
     private void updateTotalMileage() throws IOException, GeneralSecurityException
     { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() )); }
 
-    private void sendWarningToUserAsText(String phoneNumber, String carrier) throws IOException, MessagingException
+    private void sendWarningToUserAsText( String phoneNumber, String carrier ) throws IOException, MessagingException
     { sendWarning.sendNotificationAsTextMSG( phoneNumber, carrier ); }
+
+    private void sendWarningToUserAsEmail( String email ) throws IOException, MessagingException
+    { sendWarning.sendNotificationAsEmail( email ); }
+
+    private void sendHighMileage_Warning() throws IOException, GeneralSecurityException, MessagingException {
+        if (!sbmtSheet.getUserPhoneNum().equals( "empty" ) && !sbmtSheet.getUserCarrier().equals( "empty" ))
+        { sendWarningToUserAsText(sbmtSheet.getUserPhoneNum(), sbmtSheet.getUserCarrier()); }
+        if (!sbmtSheet.getUserEmail().equals( "empty" ))
+        { sendWarningToUserAsEmail( sbmtSheet.getUserEmail() ); }
+    }
 }

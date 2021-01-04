@@ -62,12 +62,6 @@ public class SBMT_Sheet {
         return response.getValues();
     }
 
-    public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList(); }
-
-    public String getMileageWarningCount() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList().get( 0 ); }
-
     private ObservableList<String> getSheetDataAsObservableList() throws IOException, GeneralSecurityException {
         ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
         List<List<Object>> sheet = getSheetData();
@@ -100,9 +94,6 @@ public class SBMT_Sheet {
                 .execute();
     }
 
-    public String getStartDate() throws IOException, GeneralSecurityException
-    { return getEntryDates_AsObservableList().get( 4 ); }
-
     public double getLastTenEntries_MileAvg()
     { return findLastTenEntries_MileAvg(); }
 
@@ -127,4 +118,22 @@ public class SBMT_Sheet {
         }
         return DoubleRounder.round(mileageTotal, 2);
     }
+
+    public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
+    { return getSheetDataAsObservableList(); }
+
+    public String getMileageWarningCount() throws IOException, GeneralSecurityException
+    { return getSheetDataAsObservableList().get( 0 ); }
+
+    public String getUserPhoneNum() throws IOException, GeneralSecurityException
+    { return getEntryDates_AsObservableList().get( 1 ); }
+
+    public String getUserEmail() throws IOException, GeneralSecurityException
+    { return getEntryDates_AsObservableList().get( 2 ); }
+
+    public String getUserCarrier() throws IOException, GeneralSecurityException
+    { return getEntryDates_AsObservableList().get( 3 ); }
+
+    public String getStartDate() throws IOException, GeneralSecurityException
+    { return getEntryDates_AsObservableList().get( 4 ); }
 }

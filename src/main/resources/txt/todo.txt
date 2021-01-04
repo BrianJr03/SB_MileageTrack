@@ -1,2 +1,2 @@
             TODO
-            Verify email / phone number fields are not empty in Results
+Implement email functionality

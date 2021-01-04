@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -15,6 +16,7 @@ import static main.Main.displayPromptFor3secs;
 
 public class SettingsController {
 
+    public ImageView email_CheckMarkImage;
     @FXML
     private TextField carrier_Field;
     @FXML
@@ -31,12 +33,15 @@ public class SettingsController {
     private Label invalidEmail_Label;
     @FXML
     private AnchorPane rootPane;
+    @FXML
+    private ImageView phoneNum_CheckMarkImage;
 
     SBMT_Sheet sbmt_sheet = new SBMT_Sheet();
 
     public SettingsController() throws IOException, GeneralSecurityException {}
 
-    public void initialize( ) throws IOException, GeneralSecurityException {
+    public void initialize() throws IOException, GeneralSecurityException {
+        showCheckMarks();
         hideLabels();
         verifyStoredText();
         verifyStoredEmail();
@@ -70,21 +75,34 @@ public class SettingsController {
         }
     }
 
+    public void showCheckMarks() throws IOException, GeneralSecurityException {
+        phoneNum_CheckMarkImage.setVisible( isValidPhoneNumber( sbmt_sheet.getUserPhoneNum() ) );
+        email_CheckMarkImage.setVisible( isValidEmail( sbmt_sheet.getUserEmail() ) );
+    }
+
     @FXML
     private void updateEmailAddress() throws IOException, GeneralSecurityException {
         if ( isValidEmail( emailAddress_Field.getText() )) {
             sbmt_sheet.updateSheet( "sbMileage!A3" , emailAddress_Field.getText() );
+            displayEmail_CheckMark();
             displayPromptFor3secs( emailUpdated_Label );
-        } else displayPromptFor3secs( invalidEmail_Label );
+        } else { email_CheckMarkImage.setVisible(false); displayPromptFor3secs( invalidEmail_Label );  }
     }
+
+    private void displayPhoneNum_CheckMark()
+    { phoneNum_CheckMarkImage.setVisible(true); }
+
+    private void displayEmail_CheckMark()
+    { email_CheckMarkImage.setVisible(true); }
 
     @FXML
     private void updatePhoneNumber() throws IOException, GeneralSecurityException {
         if ( isValidPhoneNumber( phoneNum_Field.getText() ) && isValidCarrier( carrier_Field.getText() )) {
             sbmt_sheet.updateSheet( "sbMileage!A2" , phoneNum_Field.getText() );
             sbmt_sheet.updateSheet( "sbMileage!A4" , carrier_Field.getText() );
+            displayPhoneNum_CheckMark();
             displayPromptFor3secs( phoneNumUpdated_Label );
-        } else displayPromptFor3secs( invalidPhoneNum_Label );
+        } else { phoneNum_CheckMarkImage.setVisible( false ); displayPromptFor3secs( invalidPhoneNum_Label ); }
     }
 
     private void hideLabels() {
@@ -92,6 +110,22 @@ public class SettingsController {
         emailUpdated_Label.setVisible( false );
         invalidPhoneNum_Label.setVisible( false );
         phoneNumUpdated_Label.setVisible( false );
+    }
+
+    @FXML
+    private void resetPhoneFields() throws IOException, GeneralSecurityException {
+        sbmt_sheet.updateSheet( "sbMileage!A2", "empty" );
+        sbmt_sheet.updateSheet( "sbMileage!A4", "empty" );
+        phoneNum_Field.clear();
+        carrier_Field.clear();
+        phoneNum_CheckMarkImage.setVisible( false );
+    }
+
+    @FXML
+    private void resetEmailFields()  throws IOException, GeneralSecurityException {
+        sbmt_sheet.updateSheet( "sbMileage!A3", "empty" );
+        emailAddress_Field.clear();
+        email_CheckMarkImage.setVisible( false );
     }
 
     private void verifyStoredText() throws IOException, GeneralSecurityException
