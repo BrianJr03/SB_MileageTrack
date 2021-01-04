@@ -116,16 +116,14 @@ public class SettingsController {
     private void resetPhoneFields() throws IOException, GeneralSecurityException {
         sbmt_sheet.updateSheet( "sbMileage!A2", "empty" );
         sbmt_sheet.updateSheet( "sbMileage!A4", "empty" );
-        phoneNum_Field.clear();
-        carrier_Field.clear();
+        phoneNum_Field.clear(); carrier_Field.clear();
         phoneNum_CheckMarkImage.setVisible( false );
     }
 
     @FXML
     private void resetEmailFields()  throws IOException, GeneralSecurityException {
         sbmt_sheet.updateSheet( "sbMileage!A3", "empty" );
-        emailAddress_Field.clear();
-        email_CheckMarkImage.setVisible( false );
+        emailAddress_Field.clear(); email_CheckMarkImage.setVisible( false );
     }
 
     private void verifyStoredText() throws IOException, GeneralSecurityException

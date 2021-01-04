@@ -9,7 +9,7 @@
     <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../png/bg_image1.png" />
     </ImageView>
-    <Label layoutX="137.0" layoutY="111.0" text="Hello! How many miles did you ride today?">
+    <Label layoutX="163.0" layoutY="105.0" text="How many miles did you ride today?">
         <font>
           <Font size="18.0" />
         </font>
