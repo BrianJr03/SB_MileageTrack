@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -11,7 +12,8 @@ import java.util.ResourceBundle;
 
 public class LoadingResultsController implements Initializable {
 
-    public AnchorPane rootPane;
+    @FXML
+    private AnchorPane rootPane;
 
     @Override
     public void initialize( URL location , ResourceBundle resources )

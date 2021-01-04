@@ -6,8 +6,7 @@ import googleSheet.SheetEntry;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import static main.Main.launchUI;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -40,6 +39,7 @@ public class ResultsController implements Initializable {
 
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
     SendWarning sendWarning = new SendWarning();
+
     private final String mileWarningCounter = sbmtSheet.getMileageWarningCount();
     private final double mileWarningCounter_AsDouble = Double.parseDouble( mileWarningCounter );
 
@@ -58,45 +58,40 @@ public class ResultsController implements Initializable {
         { exception.printStackTrace(); }
     }
 
-    public void setTableProperties() throws IOException, GeneralSecurityException {
+    private void setTableProperties() throws IOException, GeneralSecurityException {
         dateColumn.setCellValueFactory( new PropertyValueFactory <>( "entryDate" ) );
         mileColumn.setCellValueFactory( new PropertyValueFactory <>( "mileage" ) );
         ObservableList<SheetEntry> entries = getEntries();
-        entries.remove( 0 );
         mileageInfo_Table.setItems(entries);
     }
 
-    public ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
+    private ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
         List<List<Object>> sheetData = sbmtSheet.getSheetData();
-        int placeHolderRow = 0; int phoneNumPlaceHolder = 1;
         ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
         for ( List <Object> row : sheetData )
         { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString())); }
-        sheetEntries.remove( placeHolderRow );
-        sheetEntries.remove( phoneNumPlaceHolder );
+        removePlaceHolderRows( sheetEntries );
         return sheetEntries;
     }
 
-    public void launchUI(String uiPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(uiPath));
-        Parent root = loader.load();
-        rootPane.getChildren().setAll( root );
-    }
+    private void removePlaceHolderRows( ObservableList<SheetEntry> sheetEntries )
+    { sheetEntries.subList( 0 , 4 ).clear(); }
 
-    public void setMileAVG_Label() throws IOException, GeneralSecurityException {
+    private void setMileAVG_Label() throws IOException, GeneralSecurityException {
         if ( sbmtSheet.getSheetData().size() < 10) { mileAVG_Label.setText( "N/A" ); }
         else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg())); }
 
-    public void setTotalMileage_Label()
+    private void setTotalMileage_Label()
     { totalMileage_Label.setText( String.valueOf(sbmtSheet.getTotalMileage())); }
 
-    public void setDate_Label() throws IOException, GeneralSecurityException
+    private void setDate_Label() throws IOException, GeneralSecurityException
     { date_Label.setText( sbmtSheet.getStartDate()); }
 
-    public void launchResultsUI() throws IOException
-    { launchUI( "/ui/main.fxml" ); }
+    @FXML
+    private void launchMainUI() throws IOException
+    { launchUI( "/ui/main.fxml", rootPane ); }
 
-    public void checkFor_HighMileage() throws IOException, MessagingException, GeneralSecurityException {
+    private void checkFor_HighMileage() throws IOException, MessagingException, GeneralSecurityException {
         double totalMileage = sbmtSheet.getTotalMileage(); String A1 = "sbMileage!A1";
         if ( totalMileage >= this.mileWarningCounter_AsDouble ) {
             sbmtSheet.updateSheet( A1, String.valueOf( mileWarningCounter_AsDouble + 250 ));
@@ -105,10 +100,9 @@ public class ResultsController implements Initializable {
         }
     }
 
-    public void updateTotalMileage() throws IOException, GeneralSecurityException
+    private void updateTotalMileage() throws IOException, GeneralSecurityException
     { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() )); }
 
-    public void sendWarningToUserAsText(String phoneNumber, String carrier) throws IOException, MessagingException
+    private void sendWarningToUserAsText(String phoneNumber, String carrier) throws IOException, MessagingException
     { sendWarning.sendNotificationAsTextMSG( phoneNumber, carrier ); }
-
 }
