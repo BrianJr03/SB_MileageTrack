@@ -22,6 +22,6 @@
    <Label fx:id="emailUpdated_Label" layoutX="244.0" layoutY="218.0" text="Email Address Updated!" textFill="WHITE" />
    <Label fx:id="invalidEmail_Label" layoutX="249.0" layoutY="218.0" text="Invalid Email Address!" textFill="WHITE" />
    <Label fx:id="invalidPhoneNum_Label" layoutX="223.0" layoutY="218.0" text="Invalid Phone Number / Carrier!" textFill="WHITE" />
-   <ComboBox fx:id="carrierComboBox" layoutX="87.0" layoutY="117.0" prefHeight="26.0" prefWidth="149.0" />
    <Label layoutX="252.0" layoutY="38.0" text="Recieve Notifications" />
+   <TextField fx:id="carrier_Field" layoutX="87.0" layoutY="115.0" promptText="Carrier" />
 </AnchorPane>
