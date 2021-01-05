@@ -16,7 +16,13 @@ import static main.Main.displayPromptFor3secs;
 
 public class SettingsController {
 
-    public ImageView email_CheckMarkImage;
+    @FXML
+    private Label fieldsEmptyAlready_Label;
+    @FXML
+    private ImageView email_CheckMarkImage;
+    @FXML
+    private Label sheetReset_Label;
+    public Label sheetAlreadyReset_Label;
     @FXML
     private TextField carrier_Field;
     @FXML
@@ -106,24 +112,35 @@ public class SettingsController {
     }
 
     private void hideLabels() {
+        sheetReset_Label.setVisible( false);
         invalidEmail_Label.setVisible( false );
         emailUpdated_Label.setVisible( false );
         invalidPhoneNum_Label.setVisible( false );
         phoneNumUpdated_Label.setVisible( false );
+        sheetAlreadyReset_Label.setVisible( false );
+        fieldsEmptyAlready_Label.setVisible( false );
     }
 
     @FXML
     private void resetPhoneFields() throws IOException, GeneralSecurityException {
-        sbmt_sheet.updateSheet( "sbMileage!A2", "empty" );
-        sbmt_sheet.updateSheet( "sbMileage!A4", "empty" );
         phoneNum_Field.clear(); carrier_Field.clear();
-        phoneNum_CheckMarkImage.setVisible( false );
+        if ( phoneNum_Field.getText().equals( " " ) && carrier_Field.getText().equals( " " )) {
+            sbmt_sheet.updateSheet( "sbMileage!A2", "empty" );
+            sbmt_sheet.updateSheet( "sbMileage!A4", "empty" );
+            phoneNum_Field.clear(); carrier_Field.clear();
+            phoneNum_CheckMarkImage.setVisible( false );
+        }
+        else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
     @FXML
-    private void resetEmailFields()  throws IOException, GeneralSecurityException {
-        sbmt_sheet.updateSheet( "sbMileage!A3", "empty" );
-        emailAddress_Field.clear(); email_CheckMarkImage.setVisible( false );
+    private void resetEmailFields() throws IOException, GeneralSecurityException {
+        emailAddress_Field.clear();
+        if ( emailAddress_Field.getText().equals( " " )) {
+            sbmt_sheet.updateSheet( "sbMileage!A3", "empty" );
+            emailAddress_Field.clear(); email_CheckMarkImage.setVisible( false );
+        }
+        else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
     private void verifyStoredText() throws IOException, GeneralSecurityException
@@ -153,5 +170,13 @@ public class SettingsController {
                 }
             }
         }
+    }
+
+    public void resetSheet() throws IOException, GeneralSecurityException {
+        if ( sbmt_sheet.canSheetBeReset() ) {
+            sbmt_sheet.resetSheet();
+            displayPromptFor3secs( sheetReset_Label );
+        }
+        else displayPromptFor3secs( sheetAlreadyReset_Label );
     }
 }

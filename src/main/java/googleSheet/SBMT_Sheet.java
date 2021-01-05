@@ -94,6 +94,21 @@ public class SBMT_Sheet {
                 .execute();
     }
 
+    public void resetSheetFromIndex( int rowIndex ) throws IOException, GeneralSecurityException {
+        sheetService = getSheetService();
+        DeleteDimensionRequest deleteRequest = new DeleteDimensionRequest()
+                .setRange(
+                        new DimensionRange()
+                        .setSheetId( 0 )
+                        .setDimension( "ROWS" )
+                        .setStartIndex( rowIndex )
+                );
+        List<Request> requests = new ArrayList <>();
+        requests.add( new Request().setDeleteDimension( deleteRequest ) );
+        BatchUpdateSpreadsheetRequest body = new BatchUpdateSpreadsheetRequest().setRequests( requests );
+        sheetService.spreadsheets().batchUpdate( SPREADSHEET_ID, body ).execute();
+    }
+
     public double getLastTenEntries_MileAvg()
     { return findLastTenEntries_MileAvg(); }
 
@@ -136,4 +151,20 @@ public class SBMT_Sheet {
 
     public String getStartDate() throws IOException, GeneralSecurityException
     { return getEntryDates_AsObservableList().get( 4 ); }
+
+    public void resetSheet() throws IOException, GeneralSecurityException {
+        resetSheetFromIndex( 4 );
+        updateSheet( "sbMileage!A1", String.valueOf( 250 ) );
+        updateSheet( "sbMileage!A2", "empty" );
+        updateSheet( "sbMileage!A3", "empty" );
+        updateSheet( "sbMileage!A4", "empty" );
+        updateSheet( "sbMileage!B1", String.valueOf( 0 ) );
+        updateSheet( "sbMileage!B2", String.valueOf( 0 ) );
+        updateSheet( "sbMileage!B3", String.valueOf( 0 ) );
+        updateSheet( "sbMileage!B4", String.valueOf( 0 ) );
+        updateSheet( "sbMileage!C1", String.valueOf( 0 ) );
+    }
+
+    public boolean canSheetBeReset() throws IOException, GeneralSecurityException
+    { return getSheetData().size() > 4; }
 }

@@ -33,6 +33,10 @@
     <ImageView fx:id="email_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="307.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../png/checkMark.png" />
     </ImageView>
-   <Button layoutX="515.0" layoutY="236.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone" />
+   <Button layoutX="419.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone" />
    <Button layoutX="515.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email" />
+   <Button layoutX="322.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetSheet" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Data" />
+   <Label fx:id="sheetReset_Label" layoutX="252.0" layoutY="218.0" text="Data has been reset!" textFill="WHITE" />
+   <Label fx:id="sheetAlreadyReset_Label" layoutX="248.0" layoutY="218.0" text="Data already intialized." textFill="WHITE" />
+   <Label fx:id="fieldsEmptyAlready_Label" layoutX="247.0" layoutY="218.0" text="Field(s) already empty!" textFill="WHITE" />
 </AnchorPane>
