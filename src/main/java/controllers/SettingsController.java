@@ -152,25 +152,28 @@ public class SettingsController {
     private void verifyStoredCarrier() throws IOException, GeneralSecurityException
     { verifyStoredInfo( 3 ); }
 
-    private void verifyStoredInfo(int index) throws IOException, GeneralSecurityException {
+    private void verifyStoredInfo( int index ) throws IOException, GeneralSecurityException {
         switch ( index ) {
             case 1 -> {
-                if ( !sbmt_sheet.getEntryDates_AsObservableList().get( index ).equals( "empty" ) ) {
+                if ( isSheetCellEmpty( index ) ) {
                     phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
                 }
             }
             case 2 -> {
-                if ( !sbmt_sheet.getEntryDates_AsObservableList().get( index ).equals( "empty" ) ) {
+                if ( isSheetCellEmpty( index ) ) {
                     emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
                 }
             }
             case 3 -> {
-                if ( !sbmt_sheet.getEntryDates_AsObservableList().get( index ).equals( "empty" ) ) {
+                if ( isSheetCellEmpty( index ) ) {
                     carrier_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
                 }
             }
         }
     }
+
+    private boolean isSheetCellEmpty( int index ) throws IOException, GeneralSecurityException
+    { return !sbmt_sheet.getEntryDates_AsObservableList().get( index ).equals( "empty" ); }
 
     private void hideCheckMarks()
     { phoneNum_CheckMarkImage.setVisible( false ); email_CheckMarkImage.setVisible( false ); }

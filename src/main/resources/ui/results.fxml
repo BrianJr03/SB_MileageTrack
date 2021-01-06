@@ -19,7 +19,7 @@
       </font></Label>
    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchMainUI" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Back">
       <font>
-         <Font name="Impact" size="12.0" />
+         <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
    <TableView fx:id="mileageInfo_Table" layoutX="296.0" layoutY="28.0" prefHeight="262.0" prefWidth="291.0" stylesheets="@../stylesheets/tableView_stylesheet.css">
      <columns>

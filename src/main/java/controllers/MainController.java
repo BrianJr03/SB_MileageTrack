@@ -42,6 +42,10 @@ public class MainController implements Initializable {
         else displayPromptFor3secs( invalidMile_Label );
     }
 
+    @FXML
+    private void byPassToLoadingUI() throws IOException
+    { launchUI( "/ui/loadingResults.fxml", rootPane ); }
+
     private static boolean isValid_MileInput(String mile) {
         Pattern pattern = Pattern.compile("^[0-9]*(\\.)?[0-9]+$");
         Matcher matcher = pattern.matcher(mile);
