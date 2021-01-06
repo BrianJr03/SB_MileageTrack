@@ -19,7 +19,10 @@ public class LoadingResultsController implements Initializable {
     public void initialize( URL location , ResourceBundle resources )
     { new LoadingResults().start(); }
 
-    class LoadingResults extends Thread {
+    public void initialize()
+    { new LoadingResults().start(); }
+
+     class LoadingResults extends Thread {
         public void run() {
             try { Thread.sleep( 100 );
                 Platform.runLater( () -> {
@@ -32,6 +35,4 @@ public class LoadingResultsController implements Initializable {
             { e.printStackTrace(); }
         }
     }
-
-
 }

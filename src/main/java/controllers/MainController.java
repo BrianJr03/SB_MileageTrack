@@ -18,6 +18,8 @@ import static main.Main.launchUI;
 public class MainController implements Initializable {
 
     @FXML
+    private Label noHistory_Label;
+    @FXML
     private TextField mileEntry_Field;
     @FXML
     private Label invalidMile_Label;
@@ -29,7 +31,11 @@ public class MainController implements Initializable {
     public MainController() throws IOException, GeneralSecurityException {}
 
     @Override
-    public void initialize( URL location , ResourceBundle resources ) {
+    public void initialize( URL location , ResourceBundle resources )
+    { hideAlL_Labels(); }
+
+    private void hideAlL_Labels() {
+        noHistory_Label.setVisible( false );
         invalidMile_Label.setVisible( false );
     }
 
@@ -37,14 +43,16 @@ public class MainController implements Initializable {
     private void launchLoadingUI() throws IOException, GeneralSecurityException {
         if (isValid_MileInput( mileEntry_Field.getText() )) {
             sbmtSheet.addEntryToSheet( mileEntry_Field.getText() );
-            launchUI( "/ui/loadingResults.fxml", rootPane );
-        }
+            launchUI( "/ui/loadingResults.fxml", rootPane ); }
         else displayPromptFor3secs( invalidMile_Label );
     }
 
     @FXML
-    private void byPassToLoadingUI() throws IOException
-    { launchUI( "/ui/loadingResults.fxml", rootPane ); }
+    private void byPassToLoadingUI() throws IOException, GeneralSecurityException {
+        if ( !sbmtSheet.canSheetBeReset() ) {
+          displayPromptFor3secs( noHistory_Label ); }
+        else {  launchUI( "/ui/loadingResults.fxml", rootPane ); }
+    }
 
     private static boolean isValid_MileInput(String mile) {
         Pattern pattern = Pattern.compile("^[0-9]*(\\.)?[0-9]+$");
