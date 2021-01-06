@@ -16,8 +16,8 @@
         </font></Button>
    <TextField fx:id="phoneNum_Field" layoutX="87.0" layoutY="80.0" promptText="Phone number" />
    <TextField fx:id="emailAddress_Field" layoutX="333.0" layoutY="80.0" promptText="Email address" />
-   <Button layoutX="243.0" layoutY="80.0" mnemonicParsing="false" onAction="#updatePhoneNumber" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="OK" />
-   <Button layoutX="494.0" layoutY="80.0" mnemonicParsing="false" onAction="#updateEmailAddress" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="OK" />
+   <Button layoutX="243.0" layoutY="80.0" mnemonicParsing="false" onAction="#updatePhoneNumber" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Save" />
+   <Button layoutX="494.0" layoutY="80.0" mnemonicParsing="false" onAction="#updateEmailAddress" prefHeight="3.0" prefWidth="42.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Save" />
    <Label fx:id="phoneNumUpdated_Label" layoutX="241.0" layoutY="218.0" text="Phone Number Updated!" textFill="WHITE" />
    <Label fx:id="emailUpdated_Label" layoutX="244.0" layoutY="218.0" text="Email Address Updated!" textFill="WHITE" />
    <Label fx:id="invalidEmail_Label" layoutX="249.0" layoutY="218.0" text="Invalid Email Address!" textFill="WHITE" />
@@ -34,7 +34,7 @@
         <Image url="@../png/checkMark.png" />
     </ImageView>
    <Button layoutX="419.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone" />
-   <Button layoutX="515.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailFields" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email" />
+   <Button layoutX="515.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailField" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email" />
    <Button layoutX="322.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetSheet" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Data" />
    <Label fx:id="sheetReset_Label" layoutX="252.0" layoutY="218.0" text="Data has been reset!" textFill="WHITE" />
    <Label fx:id="sheetAlreadyReset_Label" layoutX="248.0" layoutY="218.0" text="Data already intialized." textFill="WHITE" />
