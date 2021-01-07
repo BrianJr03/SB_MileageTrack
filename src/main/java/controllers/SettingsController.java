@@ -5,10 +5,14 @@ import googleSheet.SBMT_Sheet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
@@ -156,13 +160,26 @@ public class SettingsController {
 
     @FXML
     private void resetMileThreshold() throws IOException, GeneralSecurityException {
+        displayWarningPopUP();
         if (mileThreshold_Field.getText().isBlank())
         { displayPromptFor3secs( fieldsEmptyAlready_Label ); }
         else if ( sbmt_sheet.canSheetBeReset() ) {
             clearFields();
             sbmt_sheet.resetSheet();
-            sbmt_sheet.resetMileageThresholds(); }
+            sbmt_sheet.resetMileageThresholds();
             mileThreshold_CheckMarkImage.setVisible( false );
+        }
+    }
+
+    private void displayWarningPopUP() {
+        Stage stage = ( Stage ) rootPane.getScene().getWindow();
+        Alert.AlertType warning = Alert.AlertType.WARNING;
+        Alert alert = new Alert(warning,"");
+        alert.initModality( Modality.APPLICATION_MODAL );
+        alert.initOwner( stage );
+        alert.getDialogPane().setContentText( "This will also reset your total mileage." );
+        alert.getDialogPane().setHeaderText( "SB Mileage Track" );
+        alert.showAndWait();
     }
 
     private void verifyStoredMileCount() throws IOException, GeneralSecurityException
