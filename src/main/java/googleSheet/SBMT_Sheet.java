@@ -176,6 +176,11 @@ public class SBMT_Sheet {
         updateSheet( "sbMileage!A5", String.valueOf( 0 ) );
     }
 
+    public boolean isSheetCellEmpty( int index ) throws IOException, GeneralSecurityException {
+        return !getEntryDates_AsObservableList().get( index ).equals( "empty" )
+                &&  !getEntryDates_AsObservableList().get( index ).equals( String.valueOf( 0 ) );
+    }
+
     public boolean canSheetBeReset() throws IOException, GeneralSecurityException {
         return getSheetData().size() > 5
                 || !getMileageWarningThreshold().equals( String.valueOf( 0 ) )

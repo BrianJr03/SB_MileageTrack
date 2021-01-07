@@ -1,7 +1,6 @@
 package controllers;
 
 import googleSheet.SBMT_Sheet;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,17 +11,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-
 import static controllerLogic.ControllerLogic.*;
 import static main.Main.displayPromptFor3secs;
 
 public class SettingsController {
 
-    public ImageView mileThreshold_CheckMarkImage;
-    public Label invalidMileThreshold_Label;
+    @FXML
+    private ImageView mileThreshold_CheckMarkImage;
+    @FXML
+    private Label invalidMileThreshold_Label;
     @FXML
     private Label mileThresholdUpdated_Label;
     @FXML
@@ -33,7 +32,8 @@ public class SettingsController {
     private ImageView email_CheckMarkImage;
     @FXML
     private Label sheetReset_Label;
-    public Label sheetAlreadyReset_Label;
+    @FXML
+    private Label sheetAlreadyReset_Label;
     @FXML
     private TextField carrier_Field;
     @FXML
@@ -73,8 +73,6 @@ public class SettingsController {
         rootPane.getChildren().setAll( root );
     }
 
-
-
     public void showCheckMarks() throws IOException, GeneralSecurityException {
         phoneNum_CheckMarkImage.setVisible( isValidPhoneNumber( sbmt_sheet.getUserPhoneNum() ) );
         email_CheckMarkImage.setVisible( isValidEmail( sbmt_sheet.getUserEmail() ) );
@@ -90,16 +88,6 @@ public class SettingsController {
             displayPromptFor3secs( emailUpdated_Label );
         } else { email_CheckMarkImage.setVisible(false); displayPromptFor3secs( invalidEmail_Label );  }
     }
-
-    private void displayPhoneNum_CheckMark()
-    { phoneNum_CheckMarkImage.setVisible(true); }
-
-    private void displayEmail_CheckMark()
-    { email_CheckMarkImage.setVisible(true); }
-
-    private void displayMile_CheckMark()
-    { mileThreshold_CheckMarkImage.setVisible( true ); }
-
 
     @FXML
     private void updatePhoneNumber() throws IOException, GeneralSecurityException {
@@ -164,10 +152,9 @@ public class SettingsController {
         if (mileThreshold_Field.getText().isBlank())
         { displayPromptFor3secs( fieldsEmptyAlready_Label ); }
         else if ( sbmt_sheet.canSheetBeReset() ) {
-            clearFields();
+            clearFields(); mileThreshold_CheckMarkImage.setVisible( false );
             sbmt_sheet.resetSheet();
             sbmt_sheet.resetMileageThresholds();
-            mileThreshold_CheckMarkImage.setVisible( false );
         }
     }
 
@@ -182,6 +169,15 @@ public class SettingsController {
         alert.showAndWait();
     }
 
+    private void displayPhoneNum_CheckMark()
+    { phoneNum_CheckMarkImage.setVisible(true); }
+
+    private void displayEmail_CheckMark()
+    { email_CheckMarkImage.setVisible(true); }
+
+    private void displayMile_CheckMark()
+    { mileThreshold_CheckMarkImage.setVisible( true ); }
+
     private void verifyStoredMileCount() throws IOException, GeneralSecurityException
     {  verifyStoredInfo( 4 ); }
 
@@ -194,37 +190,6 @@ public class SettingsController {
     private void verifyStoredCarrier() throws IOException, GeneralSecurityException
     { verifyStoredInfo( 3 ); }
 
-    private void verifyStoredInfo( int index ) throws IOException, GeneralSecurityException {
-        switch ( index ) {
-            case 4 -> {
-                if (isSheetCellEmpty( index ) ){
-                    mileThreshold_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
-                }
-            }
-
-            case 1 -> {
-                if ( isSheetCellEmpty( index ) ) {
-                    phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
-                }
-            }
-            case 2 -> {
-                if ( isSheetCellEmpty( index ) ) {
-                    emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
-                }
-            }
-            case 3 -> {
-                if ( isSheetCellEmpty( index ) ) {
-                    carrier_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
-                }
-            }
-        }
-    }
-
-    private boolean isSheetCellEmpty( int index ) throws IOException, GeneralSecurityException {
-        return !sbmt_sheet.getEntryDates_AsObservableList().get( index ).equals( "empty" )
-                &&  !sbmt_sheet.getEntryDates_AsObservableList().get( index ).equals( String.valueOf( 0 ) );
-    }
-
     private void hideCheckMarks() {
         email_CheckMarkImage.setVisible( false );
         phoneNum_CheckMarkImage.setVisible( false );
@@ -236,14 +201,39 @@ public class SettingsController {
         emailAddress_Field.clear(); carrier_Field.clear();
     }
 
-
     public void resetSheet() throws IOException, GeneralSecurityException {
-       clearFields(); hideCheckMarks();
+        clearFields(); hideCheckMarks();
         if ( sbmt_sheet.canSheetBeReset() ) {
             sbmt_sheet.resetSheet();
             sbmt_sheet.resetMileageThresholds();
             displayPromptFor3secs( sheetReset_Label );
         }
         else displayPromptFor3secs( sheetAlreadyReset_Label );
+    }
+
+    private void verifyStoredInfo( int index ) throws IOException, GeneralSecurityException {
+        switch ( index ) {
+            case 4 -> {
+                if ( sbmt_sheet.isSheetCellEmpty( index ) ){
+                    mileThreshold_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
+                }
+            }
+
+            case 1 -> {
+                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+                    phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
+                }
+            }
+            case 2 -> {
+                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+                    emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
+                }
+            }
+            case 3 -> {
+                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+                    carrier_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) );
+                }
+            }
+        }
     }
 }
