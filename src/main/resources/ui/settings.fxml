@@ -24,10 +24,10 @@
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
-   <Label fx:id="phoneNumUpdated_Label" layoutX="241.0" layoutY="218.0" text="Phone Number Updated!" textFill="WHITE" />
-   <Label fx:id="emailUpdated_Label" layoutX="244.0" layoutY="218.0" text="Email Address Updated!" textFill="WHITE" />
-   <Label fx:id="invalidEmail_Label" layoutX="249.0" layoutY="218.0" text="Invalid Email Address!" textFill="WHITE" />
-   <Label fx:id="invalidPhoneNum_Label" layoutX="223.0" layoutY="218.0" text="Invalid Phone Number / Carrier!" textFill="WHITE" />
+   <Label fx:id="phoneNumUpdated_Label" layoutX="241.0" layoutY="200.0" text="Phone Number Updated!" textFill="WHITE" />
+   <Label fx:id="emailUpdated_Label" layoutX="244.0" layoutY="200.0" text="Email Address Updated!" textFill="WHITE" />
+   <Label fx:id="invalidEmail_Label" layoutX="248.0" layoutY="200.0" text="Invalid Email Address!" textFill="WHITE" />
+   <Label fx:id="invalidPhoneNum_Label" layoutX="223.0" layoutY="200.0" text="Invalid Phone Number / Carrier!" textFill="WHITE" />
    <Label layoutX="254.0" layoutY="38.0" text="Recieve Notifications">
       <font>
          <Font name="Impact" size="12.0" />
@@ -39,19 +39,43 @@
     <ImageView fx:id="email_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="307.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../png/checkMark.png" />
     </ImageView>
-   <Button layoutX="407.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="96.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone">
+   <Button layoutX="403.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="96.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone">
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
-   <Button layoutX="515.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailField" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email">
+   <Button layoutX="508.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailField" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email">
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
-   <Button layoutX="308.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetSheet" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Data">
+   <Button layoutX="210.0" layoutY="271.0" mnemonicParsing="false" onAction="#resetSheet" prefHeight="24.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Data">
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
-   <Label fx:id="sheetReset_Label" layoutX="252.0" layoutY="218.0" text="Data has been reset!" textFill="WHITE" />
-   <Label fx:id="sheetAlreadyReset_Label" layoutX="248.0" layoutY="218.0" text="Data already intialized." textFill="WHITE" />
-   <Label fx:id="fieldsEmptyAlready_Label" layoutX="247.0" layoutY="218.0" text="Field(s) already empty!" textFill="WHITE" />
+   <Label fx:id="sheetReset_Label" layoutX="253.0" layoutY="200.0" text="Data has been reset!" textFill="WHITE" />
+   <Label fx:id="sheetAlreadyReset_Label" layoutX="248.0" layoutY="200.0" text="Data already initialized." textFill="WHITE" />
+   <Label fx:id="fieldsEmptyAlready_Label" layoutX="247.0" layoutY="200.0" text="Field(s) already empty!" textFill="WHITE" />
+   <Label layoutX="333.0" layoutY="120.0" prefHeight="14.0" prefWidth="96.0" text="Notify me every">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font></Label>
+   <Label layoutX="335.0" layoutY="139.0" prefHeight="18.0" prefWidth="79.0" text="miles I travel">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font></Label>
+   <TextField fx:id="mileThreshold_Field" layoutX="429.0" layoutY="114.0" prefHeight="26.0" prefWidth="50.0" promptText="mi" />
+   <Button layoutX="494.0" layoutY="114.0" mnemonicParsing="false" onAction="#updateMileageThreshold" prefHeight="26.0" prefWidth="50.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Save">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font>
+   </Button>
+   <Button layoutX="306.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetMileThreshold" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Mile ">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font>
+   </Button>
+   <Label fx:id="mileThresholdUpdated_Label" layoutX="246.0" layoutY="200.0" text="Mile Threshold Updated!" textFill="WHITE" />
+    <ImageView fx:id="mileThreshold_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="307.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../png/checkMark.png" />
+    </ImageView>
+   <Label fx:id="invalidMileThreshold_Label" layoutX="248.0" layoutY="200.0" text="Invalid Mile Threshold!" textFill="WHITE" />
 </AnchorPane>

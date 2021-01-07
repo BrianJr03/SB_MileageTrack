@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static controllerLogic.ControllerLogic.isValid_MileInput;
 import static main.Main.displayPromptFor3secs;
 import static main.Main.launchUI;
 
@@ -52,13 +51,6 @@ public class MainController implements Initializable {
         if ( !sbmtSheet.canSheetBeReset() ) {
           displayPromptFor3secs( noHistory_Label ); }
         else {  launchUI( "/ui/loadingResults.fxml", rootPane ); }
-    }
-
-    private static boolean isValid_MileInput(String mile) {
-        Pattern pattern = Pattern.compile("^[0-9]*(\\.)?[0-9]+$");
-        Matcher matcher = pattern.matcher(mile);
-        if (mile.equals( "0" )) return false;
-        return (matcher.find() && matcher.group().equals(mile));
     }
 
     @FXML

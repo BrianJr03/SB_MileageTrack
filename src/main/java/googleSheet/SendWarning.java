@@ -23,15 +23,15 @@ public class  SendWarning {
 
     public SendWarning() throws IOException, GeneralSecurityException {}
 
-    public void writeNotification() throws IOException {
+    public void writeNotification() throws IOException, GeneralSecurityException {
         FileWriter writer = new FileWriter(file);
-        writer.write( "\nYou've added 250+ miles! Time for a belt change." );
+        writer.write( "\nYou've added " + sbmt_sheet.getStored_MileageWarningThreshold() + "+ miles! Time for a belt change." );
         writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
         writer.write( "\n\nTeam SB MileageTrack" );
         writer.close();
     }
 
-    public void sendNotificationAsEmail(String userEmail) throws MessagingException, IOException {
+    public void sendNotificationAsEmail(String userEmail) throws MessagingException, IOException, GeneralSecurityException {
         writeNotification();
         Multipart emailContent = new MimeMultipart();
         MimeBodyPart textBodyPart = new MimeBodyPart();
@@ -48,7 +48,7 @@ public class  SendWarning {
         Transport.send(msg);
     }
 
-    public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException, IOException {
+    public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException, IOException, GeneralSecurityException {
         writeNotification();
         switch (userCarrier) {
             case "AT&T" -> sendNotificationAsEmail(phoneNumber + "@mms.att.net");

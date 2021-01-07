@@ -137,7 +137,7 @@ public class SBMT_Sheet {
     public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
     { return getSheetDataAsObservableList(); }
 
-    public String getMileageWarningCount() throws IOException, GeneralSecurityException
+    public String getMileageWarningThreshold() throws IOException, GeneralSecurityException
     { return getSheetDataAsObservableList().get( 0 ); }
 
     public String getUserPhoneNum() throws IOException, GeneralSecurityException
@@ -149,22 +149,38 @@ public class SBMT_Sheet {
     public String getUserCarrier() throws IOException, GeneralSecurityException
     { return getEntryDates_AsObservableList().get( 3 ); }
 
-    public String getStartDate() throws IOException, GeneralSecurityException
+    public String getStored_MileageWarningThreshold() throws IOException, GeneralSecurityException
     { return getEntryDates_AsObservableList().get( 4 ); }
 
+    public String getStartDate() throws IOException, GeneralSecurityException
+    { return getEntryDates_AsObservableList().get( 5 ); }
+
     public void resetSheet() throws IOException, GeneralSecurityException {
-        resetSheetFromIndex( 4 );
-        updateSheet( "sbMileage!A1", String.valueOf( 250 ) );
+        updateSheet( "sbMileage!A1", String.valueOf( 0 ) );
         updateSheet( "sbMileage!A2", "empty" );
         updateSheet( "sbMileage!A3", "empty" );
         updateSheet( "sbMileage!A4", "empty" );
+        updateSheet( "sbMileage!A5", String.valueOf( 0 ) );
         updateSheet( "sbMileage!B1", String.valueOf( 0 ) );
         updateSheet( "sbMileage!B2", String.valueOf( 0 ) );
         updateSheet( "sbMileage!B3", String.valueOf( 0 ) );
         updateSheet( "sbMileage!B4", String.valueOf( 0 ) );
+        updateSheet( "sbMileage!B5", String.valueOf( 0 ) );
         updateSheet( "sbMileage!C1", String.valueOf( 0 ) );
+        if ( canSheetBeReset() )
+             { resetSheetFromIndex( 5 ); }
     }
 
-    public boolean canSheetBeReset() throws IOException, GeneralSecurityException
-    { return getSheetData().size() > 4; }
+    public void resetMileageThresholds() throws IOException, GeneralSecurityException {
+        updateSheet( "sbMileage!A1", String.valueOf( 0 ) );
+        updateSheet( "sbMileage!A5", String.valueOf( 0 ) );
+    }
+
+    public boolean canSheetBeReset() throws IOException, GeneralSecurityException {
+        return getSheetData().size() > 5
+                || !getMileageWarningThreshold().equals( String.valueOf( 0 ) )
+                || !getUserPhoneNum().equals( "empty" )
+                || !getUserEmail().equals( "empty" )
+                || !getUserCarrier().equals( "empty" ) || !getStored_MileageWarningThreshold().equals( String.valueOf( 0 ) );
+    }
 }

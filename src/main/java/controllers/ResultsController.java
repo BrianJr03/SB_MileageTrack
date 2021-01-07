@@ -40,8 +40,8 @@ public class ResultsController implements Initializable {
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
     SendWarning sendWarning = new SendWarning();
 
-    private final String mileWarningCounter = sbmtSheet.getMileageWarningCount();
-    private final double mileWarningCounter_AsDouble = Double.parseDouble( mileWarningCounter );
+    private final String mileWarningThreshold    = sbmtSheet.getStored_MileageWarningThreshold();
+    private final double mileWarningThreshold_AsDouble = Double.parseDouble( mileWarningThreshold );
 
     public ResultsController() throws IOException, GeneralSecurityException {}
 
@@ -75,7 +75,7 @@ public class ResultsController implements Initializable {
     }
 
     private void removePlaceHolderRows( ObservableList<SheetEntry> sheetEntries )
-    { sheetEntries.subList( 0 , 4 ).clear(); }
+    { sheetEntries.subList( 0 , 5 ).clear(); }
 
     private void setMileAVG_Label() throws IOException, GeneralSecurityException {
         if ( sbmtSheet.getSheetData().size() < 10) { mileAVG_Label.setText( "N/A" ); }
@@ -93,19 +93,21 @@ public class ResultsController implements Initializable {
     { launchUI( "/ui/main.fxml", rootPane ); }
 
     private void checkFor_HighMileage() throws IOException, MessagingException, GeneralSecurityException {
-        double totalMileage = sbmtSheet.getTotalMileage(); String A1 = "sbMileage!A1";
-        if ( totalMileage >= this.mileWarningCounter_AsDouble ) {
-            sbmtSheet.updateSheet( A1, String.valueOf( mileWarningCounter_AsDouble + 250 ));
+        String A1 = "sbMileage!A1"; double totalMileage = sbmtSheet.getTotalMileage();
+        if ( totalMileage >= Double.parseDouble( sbmtSheet.getMileageWarningThreshold() )
+                && !sbmtSheet.getMileageWarningThreshold().equals( String.valueOf( 0 ) ) ) {
+            sbmtSheet.updateSheet( A1,
+                    String.valueOf( mileWarningThreshold_AsDouble + sbmtSheet.getTotalMileage() ));
             sendHighMileage_Warning(); }
     }
 
     private void updateTotalMileage() throws IOException, GeneralSecurityException
     { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() )); }
 
-    private void sendWarningToUserAsText( String phoneNumber, String carrier ) throws IOException, MessagingException
+    private void sendWarningToUserAsText( String phoneNumber, String carrier ) throws IOException, MessagingException, GeneralSecurityException
     { sendWarning.sendNotificationAsTextMSG( phoneNumber, carrier ); }
 
-    private void sendWarningToUserAsEmail( String email ) throws IOException, MessagingException
+    private void sendWarningToUserAsEmail( String email ) throws IOException, MessagingException, GeneralSecurityException
     { sendWarning.sendNotificationAsEmail( email ); }
 
     private void sendHighMileage_Warning() throws IOException, GeneralSecurityException, MessagingException {
