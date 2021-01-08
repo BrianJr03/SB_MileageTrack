@@ -177,12 +177,12 @@ public class SettingsController {
     }
 
     @FXML
-    private void displayMile_Alert() throws IOException, GeneralSecurityException {
+    private void displayMile_Alert() {
         if ( !mileThreshold_Field.getText().isBlank() && isValidMileThreshold( mileThreshold_Field.getText() ) ) {
             Alert alert = createAlert();
             Optional< ButtonType > result = alert.showAndWait();
             if ( result.orElse(null) == ButtonType.OK )
-            { resetMileThreshold(); }
+            { loadMileReset(); }
         }
         else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
@@ -261,6 +261,17 @@ public class SettingsController {
     private void loadSheetReset()
     { new LoadingSheetReset_Label().start(); }
 
+    private void loadMileReset()
+    { new LoadingMileReset_Label().start(); }
+
+    @FXML
+    private void loadingEmailReset()
+    { new LoadingEmailReset_Label().start(); }
+
+    @FXML
+    private void loadingPhoneReset()
+    { new LoadingPhoneReset_Label().start(); }
+
      class LoadingSheetReset_Label extends Thread {
         public void run() {
             loading_Label.setVisible(true);
@@ -269,9 +280,49 @@ public class SettingsController {
                     try { resetSheet(); }
                     catch ( IOException | GeneralSecurityException exception )
                     { exception.printStackTrace(); }
-                    loading_Label.setVisible(false);
-                } );
-            }
+                    loading_Label.setVisible(false); } ); }
+            catch ( InterruptedException e )
+            { e.printStackTrace(); }
+        }
+    }
+
+    class LoadingMileReset_Label extends Thread {
+        public void run() {
+            loading_Label.setVisible(true);
+            try { Thread.sleep( 100 );
+                Platform.runLater( () -> {
+                    try { resetMileThreshold(); }
+                    catch ( IOException | GeneralSecurityException exception )
+                    { exception.printStackTrace(); }
+                    loading_Label.setVisible(false); } ); }
+            catch ( InterruptedException e )
+            { e.printStackTrace(); }
+        }
+    }
+
+    class LoadingEmailReset_Label extends Thread {
+        public void run() {
+            loading_Label.setVisible(true);
+            try { Thread.sleep( 100 );
+                Platform.runLater( () -> {
+                    try { resetEmailField(); }
+                    catch ( IOException | GeneralSecurityException exception )
+                    { exception.printStackTrace(); }
+                    loading_Label.setVisible(false); } ); }
+            catch ( InterruptedException e )
+            { e.printStackTrace(); }
+        }
+    }
+
+    class LoadingPhoneReset_Label extends Thread {
+        public void run() {
+            loading_Label.setVisible(true);
+            try { Thread.sleep( 100 );
+                Platform.runLater( () -> {
+                    try { resetPhoneFields(); }
+                    catch ( IOException | GeneralSecurityException exception )
+                    { exception.printStackTrace(); }
+                    loading_Label.setVisible(false); } ); }
             catch ( InterruptedException e )
             { e.printStackTrace(); }
         }

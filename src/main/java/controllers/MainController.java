@@ -1,6 +1,7 @@
 package controllers;
 
 import googleSheet.SBMT_Sheet;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -16,6 +17,8 @@ import static main.Main.launchUI;
 
 public class MainController implements Initializable {
 
+    @FXML
+    private Label loading_Label;
     @FXML
     private Label noHistory_Label;
     @FXML
@@ -34,6 +37,7 @@ public class MainController implements Initializable {
     { hideAlL_Labels(); }
 
     private void hideAlL_Labels() {
+        loading_Label.setVisible( false );
         noHistory_Label.setVisible( false );
         invalidMile_Label.setVisible( false );
     }
@@ -46,7 +50,6 @@ public class MainController implements Initializable {
         else displayPromptFor3secs( invalidMile_Label );
     }
 
-    @FXML
     private void byPassToLoadingUI() throws IOException, GeneralSecurityException {
         if ( !sbmtSheet.canSheetBeReset() ) {
           displayPromptFor3secs( noHistory_Label ); }
@@ -56,4 +59,22 @@ public class MainController implements Initializable {
     @FXML
     private void launchSettings() throws IOException
     { launchUI( "/ui/loadingSettings.fxml", rootPane ); }
+
+    @FXML
+    private void loadUserHistory()
+    { new LoadingHistory_Label().start(); }
+
+    class LoadingHistory_Label extends Thread {
+        public void run() {
+            loading_Label.setVisible(true);
+            try { Thread.sleep( 100 );
+                Platform.runLater( () -> {
+                    try { byPassToLoadingUI(); }
+                    catch ( IOException | GeneralSecurityException exception )
+                    { exception.printStackTrace(); }
+                    loading_Label.setVisible(false); } ); }
+            catch ( InterruptedException e )
+            { e.printStackTrace(); }
+        }
+    }
 }

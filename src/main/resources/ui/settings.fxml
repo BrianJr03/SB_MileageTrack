@@ -39,11 +39,11 @@
     <ImageView fx:id="email_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="307.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../png/checkMark.png" />
     </ImageView>
-   <Button layoutX="403.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetPhoneFields" prefHeight="26.0" prefWidth="96.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone">
+   <Button layoutX="403.0" layoutY="270.0" mnemonicParsing="false" onAction="#loadingPhoneReset" prefHeight="26.0" prefWidth="96.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Phone">
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
-   <Button layoutX="508.0" layoutY="270.0" mnemonicParsing="false" onAction="#resetEmailField" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email">
+   <Button layoutX="508.0" layoutY="270.0" mnemonicParsing="false" onAction="#loadingEmailReset" prefHeight="26.0" prefWidth="86.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Reset Email">
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font></Button>
