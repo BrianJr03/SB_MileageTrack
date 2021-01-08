@@ -8,13 +8,14 @@ To run this project: Run through Gradle: On the right-hand side of the IntelliJ 
 Click on this, then expand the project directory if that is not done. 
 Expand Tasks > Application, and double-click on the run operation to begin running this application.
 
-A high mileage warning will be sent when the user's total mileage reaches a 250 mile threshold. For example, if your total mileage 
+A high mileage warning will be sent when the user's total mileage reaches a defined threshold. For example, if your total mileage 
 is 0, and overtime, it reaches 250, a warning will be sent. This will occur when the user reaches 250, 500, 750 total miles and so on.
-Go to settings (from the main UI) to update contact information. If you do not wish to receieve a warning, leave the fields blank.
+Go to settings (from the main UI) to update contact and threshold information. If you do not wish to receieve a warning, leave the fields blank.
 
 In settings:
 
-  - Any valid email address will be accepted. 
+  - Any valid email address will be accepted.
+  - The minimum mile threshold you can set is 10
   - The required format for a phone number is xxx-xxx-xxxx
   - Sprint, Verizon, T-Mobile, and AT&T are the only supported carriers. Case-sensitive.
 
