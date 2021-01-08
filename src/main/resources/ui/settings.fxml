@@ -78,4 +78,5 @@
         <Image url="@../png/checkMark.png" />
     </ImageView>
    <Label fx:id="invalidMileThreshold_Label" layoutX="248.0" layoutY="200.0" text="Invalid Mile Threshold!" textFill="WHITE" />
+   <Label fx:id="loading_Label" layoutX="280.0" layoutY="200.0" text="Loading..." textFill="WHITE" />
 </AnchorPane>

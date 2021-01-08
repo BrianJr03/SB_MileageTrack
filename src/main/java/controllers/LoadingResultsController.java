@@ -19,9 +19,6 @@ public class LoadingResultsController implements Initializable {
     public void initialize( URL location , ResourceBundle resources )
     { new LoadingResults().start(); }
 
-    public void initialize()
-    { new LoadingResults().start(); }
-
      class LoadingResults extends Thread {
         public void run() {
             try { Thread.sleep( 100 );

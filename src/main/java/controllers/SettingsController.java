@@ -1,6 +1,7 @@
 package controllers;
 
 import googleSheet.SBMT_Sheet;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,8 @@ import static main.Main.displayPromptFor3secs;
 
 public class SettingsController {
 
+    @FXML
+    private Label loading_Label;
     @FXML
     private ImageView mileThreshold_CheckMarkImage;
     @FXML
@@ -61,6 +64,7 @@ public class SettingsController {
     public SettingsController() throws IOException, GeneralSecurityException {}
 
     public void initialize() throws IOException, GeneralSecurityException {
+        loading_Label.setVisible( false );
         showCheckMarks();
         hideAll_Labels();
         verifyStoredEmail();
@@ -164,11 +168,11 @@ public class SettingsController {
     }
 
     @FXML
-    private void displayData_Alert() throws IOException, GeneralSecurityException {
+    private void displayData_Alert() {
         Alert alert = createAlert();
         Optional< ButtonType > result = alert.showAndWait();
         if ( result.orElse(null) == ButtonType.OK )
-        { resetSheet(); }
+        { loadSheetReset(); }
         else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
@@ -251,6 +255,25 @@ public class SettingsController {
             case 4 -> {
                 if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
                     mileThreshold_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
+        }
+    }
+
+    private void loadSheetReset()
+    { new LoadingSheetReset_Label().start(); }
+
+     class LoadingSheetReset_Label extends Thread {
+        public void run() {
+            loading_Label.setVisible(true);
+            try { Thread.sleep( 100 );
+                Platform.runLater( () -> {
+                    try { resetSheet(); }
+                    catch ( IOException | GeneralSecurityException exception )
+                    { exception.printStackTrace(); }
+                    loading_Label.setVisible(false);
+                } );
+            }
+            catch ( InterruptedException e )
+            { e.printStackTrace(); }
         }
     }
 }
