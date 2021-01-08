@@ -159,7 +159,7 @@ public class SettingsController {
         alert.initModality( Modality.APPLICATION_MODAL );
         alert.initOwner( stage );
         alert.getDialogPane().setContentText( "This will reset your data." );
-        alert.getDialogPane().setHeaderText( "SB Mileage Track" );
+        alert.getDialogPane().setHeaderText( "WARNING" );
         return alert;
     }
 
@@ -169,9 +169,6 @@ public class SettingsController {
         Optional< ButtonType > result = alert.showAndWait();
         if ( result.orElse(null) == ButtonType.OK )
         { loadSheetReset(); }
-        if ( result.orElse( null ) == ButtonType.CANCEL )
-        { fieldsEmptyAlready_Label.setVisible( false ); }
-        else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
     @FXML
