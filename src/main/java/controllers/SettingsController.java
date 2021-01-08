@@ -64,7 +64,6 @@ public class SettingsController {
     public SettingsController() throws IOException, GeneralSecurityException {}
 
     public void initialize() throws IOException, GeneralSecurityException {
-        loading_Label.setVisible( false );
         showCheckMarks();
         hideAll_Labels();
         verifyStoredEmail();
@@ -84,8 +83,7 @@ public class SettingsController {
     private void updateEmailAddress() throws IOException, GeneralSecurityException {
         if ( isValidEmail( emailAddress_Field.getText() )) {
             sbmt_sheet.updateSheet( "sbMileage!A3" , emailAddress_Field.getText() );
-            displayEmail_CheckMark();
-            displayPromptFor3secs( emailUpdated_Label );
+            displayEmail_CheckMark(); displayPromptFor3secs( emailUpdated_Label );
         } else { email_CheckMarkImage.setVisible(false); displayPromptFor3secs( invalidEmail_Label );  }
     }
 
@@ -94,8 +92,7 @@ public class SettingsController {
         if ( isValidPhoneNumber( phoneNum_Field.getText() ) && isValidCarrier( carrier_Field.getText() )) {
             sbmt_sheet.updateSheet( "sbMileage!A2" , phoneNum_Field.getText() );
             sbmt_sheet.updateSheet( "sbMileage!A4" , carrier_Field.getText() );
-            displayPhoneNum_CheckMark();
-            displayPromptFor3secs( phoneNumUpdated_Label );
+            displayPhoneNum_CheckMark(); displayPromptFor3secs( phoneNumUpdated_Label );
         } else { phoneNum_CheckMarkImage.setVisible( false ); displayPromptFor3secs( invalidPhoneNum_Label ); }
     }
 
@@ -105,8 +102,7 @@ public class SettingsController {
             sbmt_sheet.updateSheet( "sbMileage!A1", mileThreshold_Field.getText() );
             sbmt_sheet.updateSheet( "sbMileage!A5", mileThreshold_Field.getText() );
             sbmt_sheet.updateSheet( "sbMileage!C1", String.valueOf( 0 ) );
-            displayMile_CheckMark();
-            displayPromptFor3secs( mileThresholdUpdated_Label );
+            displayMile_CheckMark(); displayPromptFor3secs( mileThresholdUpdated_Label );
         }
         else { mileThreshold_CheckMarkImage.setVisible( false );
         displayPromptFor3secs( invalidMileThreshold_Label );
@@ -173,6 +169,8 @@ public class SettingsController {
         Optional< ButtonType > result = alert.showAndWait();
         if ( result.orElse(null) == ButtonType.OK )
         { loadSheetReset(); }
+        if ( result.orElse( null ) == ButtonType.CANCEL )
+        { fieldsEmptyAlready_Label.setVisible( false ); }
         else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
@@ -182,8 +180,7 @@ public class SettingsController {
             Alert alert = createAlert();
             Optional< ButtonType > result = alert.showAndWait();
             if ( result.orElse(null) == ButtonType.OK )
-            { loadMileReset(); }
-        }
+            { loadMileReset(); } }
         else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
@@ -196,9 +193,6 @@ public class SettingsController {
     private void displayMile_CheckMark()
     { mileThreshold_CheckMarkImage.setVisible( true ); }
 
-    private void verifyStoredMileCount() throws IOException, GeneralSecurityException
-    {  verifyStoredInfo( 4 ); }
-
     private void verifyStoredPhoneNum() throws IOException, GeneralSecurityException
     { verifyStoredInfo( 1 ); }
 
@@ -207,6 +201,9 @@ public class SettingsController {
 
     private void verifyStoredCarrier() throws IOException, GeneralSecurityException
     { verifyStoredInfo( 3 ); }
+
+    private void verifyStoredMileCount() throws IOException, GeneralSecurityException
+    {  verifyStoredInfo( 4 ); }
 
     private void clearFields() {
         phoneNum_Field.clear(); mileThreshold_Field.clear();
@@ -227,6 +224,7 @@ public class SettingsController {
     }
 
     private void hideAll_Labels() {
+        loading_Label.setVisible( false );
         sheetReset_Label.setVisible( false);
         invalidEmail_Label.setVisible( false );
         emailUpdated_Label.setVisible( false );

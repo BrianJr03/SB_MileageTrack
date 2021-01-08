@@ -79,7 +79,7 @@ public class ResultsController implements Initializable {
 
     private void setMileAVG_Label() throws IOException, GeneralSecurityException {
         if ( sbmtSheet.getSheetData().size() < 10) { mileAVG_Label.setText( "N/A" ); }
-        else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg()));
+        else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg() ));
     }
 
     private void setTotalMileage_Label()
@@ -112,7 +112,7 @@ public class ResultsController implements Initializable {
 
     private void sendHighMileage_Warning() throws IOException, GeneralSecurityException, MessagingException {
         if (!sbmtSheet.getUserPhoneNum().equals( "empty" ) && !sbmtSheet.getUserCarrier().equals( "empty" ))
-        { sendWarningToUserAsText(sbmtSheet.getUserPhoneNum(), sbmtSheet.getUserCarrier()); }
+        { sendWarningToUserAsText( sbmtSheet.getUserPhoneNum(), sbmtSheet.getUserCarrier()); }
         if (!sbmtSheet.getUserEmail().equals( "empty" ))
         { sendWarningToUserAsEmail( sbmtSheet.getUserEmail() ); }
     }

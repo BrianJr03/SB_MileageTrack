@@ -186,6 +186,7 @@ public class SBMT_Sheet {
                 || !getMileageWarningThreshold().equals( String.valueOf( 0 ) )
                 || !getUserPhoneNum().equals( "empty" )
                 || !getUserEmail().equals( "empty" )
-                || !getUserCarrier().equals( "empty" ) || !getStored_MileageWarningThreshold().equals( String.valueOf( 0 ) );
+                || !getUserCarrier().equals( "empty" )
+                || !getStored_MileageWarningThreshold().equals( String.valueOf( 0 ) );
     }
 }
