@@ -18,7 +18,7 @@ public class ControllerLogic {
     public static boolean isValidMileThreshold( String mile ) {
         Pattern pattern = Pattern.compile( "^\\d+(?:\\.\\d{0,2})?$" );
         if ( mile.isEmpty() ) return false;
-        if ( Double.parseDouble( mile ) < 10 ) return false;
+        if ( Double.parseDouble( mile ) < 1 ) return false;
         return pattern.matcher( mile ).matches();
     }
 
@@ -30,7 +30,7 @@ public class ControllerLogic {
 
     public static boolean isValidCarrier( String carrier ) {
         switch ( carrier ) {
-            case "AT&T" , "Sprint" , "Verizon" , "T-Mobile" -> { return true; }
+            case "AT&T" , "Sprint" , "Verizon" , "T-Mobile", "Boost Mobile", "Metro PCS" -> { return true; }
             default -> { return false; }
         }
     }

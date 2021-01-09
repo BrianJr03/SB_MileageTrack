@@ -55,6 +55,8 @@ public class  SendWarning {
             case "Sprint" -> sendNotificationAsEmail(phoneNumber + "@pm.sprint.com");
             case "Verizon" -> sendNotificationAsEmail(phoneNumber + "@vzwpix.com");
             case "T-Mobile" -> sendNotificationAsEmail(phoneNumber + "@tmomail.net");
+            case "Boost Mobile" -> sendNotificationAsEmail( phoneNumber + "@myboostmobile.com" );
+            case "Metro PCS" -> sendNotificationAsEmail( phoneNumber + "mymetropcs.com" );
         }
     }
 
