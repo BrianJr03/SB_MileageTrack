@@ -35,6 +35,8 @@ public class ResultsController implements Initializable {
     @FXML
     private Label totalMileage_Label;
     @FXML
+    private Label mileAVGLast10_Label;
+    @FXML
     private Label mileAVG_Label;
 
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
@@ -62,7 +64,7 @@ public class ResultsController implements Initializable {
         dateColumn.setCellValueFactory( new PropertyValueFactory <>( "entryDate" ) );
         mileColumn.setCellValueFactory( new PropertyValueFactory <>( "mileage" ) );
         ObservableList<SheetEntry> entries = getEntries();
-        mileageInfo_Table.setItems(entries);
+        mileageInfo_Table.setItems( entries );
     }
 
     private ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
@@ -70,16 +72,14 @@ public class ResultsController implements Initializable {
         ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
         for ( List <Object> row : sheetData )
         { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString())); }
-        removePlaceHolderRows( sheetEntries );
+        sbmtSheet.removePlaceHolderRows( sheetEntries );
         return sheetEntries;
     }
 
-    private void removePlaceHolderRows( ObservableList<SheetEntry> sheetEntries )
-    { sheetEntries.subList( 0 , 5 ).clear(); }
-
     private void setMileAVG_Label() throws IOException, GeneralSecurityException {
-        if ( sbmtSheet.getSheetData().size() < 10) { mileAVG_Label.setText( "N/A" ); }
-        else mileAVG_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg() ));
+        mileAVG_Label.setText( String.valueOf( sbmtSheet.get_MileAvg() ) );
+        if ( sbmtSheet.getSheetData().size() < 10) { mileAVGLast10_Label.setText( "N/A" ); }
+        else mileAVGLast10_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg() ));
     }
 
     private void setTotalMileage_Label()
@@ -96,9 +96,9 @@ public class ResultsController implements Initializable {
         String A1 = "sbMileage!A1"; double totalMileage = sbmtSheet.getTotalMileage();
         if ( totalMileage >= Double.parseDouble( sbmtSheet.getMileageWarningThreshold() )
                 && !sbmtSheet.getMileageWarningThreshold().equals( String.valueOf( 0 ) ) ) {
-            sbmtSheet.updateSheet( A1,
-                    String.valueOf( mileWarningThreshold_AsDouble + sbmtSheet.getTotalMileage() ));
-            sendHighMileage_Warning(); }
+            sbmtSheet.updateSheet( A1, Double.toString(  mileWarningThreshold_AsDouble + sbmtSheet.getTotalMileage() ));
+
+            sendHighMileage_Warning();  }
     }
 
     private void updateTotalMileage() throws IOException, GeneralSecurityException

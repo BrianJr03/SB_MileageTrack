@@ -29,7 +29,7 @@ public class Main extends Application implements EventHandler <ActionEvent> {
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource( "/ui/welcome.fxml" ));
         stage.setResizable( false );
-        stage.getIcons().add( new Image(icon));
+        stage.getIcons().add( new Image( icon ));
         stage.setTitle( "SB Mileage Track");
         stage.setScene(new Scene(root,615,315));
         stage.show();
@@ -46,7 +46,7 @@ public class Main extends Application implements EventHandler <ActionEvent> {
     }
 
     public static void launchUI( String uiPath,  AnchorPane rootPane ) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(uiPath));
+        FXMLLoader loader = new FXMLLoader( Main.class.getResource( uiPath ) );
         Parent root = loader.load();
         rootPane.getChildren().setAll( root );
     }

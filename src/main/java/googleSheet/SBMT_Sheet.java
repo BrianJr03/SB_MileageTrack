@@ -109,8 +109,23 @@ public class SBMT_Sheet {
         sheetService.spreadsheets().batchUpdate( SPREADSHEET_ID, body ).execute();
     }
 
+    public void removePlaceHolderRows( ObservableList<SheetEntry> sheetEntries )
+    { sheetEntries.subList( 0 , 5 ).clear(); }
+
     public double getLastTenEntries_MileAvg()
     { return findLastTenEntries_MileAvg(); }
+
+    public double get_MileAvg()
+    { return findCurrent_MileAVG(); }
+
+    private double findCurrent_MileAVG() {
+        double mileCount = 0.0;
+        ArrayList < List < Object > > previousEntries = new ArrayList <>( sheet );
+        previousEntries.subList( 0, 5 ).clear();
+        for ( List<Object> row : previousEntries )
+        { mileCount += Double.parseDouble( row.get( 1 ).toString() ); }
+        return DoubleRounder.round((mileCount / previousEntries.size()), 2);
+    }
 
     private double findLastTenEntries_MileAvg() {
         double mileCount = 0.0;

@@ -14,10 +14,8 @@ public class ControllerLogic {
 
     public static boolean isValidMileThreshold( String mile ) {
         Pattern pattern = Pattern.compile( "^\\d+(?:\\.\\d{0,2})?$" );
-        if ( mile.isEmpty() )
-        { return false; }
-        if ( Double.parseDouble( mile ) < 10 )
-        { return false; }
+        if ( mile.isEmpty() ) return false;
+        if ( Double.parseDouble( mile ) < 10 ) return false;
         return pattern.matcher( mile ).matches();
     }
 

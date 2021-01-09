@@ -102,11 +102,9 @@ public class SettingsController {
             sbmt_sheet.updateSheet( "sbMileage!A1", mileThreshold_Field.getText() );
             sbmt_sheet.updateSheet( "sbMileage!A5", mileThreshold_Field.getText() );
             sbmt_sheet.updateSheet( "sbMileage!C1", String.valueOf( 0 ) );
-            displayMile_CheckMark(); displayPromptFor3secs( mileThresholdUpdated_Label );
-        }
+            displayMile_CheckMark(); displayPromptFor3secs( mileThresholdUpdated_Label ); }
         else { mileThreshold_CheckMarkImage.setVisible( false );
-        displayPromptFor3secs( invalidMileThreshold_Label );
-        }
+        displayPromptFor3secs( invalidMileThreshold_Label ); }
     }
 
     @FXML
@@ -132,7 +130,7 @@ public class SettingsController {
     }
 
     private void resetMileThreshold() throws IOException, GeneralSecurityException {
-        if (mileThreshold_Field.getText().isBlank())
+        if ( mileThreshold_Field.getText().isBlank() )
         { displayPromptFor3secs( fieldsEmptyAlready_Label ); }
         else if ( sbmt_sheet.canSheetBeReset() ) {
             clearFields(); hideCheckMarks();
@@ -158,8 +156,8 @@ public class SettingsController {
         Alert alert = new Alert(warning,"");
         alert.initModality( Modality.APPLICATION_MODAL );
         alert.initOwner( stage );
-        alert.getDialogPane().setContentText( "This will reset your data." );
         alert.getDialogPane().setHeaderText( "WARNING" );
+        alert.getDialogPane().setContentText( "This will reset your data." );
         return alert;
     }
 

@@ -53,7 +53,7 @@ public class MainController implements Initializable {
     private void byPassToLoadingUI() throws IOException, GeneralSecurityException {
         if ( !sbmtSheet.canSheetBeReset() ) {
           displayPromptFor3secs( noHistory_Label ); }
-        else {  launchUI( "/ui/loadingResults.fxml", rootPane ); }
+        else { launchUI( "/ui/loadingResults.fxml", rootPane ); }
     }
 
     @FXML

@@ -22,7 +22,6 @@ dependencies {
     compile group: 'org.decimal4j', name: 'decimal4j', version: '1.0.3'
     compile 'joda-time:joda-time:2.10.8'
     mainClassName = 'main.Main'
-
 }
 
 test {
