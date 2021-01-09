@@ -18,6 +18,7 @@ import java.security.GeneralSecurityException;
 import java.util.Optional;
 
 import static controllerLogic.ControllerLogic.*;
+import static controllerLogic.ControllerLogic.formatPhoneNumber;
 import static main.Main.displayPromptFor3secs;
 
 public class SettingsController {
@@ -89,13 +90,14 @@ public class SettingsController {
 
     @FXML
     private void updatePhoneNumber() throws IOException, GeneralSecurityException {
-        if ( isValidPhoneNumber( phoneNum_Field.getText() ) && isValidCarrier( carrier_Field.getText() )) {
-            sbmt_sheet.updateSheet( "sbMileage!A2" , phoneNum_Field.getText() );
+        String phoneNum = phoneNum_Field.getText(); String formattedPhoneNum = formatPhoneNumber( phoneNum );
+        if ( isValidPhoneNumber( formattedPhoneNum ) && isValidCarrier( carrier_Field.getText() )) {
+            phoneNum_Field.setText( formattedPhoneNum );
+            sbmt_sheet.updateSheet( "sbMileage!A2" , formattedPhoneNum );
             sbmt_sheet.updateSheet( "sbMileage!A4" , carrier_Field.getText() );
             displayPhoneNum_CheckMark(); displayPromptFor3secs( phoneNumUpdated_Label );
         } else { phoneNum_CheckMarkImage.setVisible( false ); displayPromptFor3secs( invalidPhoneNum_Label ); }
     }
-
     @FXML
     private void updateMileageThreshold() throws IOException, GeneralSecurityException {
         if ( isValidMileThreshold( mileThreshold_Field.getText() ) ) {

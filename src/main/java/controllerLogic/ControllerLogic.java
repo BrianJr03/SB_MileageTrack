@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 public class ControllerLogic {
 
+    public static String formatPhoneNumber( String phoneNumber )
+    { return phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "$1-$2-$3"); }
+
     public static boolean isValidEmail( String email ) {
         Pattern pattern = Pattern.compile( "^[a-zA-Z0-9_+&*-]+(?:\\" +
                 ".[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\" +
