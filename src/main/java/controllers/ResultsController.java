@@ -77,13 +77,13 @@ public class ResultsController implements Initializable {
     }
 
     private void setMileAVG_Label() throws IOException, GeneralSecurityException {
-        mileAVG_Label.setText( String.valueOf( sbmtSheet.get_MileAvg() ) );
-        if ( sbmtSheet.getSheetData().size() < 10) { mileAVGLast10_Label.setText( "N/A" ); }
-        else mileAVGLast10_Label.setText( String.valueOf( sbmtSheet.getLastTenEntries_MileAvg() ));
+        mileAVG_Label.setText( sbmtSheet.get_MileAvg() + " mi" );
+        if ( sbmtSheet.getSheetData().size() < 15 ) { mileAVGLast10_Label.setText( "N/A" ); }
+        else mileAVGLast10_Label.setText( sbmtSheet.getLastTenEntries_MileAvg() + " mi");
     }
 
     private void setTotalMileage_Label()
-    { totalMileage_Label.setText( String.valueOf(sbmtSheet.getTotalMileage())); }
+    { totalMileage_Label.setText( sbmtSheet.getTotalMileage() + " mi"); }
 
     private void setDate_Label() throws IOException, GeneralSecurityException
     { date_Label.setText( sbmtSheet.getStartDate()); }

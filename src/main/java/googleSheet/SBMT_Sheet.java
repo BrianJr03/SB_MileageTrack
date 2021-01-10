@@ -134,7 +134,7 @@ public class SBMT_Sheet {
             previousEntries.add( row );
             if (previousEntries.size() + 1 > 10)
                 break; }
-        for ( List<Object> row : previousEntries )
+        for ( List<Object> row :  previousEntries  )
         { mileCount += Double.parseDouble( row.get( 1 ).toString() ); }
         return DoubleRounder.round((mileCount / 10), 2);
     }
