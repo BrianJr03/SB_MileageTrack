@@ -41,12 +41,12 @@
          <Font size="18.0" />
       </font></Label>
    <Label layoutX="14.0" layoutY="283.0" text="Now Playing : 5:32pm by The Deli" textFill="WHITE" />
-   <Label layoutX="21.0" layoutY="111.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
+   <Label layoutX="21.0" layoutY="117.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Label fx:id="mileAVG_Label" layoutX="107.0" layoutY="111.0" prefHeight="27.0" prefWidth="116.0" text="9999" textFill="#6500fd">
+   <Label fx:id="mileAVG_Label" layoutX="110.0" layoutY="117.0" prefHeight="27.0" prefWidth="116.0" text="9999" textFill="#6500fd">
       <font>
          <Font size="18.0" />
       </font>
