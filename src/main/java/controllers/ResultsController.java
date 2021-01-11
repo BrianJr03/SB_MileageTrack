@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
 public class ResultsController implements Initializable {
 
     @FXML
+    private Label numOfEntries_Label;
+    @FXML
     private AnchorPane rootPane;
     @FXML
     private TableView<SheetEntry> mileageInfo_Table;
@@ -55,7 +57,8 @@ public class ResultsController implements Initializable {
             setTableProperties();
             updateTotalMileage();
             checkFor_HighMileage();
-            setTotalMileage_Label(); }
+            setTotalMileage_Label();
+            setNumOfEntries_Label(); }
         catch ( IOException | GeneralSecurityException | MessagingException exception )
         { exception.printStackTrace(); }
     }
@@ -81,6 +84,9 @@ public class ResultsController implements Initializable {
         if ( sbmtSheet.getSheetData().size() < 15 ) { mileAVGLast10_Label.setText( "N/A" ); }
         else mileAVGLast10_Label.setText( sbmtSheet.getLastTenEntries_MileAvg() + " mi");
     }
+
+    private void setNumOfEntries_Label() throws IOException, GeneralSecurityException
+    { numOfEntries_Label.setText( String.valueOf( sbmtSheet.getSheetData().size() - 5 ) ); }
 
     private void setTotalMileage_Label()
     { totalMileage_Label.setText( sbmtSheet.getTotalMileage() + " mi"); }
