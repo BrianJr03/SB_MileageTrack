@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 public class ResultsController implements Initializable {
 
     @FXML
-    private Label numOfEntries_Label;
+    private TableColumn<SheetEntry, String> entryCountColumn;
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -58,7 +58,8 @@ public class ResultsController implements Initializable {
             updateTotalMileage();
             checkFor_HighMileage();
             setTotalMileage_Label();
-            setNumOfEntries_Label(); }
+            mileageInfo_Table.setEditable( false );
+        }
         catch ( IOException | GeneralSecurityException | MessagingException exception )
         { exception.printStackTrace(); }
     }
@@ -66,6 +67,7 @@ public class ResultsController implements Initializable {
     private void setTableProperties() throws IOException, GeneralSecurityException {
         dateColumn.setCellValueFactory( new PropertyValueFactory <>( "entryDate" ) );
         mileColumn.setCellValueFactory( new PropertyValueFactory <>( "mileage" ) );
+        entryCountColumn.setCellValueFactory( new PropertyValueFactory<>( "entryCount" ));
         ObservableList<SheetEntry> entries = getEntries();
         mileageInfo_Table.setItems( entries );
     }
@@ -73,8 +75,11 @@ public class ResultsController implements Initializable {
     private ObservableList< SheetEntry > getEntries() throws IOException, GeneralSecurityException {
         List<List<Object>> sheetData = sbmtSheet.getSheetData();
         ObservableList<SheetEntry> sheetEntries = FXCollections.observableArrayList();
-        for ( List <Object> row : sheetData )
-        { sheetEntries.add( new SheetEntry( row.get( 0 ).toString(), row.get( 1 ).toString())); }
+        int entryCount = -5;
+        for ( List <Object> row : sheetData ) {
+            entryCount++;
+            sheetEntries.add( new SheetEntry( row.get( 0 ).toString(),
+                row.get( 1 ).toString(), String.valueOf( entryCount ))); }
         sbmtSheet.removePlaceHolderRows( sheetEntries );
         return sheetEntries;
     }
@@ -84,9 +89,6 @@ public class ResultsController implements Initializable {
         if ( sbmtSheet.getSheetData().size() < 15 ) { mileAVGLast10_Label.setText( "N/A" ); }
         else mileAVGLast10_Label.setText( sbmtSheet.getLastTenEntries_MileAvg() + " mi");
     }
-
-    private void setNumOfEntries_Label() throws IOException, GeneralSecurityException
-    { numOfEntries_Label.setText( String.valueOf( sbmtSheet.getSheetData().size() - 5 ) ); }
 
     private void setTotalMileage_Label()
     { totalMileage_Label.setText( sbmtSheet.getTotalMileage() + " mi"); }

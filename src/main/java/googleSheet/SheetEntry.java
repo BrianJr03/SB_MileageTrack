@@ -7,11 +7,26 @@ public class SheetEntry {
 
     private final SimpleStringProperty mileage;
     private final SimpleStringProperty entryDate;
+    private final SimpleStringProperty entryCount;
 
-    public SheetEntry( String entryDate , String mileage ) {
+    public SheetEntry( String entryDate , String mileage, String entryCount ) {
         this.entryDate = new SimpleStringProperty(entryDate);
         this.mileage =  new SimpleStringProperty(mileage);
+        this.entryCount = new SimpleStringProperty( entryCount );
     }
+
+    public String getEntryCount( ) {
+        return entryCount.get();
+    }
+
+    public SimpleStringProperty entryCountProperty( ) {
+        return entryCount;
+    }
+
+    public void setEntryCount( String entryCount ) {
+        this.entryCount.set( entryCount );
+    }
+
 
     public String getEntryDate()
     { return entryDate.get(); }
