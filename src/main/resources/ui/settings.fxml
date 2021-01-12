@@ -32,7 +32,7 @@
       <font>
          <Font name="Impact" size="12.0" />
       </font></Label>
-   <TextField fx:id="carrier_Field" layoutX="87.0" layoutY="115.0" promptText="Carrier" />
+   <TextField fx:id="carrier_Field" layoutX="87.0" layoutY="115.0" promptText="Phone Carrier" />
     <ImageView fx:id="phoneNum_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="55.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../png/checkMark.png" />
     </ImageView>
@@ -79,4 +79,13 @@
     </ImageView>
    <Label fx:id="invalidMileThreshold_Label" layoutX="248.0" layoutY="200.0" text="Invalid Mile Threshold!" textFill="WHITE" />
    <Label fx:id="loading_Label" layoutX="280.0" layoutY="200.0" text="Loading..." textFill="WHITE" />
+   <Button layoutX="243.0" layoutY="115.0" mnemonicParsing="false" onAction="#updateCarrier" prefHeight="26.0" prefWidth="50.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="Save">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font>
+   </Button>
+    <ImageView fx:id="carrier_CheckMarkImage" fitHeight="24.0" fitWidth="30.0" layoutX="55.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../png/checkMark.png" />
+    </ImageView>
+   <Label fx:id="carrierUpdated_Label" layoutX="249.0" layoutY="200.0" text="Phone Carrier Updated!" textFill="WHITE" />
 </AnchorPane>

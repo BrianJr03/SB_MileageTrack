@@ -44,7 +44,7 @@ public class ResultsController implements Initializable {
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
     SendWarning sendWarning = new SendWarning();
 
-    private final String mileWarningThreshold    = sbmtSheet.getStored_MileageWarningThreshold();
+    private final String mileWarningThreshold = sbmtSheet.getStored_MileageWarningThreshold();
     private final double mileWarningThreshold_AsDouble = Double.parseDouble( mileWarningThreshold );
 
     public ResultsController() throws IOException, GeneralSecurityException {}
@@ -57,9 +57,7 @@ public class ResultsController implements Initializable {
             setTableProperties();
             updateTotalMileage();
             checkFor_HighMileage();
-            setTotalMileage_Label();
-            mileageInfo_Table.setEditable( false );
-        }
+            setTotalMileage_Label(); }
         catch ( IOException | GeneralSecurityException | MessagingException exception )
         { exception.printStackTrace(); }
     }
@@ -105,7 +103,6 @@ public class ResultsController implements Initializable {
         if ( totalMileage >= Double.parseDouble( sbmtSheet.getMileageWarningThreshold() )
                 && !sbmtSheet.getMileageWarningThreshold().equals( String.valueOf( 0 ) ) ) {
             sbmtSheet.updateSheet( A1, Double.toString(  mileWarningThreshold_AsDouble + sbmtSheet.getTotalMileage() ));
-
             sendHighMileage_Warning();  }
     }
 

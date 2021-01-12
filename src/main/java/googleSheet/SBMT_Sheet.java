@@ -144,8 +144,7 @@ public class SBMT_Sheet {
         if(sheet == null || sheet.isEmpty())
             { return Double.parseDouble( "No data found." ); }
         else { for (List<Object> row : sheet)
-                 mileageTotal += Double.parseDouble( row.get( 1 ).toString() );
-        }
+                 mileageTotal += Double.parseDouble( row.get( 1 ).toString() ); }
         return DoubleRounder.round(mileageTotal, 2);
     }
 

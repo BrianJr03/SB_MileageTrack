@@ -24,6 +24,10 @@ import static main.Main.displayPromptFor3secs;
 public class SettingsController {
 
     @FXML
+    private Label carrierUpdated_Label;
+    @FXML
+    private ImageView carrier_CheckMarkImage;
+    @FXML
     private Label loading_Label;
     @FXML
     private ImageView mileThreshold_CheckMarkImage;
@@ -89,15 +93,27 @@ public class SettingsController {
     }
 
     @FXML
+    private void updateCarrier() throws IOException, GeneralSecurityException {
+        if ( isValidCarrier( carrier_Field.getText() )) {
+            sbmt_sheet.updateSheet( "sbMileage!A4" , carrier_Field.getText() );
+            displayCarrier_CheckMark(); displayPromptFor3secs( carrierUpdated_Label ); }
+        else carrier_CheckMarkImage.setVisible( false );
+        if ( !isValidCarrier( carrier_Field.getText() ) )
+         displayPromptFor3secs( invalidPhoneNum_Label );
+    }
+
+    @FXML
     private void updatePhoneNumber() throws IOException, GeneralSecurityException {
         String phoneNum = phoneNum_Field.getText(); String formattedPhoneNum = formatPhoneNumber( phoneNum );
-        if ( isValidPhoneNumber( formattedPhoneNum ) && isValidCarrier( carrier_Field.getText() )) {
+        if ( isValidPhoneNumber( formattedPhoneNum )) {
             phoneNum_Field.setText( formattedPhoneNum );
             sbmt_sheet.updateSheet( "sbMileage!A2" , formattedPhoneNum );
-            sbmt_sheet.updateSheet( "sbMileage!A4" , carrier_Field.getText() );
-            displayPhoneNum_CheckMark(); displayPromptFor3secs( phoneNumUpdated_Label );
-        } else { phoneNum_CheckMarkImage.setVisible( false ); displayPromptFor3secs( invalidPhoneNum_Label ); }
+            displayPhoneNum_CheckMark(); displayPromptFor3secs( phoneNumUpdated_Label ); }
+        else phoneNum_CheckMarkImage.setVisible( false );
+        if ( !isValidPhoneNumber( phoneNum_Field.getText() ) )
+         displayPromptFor3secs( invalidPhoneNum_Label );
     }
+
     @FXML
     private void updateMileageThreshold() throws IOException, GeneralSecurityException {
         if ( isValidMileThreshold( mileThreshold_Field.getText() ) ) {
@@ -114,7 +130,9 @@ public class SettingsController {
         if ( phoneNum_Field.getText().isBlank() && carrier_Field.getText().isBlank() )
         { displayPromptFor3secs( fieldsEmptyAlready_Label ); }
         else {
-            phoneNum_Field.clear(); carrier_Field.clear(); phoneNum_CheckMarkImage.setVisible( false );
+            phoneNum_Field.clear(); carrier_Field.clear();
+            phoneNum_CheckMarkImage.setVisible( false );
+            carrier_CheckMarkImage.setVisible( false );
             sbmt_sheet.updateSheet( "sbMileage!A2", "empty" );
             sbmt_sheet.updateSheet( "sbMileage!A4", "empty" );
         }
@@ -181,6 +199,9 @@ public class SettingsController {
         else displayPromptFor3secs( fieldsEmptyAlready_Label );
     }
 
+    private void displayCarrier_CheckMark( )
+    { carrier_CheckMarkImage.setVisible( true ); }
+
     private void displayPhoneNum_CheckMark()
     { phoneNum_CheckMarkImage.setVisible(true); }
 
@@ -209,12 +230,14 @@ public class SettingsController {
 
     private void hideCheckMarks() {
         email_CheckMarkImage.setVisible( false );
+        carrier_CheckMarkImage.setVisible( false );
         phoneNum_CheckMarkImage.setVisible( false );
         mileThreshold_CheckMarkImage.setVisible( false );
     }
 
     private void showCheckMarks() throws IOException, GeneralSecurityException {
         phoneNum_CheckMarkImage.setVisible( isValidPhoneNumber( sbmt_sheet.getUserPhoneNum() ) );
+        carrier_CheckMarkImage.setVisible( isValidCarrier( sbmt_sheet.getUserCarrier() ) );
         email_CheckMarkImage.setVisible( isValidEmail( sbmt_sheet.getUserEmail() ) );
         mileThreshold_CheckMarkImage.setVisible( isValidMileThreshold( sbmt_sheet.getMileageWarningThreshold() )
                 && !sbmt_sheet.getStored_MileageWarningThreshold().equals( String.valueOf( 0 ) ) );
@@ -225,6 +248,7 @@ public class SettingsController {
         sheetReset_Label.setVisible( false);
         invalidEmail_Label.setVisible( false );
         emailUpdated_Label.setVisible( false );
+        carrierUpdated_Label.setVisible( false );
         invalidPhoneNum_Label.setVisible( false );
         phoneNumUpdated_Label.setVisible( false );
         sheetAlreadyReset_Label.setVisible( false );
@@ -267,7 +291,7 @@ public class SettingsController {
     private void loadingPhoneReset()
     { new LoadingPhoneReset_Label().start(); }
 
-     class LoadingSheetReset_Label extends Thread {
+    class LoadingSheetReset_Label extends Thread {
         public void run() {
             loading_Label.setVisible(true);
             try { Thread.sleep( 100 );

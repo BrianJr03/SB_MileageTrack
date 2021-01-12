@@ -15,18 +15,14 @@ public class SheetEntry {
         this.entryCount = new SimpleStringProperty( entryCount );
     }
 
-    public String getEntryCount( ) {
-        return entryCount.get();
-    }
+    public String getEntryCount()
+    { return entryCount.get(); }
 
-    public SimpleStringProperty entryCountProperty( ) {
-        return entryCount;
-    }
+    public SimpleStringProperty entryCountProperty()
+    { return entryCount; }
 
-    public void setEntryCount( String entryCount ) {
-        this.entryCount.set( entryCount );
-    }
-
+    public void setEntryCount( String entryCount )
+    { this.entryCount.set( entryCount ); }
 
     public String getEntryDate()
     { return entryDate.get(); }
