@@ -104,7 +104,8 @@ public class SettingsController {
 
     @FXML
     private void updatePhoneNumber() throws IOException, GeneralSecurityException {
-        String phoneNum = phoneNum_Field.getText(); String formattedPhoneNum = formatPhoneNumber( phoneNum );
+        String phoneNum = phoneNum_Field.getText();
+        String formattedPhoneNum = formatPhoneNumber( phoneNum );
         if ( isValidPhoneNumber( formattedPhoneNum )) {
             phoneNum_Field.setText( formattedPhoneNum );
             sbmt_sheet.updateSheet( "sbMileage!A2" , formattedPhoneNum );
