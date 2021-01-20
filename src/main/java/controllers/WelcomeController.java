@@ -6,9 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
-import music.Music;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,13 +14,9 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
-    Music bgMusic = new Music( "src/main/resources/music/The Deli.wav" );
-
-    public WelcomeController() throws UnsupportedAudioFileException, IOException, LineUnavailableException {}
 
     @Override
     public void initialize( URL location , ResourceBundle resources ) {
-        bgMusic.play();
         new WelcomeScreen().start();
     }
 

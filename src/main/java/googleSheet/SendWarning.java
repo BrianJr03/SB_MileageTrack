@@ -50,14 +50,12 @@ public class  SendWarning {
 
     public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException, IOException, GeneralSecurityException {
         writeNotification();
-        switch (userCarrier) {
-            case "AT&T" -> sendNotificationAsEmail(phoneNumber + "@mms.att.net");
-            case "Sprint" -> sendNotificationAsEmail(phoneNumber + "@pm.sprint.com");
-            case "Verizon" -> sendNotificationAsEmail(phoneNumber + "@vzwpix.com");
-            case "T-Mobile" -> sendNotificationAsEmail(phoneNumber + "@tmomail.net");
-            case "Boost Mobile" -> sendNotificationAsEmail( phoneNumber + "@myboostmobile.com" );
-            case "Metro PCS" -> sendNotificationAsEmail( phoneNumber + "mymetropcs.com" );
-        }
+        if ( userCarrier.equals( "AT&T" ) ) { sendNotificationAsEmail(phoneNumber + "@mms.att.net"); }
+        if ( userCarrier.equals( "Sprint" ) ) { sendNotificationAsEmail(phoneNumber + "@pm.sprint.com"); }
+        if ( userCarrier.equals( "Verizon" ) ) { sendNotificationAsEmail(phoneNumber + "@vzwpix.com"); }
+        if ( userCarrier.equals( "T-Mobile" ) ) { sendNotificationAsEmail(phoneNumber + "@tmomail.net"); }
+        if ( userCarrier.equals( "Boost Mobile" ) ) { sendNotificationAsEmail( phoneNumber + "@myboostmobile.com" ); }
+        if ( userCarrier.equals( "Metro PCS" ) ) { sendNotificationAsEmail( phoneNumber + "mymetropcs.com" ); }
     }
 
     public static Properties setEmailProperties() {

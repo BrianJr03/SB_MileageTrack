@@ -24,8 +24,8 @@
    <TableView fx:id="mileageInfo_Table" layoutX="296.0" layoutY="28.0" prefHeight="262.0" prefWidth="299.0" stylesheets="@../stylesheets/tableView_stylesheet.css">
      <columns>
        <TableColumn fx:id="entryCountColumn" prefWidth="33.5999755859375" text="#" />
-       <TableColumn fx:id="dateColumn" prefWidth="137.60003662109375" text="Entry Date" />
-         <TableColumn fx:id="mileColumn" prefWidth="118.40001220703124" text="Mileage" />
+       <TableColumn fx:id="dateColumn" prefWidth="184.0" text="Entry Date" />
+         <TableColumn fx:id="mileColumn" prefWidth="73.0" text="Mileage" />
      </columns>
    </TableView>
    <Label fx:id="totalMileage_Label" layoutX="21.0" layoutY="84.0" prefHeight="27.0" prefWidth="133.0" text="9999" textFill="#6500fd">

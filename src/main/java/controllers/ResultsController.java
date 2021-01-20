@@ -1,6 +1,7 @@
 package controllers;
 
 import javafx.fxml.Initializable;
+import java.time.LocalDateTime;
 import googleSheet.SendWarning;
 import googleSheet.SheetEntry;
 import javafx.collections.FXCollections;
@@ -42,6 +43,7 @@ public class ResultsController implements Initializable {
     private Label mileAVG_Label;
 
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
+    LocalDateTime time = LocalDateTime.now();
     SendWarning sendWarning = new SendWarning();
 
     private final String mileWarningThreshold = sbmtSheet.getStored_MileageWarningThreshold();
@@ -76,7 +78,7 @@ public class ResultsController implements Initializable {
         int entryCount = -5;
         for ( List <Object> row : sheetData ) {
             entryCount++;
-            sheetEntries.add( new SheetEntry( row.get( 0 ).toString(),
+            sheetEntries.add( new SheetEntry( row.get( 0 ).toString() ,
                 row.get( 1 ).toString(), String.valueOf( entryCount ))); }
         sbmtSheet.removePlaceHolderRows( sheetEntries );
         return sheetEntries;

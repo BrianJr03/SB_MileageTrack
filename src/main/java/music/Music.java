@@ -7,6 +7,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+@SuppressWarnings( "unused" )
 public class Music {
 
     private final Clip clip;

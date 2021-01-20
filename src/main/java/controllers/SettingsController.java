@@ -259,23 +259,14 @@ public class SettingsController {
     }
 
     private void verifyStoredInfo( int index ) throws IOException, GeneralSecurityException {
-        switch ( index ) {
-            case 1 -> {
-                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+        if ( index == 1 ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
                     phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
-
-            case 2 -> {
-                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+        if ( index == 2 ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
                     emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
-
-            case 3 -> {
-                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+        if ( index == 3 ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
                     carrier_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
-
-            case 4 -> {
-                if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
+        if ( index == 4  ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
                     mileThreshold_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
-        }
     }
 
     private void loadSheetReset()

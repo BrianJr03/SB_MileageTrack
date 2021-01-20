@@ -29,10 +29,11 @@ public class ControllerLogic {
     }
 
     public static boolean isValidCarrier( String carrier ) {
-        switch ( carrier ) {
-            case "AT&T" , "Sprint" , "Verizon" , "T-Mobile", "Boost Mobile", "Metro PCS" -> { return true; }
-            default -> { return false; }
-        }
+        return carrier.equals( "AT&T" )
+                || carrier.equals( "Sprint" )
+                || carrier.equals( "Verizon" )
+                || carrier.equals( "Boost Mobile" )
+                || carrier.equals( "Metro PCS" );
     }
 
     public static boolean isValid_MileInput(String mile) {

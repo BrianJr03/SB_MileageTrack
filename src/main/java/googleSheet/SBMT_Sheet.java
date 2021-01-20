@@ -4,10 +4,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -22,12 +21,12 @@ import com.google.api.services.sheets.v4.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.decimal4j.util.DoubleRounder;
-import org.joda.time.DateTime;
 
 public class SBMT_Sheet {
 
     private Sheets sheetService;
-    private final String currentDate = DateTime.now().toLocalDate().toString();
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy h.mm aa");
+    private final String currentDate = dateFormat.format( new Date() );
     private final static String APPLICATION_NAME = "SB Mileage Track";
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
     private final List<List<Object>> sheet = getSheetData();
