@@ -15,6 +15,9 @@ public class LoadingResultsController implements Initializable {
     @FXML
     private AnchorPane rootPane;
 
+    public LoadingResultsController() {
+    }
+
     @Override
     public void initialize( URL location , ResourceBundle resources )
     { new LoadingResults().start(); }

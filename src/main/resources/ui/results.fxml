@@ -7,13 +7,13 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" styleClass="parent" stylesheets="@../stylesheets/mainUI_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ResultsController">
    <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../png/bg_image1.png" />
+      <Image url="@../png/blueMtn.png" />
    </ImageView>
    <Label layoutX="21.0" layoutY="58.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="date_Label" layoutX="193.0" layoutY="60.0" prefHeight="24.0" prefWidth="86.0" text="Date">
+   <Label fx:id="startDate_Label" layoutX="193.0" layoutY="60.0" prefHeight="24.0" prefWidth="86.0" text="Date">
       <font>
          <Font size="14.0" />
       </font></Label>
@@ -40,7 +40,6 @@
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label layoutX="14.0" layoutY="283.0" text="Now Playing : 5:32pm by The Deli" textFill="WHITE" />
    <Label layoutX="21.0" layoutY="117.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
       <font>
          <Font size="18.0" />

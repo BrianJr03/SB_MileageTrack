@@ -1,5 +1,6 @@
 package googleSheet;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +21,8 @@ import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.decimal4j.util.DoubleRounder;
 
 public class SBMT_Sheet {
@@ -31,7 +34,13 @@ public class SBMT_Sheet {
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
     private final List<List<Object>> sheet = getSheetData();
 
-    public SBMT_Sheet() throws IOException, GeneralSecurityException {}
+    final File blueMtn_bkGrnd_File = new File("src/main/resources/png/blueMtn.png");
+    final File purple_bkGrnd_File = new File("src/main/resources/png/purpleAndBlue.png");
+    final Image blueMtn_bkGrnd = new Image(blueMtn_bkGrnd_File.toURI().toString());
+    final Image purpleAndBlue_bkGrnd = new Image( purple_bkGrnd_File.toURI().toString());
+    ArrayList< Image > bkGrndImages = new ArrayList <>();
+
+    public SBMT_Sheet() throws IOException, GeneralSecurityException { populateBkGrndImages_Array(); }
 
     private static Credential auth() throws IOException, GeneralSecurityException {
         final java.util.logging.Logger buggyLogger = java.util.logging.Logger.getLogger(FileDataStoreFactory.class.getName());
@@ -61,13 +70,20 @@ public class SBMT_Sheet {
         return response.getValues();
     }
 
-    private ObservableList<String> getSheetDataAsObservableList() throws IOException, GeneralSecurityException {
+    private ObservableList<String> getSheetData_AsObservableList( int index ) throws IOException,
+            GeneralSecurityException {
         ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
         List<List<Object>> sheet = getSheetData();
         for ( List<Object> row : sheet )
-        { sheetDataAsObservableList.add( row.get( 0 ).toString() ); }
+        { sheetDataAsObservableList.add( row.get( index ).toString() ); }
         return sheetDataAsObservableList;
     }
+
+    private ObservableList<String> getSheetDataCol1_AsObservableList() throws IOException, GeneralSecurityException
+    { return getSheetData_AsObservableList( 0 ); }
+
+    private ObservableList<String> getSheetDataCol2_AsObservableList() throws IOException, GeneralSecurityException
+    { return getSheetData_AsObservableList( 1 ); }
 
     public void addEntryToSheet(String miles) throws IOException, GeneralSecurityException {
         sheetService = getSheetService();
@@ -140,7 +156,7 @@ public class SBMT_Sheet {
 
     public double getTotalMileage() {
         double mileageTotal = 0.0;
-        if(sheet == null || sheet.isEmpty())
+        if( sheet == null || sheet.isEmpty() )
             { return Double.parseDouble( "No data found." ); }
         else { for (List<Object> row : sheet)
                  mileageTotal += Double.parseDouble( row.get( 1 ).toString() ); }
@@ -148,10 +164,10 @@ public class SBMT_Sheet {
     }
 
     public ObservableList<String> getEntryDates_AsObservableList() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList(); }
+    { return getSheetDataCol1_AsObservableList(); }
 
     public String getMileageWarningThreshold() throws IOException, GeneralSecurityException
-    { return getSheetDataAsObservableList().get( 0 ); }
+    { return getSheetDataCol1_AsObservableList().get( 0 ); }
 
     public String getUserPhoneNum() throws IOException, GeneralSecurityException
     { return getEntryDates_AsObservableList().get( 1 ); }
@@ -165,8 +181,13 @@ public class SBMT_Sheet {
     public String getStored_MileageWarningThreshold() throws IOException, GeneralSecurityException
     { return getEntryDates_AsObservableList().get( 4 ); }
 
-    public String getStartDate() throws IOException, GeneralSecurityException
-    { return getEntryDates_AsObservableList().get( 5 ); }
+    public String getBkGrndIndex() throws IOException, GeneralSecurityException
+    { return getSheetDataCol2_AsObservableList().subList( 0, 1 ).get( 0 ); }
+
+    public String getStartDate() throws IOException, GeneralSecurityException {
+        String startDateAndTime = getEntryDates_AsObservableList().get( 5 );
+        return startDateAndTime.substring(0, Math.min(startDateAndTime.length(), 10));
+    }
 
     public void resetSheet() throws IOException, GeneralSecurityException {
         updateSheet( "sbMileage!A1", String.valueOf( 0 ) );
@@ -201,5 +222,21 @@ public class SBMT_Sheet {
                 || !getUserEmail().equals( "empty" )
                 || !getUserCarrier().equals( "empty" )
                 || !getStored_MileageWarningThreshold().equals( String.valueOf( 0 ) );
+    }
+
+    private void populateBkGrndImages_Array()
+    { bkGrndImages.add( blueMtn_bkGrnd ); bkGrndImages.add( purpleAndBlue_bkGrnd ); }
+
+    public void setBkGrnd( ImageView bkGrnd ) throws IOException, GeneralSecurityException
+    { bkGrnd.setImage( bkGrndImages.get( Integer.parseInt( getBkGrndIndex() ))); }
+
+    public void verifyBkGrnd( ImageView bkGrnd_ImageView ) throws IOException, GeneralSecurityException {
+        String bkGrnd_Index = getBkGrndIndex();
+        if ( bkGrnd_Index.equals( "0" ) ) {
+            bkGrnd_ImageView.setImage( purpleAndBlue_bkGrnd );
+            updateSheet( "sbMileage!B1", "1" ); }
+        if ( bkGrnd_Index.equals( "1" ) ) {
+            bkGrnd_ImageView.setImage( blueMtn_bkGrnd );
+            updateSheet( "sbMileage!B1", "0" ); }
     }
 }

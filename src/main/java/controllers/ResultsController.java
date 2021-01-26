@@ -1,7 +1,6 @@
 package controllers;
 
 import javafx.fxml.Initializable;
-import java.time.LocalDateTime;
 import googleSheet.SendWarning;
 import googleSheet.SheetEntry;
 import javafx.collections.FXCollections;
@@ -34,7 +33,7 @@ public class ResultsController implements Initializable {
     @FXML
     private TableColumn<SheetEntry, String> mileColumn;
     @FXML
-    private Label date_Label;
+    private Label startDate_Label;
     @FXML
     private Label totalMileage_Label;
     @FXML
@@ -43,7 +42,6 @@ public class ResultsController implements Initializable {
     private Label mileAVG_Label;
 
     SBMT_Sheet sbmtSheet = new SBMT_Sheet();
-    LocalDateTime time = LocalDateTime.now();
     SendWarning sendWarning = new SendWarning();
 
     private final String mileWarningThreshold = sbmtSheet.getStored_MileageWarningThreshold();
@@ -94,7 +92,7 @@ public class ResultsController implements Initializable {
     { totalMileage_Label.setText( sbmtSheet.getTotalMileage() + " mi"); }
 
     private void setDate_Label() throws IOException, GeneralSecurityException
-    { date_Label.setText( sbmtSheet.getStartDate()); }
+    { startDate_Label.setText( sbmtSheet.getStartDate()); }
 
     @FXML
     private void launchMainUI() throws IOException

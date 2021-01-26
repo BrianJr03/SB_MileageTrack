@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +17,7 @@ import static main.Main.displayPromptFor3secs;
 import static main.Main.launchUI;
 
 public class MainController implements Initializable {
+
 
     @FXML
     private Label loading_Label;
@@ -33,8 +35,12 @@ public class MainController implements Initializable {
     public MainController() throws IOException, GeneralSecurityException {}
 
     @Override
-    public void initialize( URL location , ResourceBundle resources )
-    { hideAlL_Labels(); }
+    public void initialize( URL location , ResourceBundle resources ) {
+        hideAlL_Labels();
+//        try { sbmtSheet.verifyBkGrnd( bkGrnd_ImageView ); }
+//        catch ( IOException | GeneralSecurityException exception )
+//        { exception.printStackTrace(); }
+    }
 
     private void hideAlL_Labels() {
         loading_Label.setVisible( false );

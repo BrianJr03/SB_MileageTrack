@@ -16,13 +16,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Optional;
-
 import static controllerLogic.ControllerLogic.*;
 import static controllerLogic.ControllerLogic.formatPhoneNumber;
 import static main.Main.displayPromptFor3secs;
 
 public class SettingsController {
 
+    @FXML
+    private ImageView bkGrnd_ImageView;
     @FXML
     private Label carrierUpdated_Label;
     @FXML
@@ -75,6 +76,7 @@ public class SettingsController {
         verifyStoredCarrier();
         verifyStoredPhoneNum();
         verifyStoredMileCount();
+        sbmt_sheet.setBkGrnd( bkGrnd_ImageView );
     }
 
     @FXML
@@ -106,12 +108,12 @@ public class SettingsController {
     private void updatePhoneNumber() throws IOException, GeneralSecurityException {
         String phoneNum = phoneNum_Field.getText();
         String formattedPhoneNum = formatPhoneNumber( phoneNum );
-        if ( isValidPhoneNumber( formattedPhoneNum )) {
+        if ( isValidPhoneNumber( formattedPhoneNum ) ) {
             phoneNum_Field.setText( formattedPhoneNum );
             sbmt_sheet.updateSheet( "sbMileage!A2" , formattedPhoneNum );
             displayPhoneNum_CheckMark(); displayPromptFor3secs( phoneNumUpdated_Label ); }
         else phoneNum_CheckMarkImage.setVisible( false );
-        if ( !isValidPhoneNumber( phoneNum_Field.getText() ) )
+        if ( !isValidPhoneNumber( phoneNum_Field.getText() ))
          displayPromptFor3secs( invalidPhoneNum_Label );
     }
 
@@ -170,6 +172,10 @@ public class SettingsController {
         }
         else displayPromptFor3secs( sheetAlreadyReset_Label );
     }
+
+    @FXML
+    private void newBackground() throws IOException, GeneralSecurityException
+    { sbmt_sheet.verifyBkGrnd( bkGrnd_ImageView ); }
 
     private Alert createAlert() {
         Stage stage = ( Stage ) rootPane.getScene().getWindow();
@@ -260,13 +266,13 @@ public class SettingsController {
 
     private void verifyStoredInfo( int index ) throws IOException, GeneralSecurityException {
         if ( index == 1 ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
-                    phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
+                    phoneNum_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().subList( 0, 5 ).get( index ) ); } }
         if ( index == 2 ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
-                    emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
+                    emailAddress_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().subList( 0, 5 ).get( index ) ); } }
         if ( index == 3 ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
-                    carrier_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
+                    carrier_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().subList( 0, 5 ).get( index ) ); } }
         if ( index == 4  ) { if ( sbmt_sheet.isSheetCellEmpty( index ) ) {
-                    mileThreshold_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().get( index ) ); } }
+                    mileThreshold_Field.setText( sbmt_sheet.getEntryDates_AsObservableList().subList( 0, 5 ).get( index ) ); } }
     }
 
     private void loadSheetReset()

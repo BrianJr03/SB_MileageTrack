@@ -7,12 +7,11 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WelcomeController">
     <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../png/bg_image1.png" />
+        <Image url="@../png/blueMtn.png" />
     </ImageView>
     <Label layoutX="208.0" layoutY="98.0" text="Welcome!">
         <font>
             <Font name="Impact" size="48.0" />
         </font>
     </Label>
-    <Label layoutX="14.0" layoutY="283.0" text="Now Playing : 5:32pm by The Deli" textFill="WHITE" />
 </AnchorPane>
