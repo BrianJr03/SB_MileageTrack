@@ -1,26 +1,36 @@
 package controllers;
 
+import googleSheet.SBMT_Sheet;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.util.ResourceBundle;
 
 public class LoadingResultsController implements Initializable {
 
     @FXML
+    private ImageView bkGrnd_ImageView;
+    @FXML
     private AnchorPane rootPane;
 
-    public LoadingResultsController() {
-    }
+    SBMT_Sheet sbmt_sheet = new SBMT_Sheet();
+
+    public LoadingResultsController() throws IOException, GeneralSecurityException {}
 
     @Override
-    public void initialize( URL location , ResourceBundle resources )
-    { new LoadingResults().start(); }
+    public void initialize( URL location , ResourceBundle resources ) {
+        try { sbmt_sheet.setBkGrnd( bkGrnd_ImageView ); }
+        catch ( IOException | GeneralSecurityException exception )
+        { exception.printStackTrace(); }
+        new LoadingResults().start();
+    }
 
      class LoadingResults extends Thread {
         public void run() {

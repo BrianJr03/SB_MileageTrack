@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoadingResultsController">
-   <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="bkGrnd_ImageView" fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../png/blueMtn.png" />
    </ImageView>
    <Circle fill="DODGERBLUE" layoutX="240.0" layoutY="167.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="6.0" />

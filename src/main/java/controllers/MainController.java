@@ -18,7 +18,8 @@ import static main.Main.launchUI;
 
 public class MainController implements Initializable {
 
-
+    @FXML
+    private ImageView bkGrnd_ImageView;
     @FXML
     private Label loading_Label;
     @FXML
@@ -37,9 +38,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize( URL location , ResourceBundle resources ) {
         hideAlL_Labels();
-//        try { sbmtSheet.verifyBkGrnd( bkGrnd_ImageView ); }
-//        catch ( IOException | GeneralSecurityException exception )
-//        { exception.printStackTrace(); }
+        try { sbmtSheet.setBkGrnd( bkGrnd_ImageView ); }
+        catch ( IOException | GeneralSecurityException exception )
+        { exception.printStackTrace(); }
     }
 
     private void hideAlL_Labels() {

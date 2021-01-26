@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import googleSheet.SBMT_Sheet;
 import javax.mail.MessagingException;
@@ -22,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class ResultsController implements Initializable {
 
+    @FXML
+    private ImageView bkGrnd_ImageView;
     @FXML
     private TableColumn<SheetEntry, String> entryCountColumn;
     @FXML
@@ -57,7 +60,9 @@ public class ResultsController implements Initializable {
             setTableProperties();
             updateTotalMileage();
             checkFor_HighMileage();
-            setTotalMileage_Label(); }
+            setTotalMileage_Label();
+            sbmtSheet.setBkGrnd( bkGrnd_ImageView );
+        }
         catch ( IOException | GeneralSecurityException | MessagingException exception )
         { exception.printStackTrace(); }
     }

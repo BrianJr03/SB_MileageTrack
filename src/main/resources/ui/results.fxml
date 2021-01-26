@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="rootPane" prefHeight="315.0" prefWidth="615.0" styleClass="parent" stylesheets="@../stylesheets/mainUI_stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ResultsController">
-   <ImageView fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="bkGrnd_ImageView" fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../png/blueMtn.png" />
    </ImageView>
    <Label layoutX="21.0" layoutY="58.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
