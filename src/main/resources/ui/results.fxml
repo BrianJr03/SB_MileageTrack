@@ -9,7 +9,7 @@
    <ImageView fx:id="bkGrnd_ImageView" fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../png/blueMtn.png" />
    </ImageView>
-   <Label layoutX="21.0" layoutY="58.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
+   <Label fx:id="totalMileageString_Label" layoutX="21.0" layoutY="58.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
       <font>
          <Font size="18.0" />
       </font></Label>
@@ -32,7 +32,7 @@
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label layoutX="21.0" layoutY="145.0" prefHeight="27.0" prefWidth="227.0" text="Last 10 entries : ">
+   <Label fx:id="mileAVGLast10String_Label" layoutX="21.0" layoutY="145.0" prefHeight="27.0" prefWidth="227.0" text="Last 10 entries : ">
       <font>
          <Font size="18.0" />
       </font></Label>
@@ -40,7 +40,7 @@
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label layoutX="21.0" layoutY="117.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
+   <Label fx:id="mileAvgString_Label" layoutX="21.0" layoutY="117.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
       <font>
          <Font size="18.0" />
       </font>

@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import googleSheet.SBMT_Sheet;
+import javafx.scene.paint.Color;
+
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +25,12 @@ import java.util.ResourceBundle;
 
 public class ResultsController implements Initializable {
 
+    @FXML
+    private Label totalMileageString_Label;
+    @FXML
+    private Label mileAvgString_Label;
+    @FXML
+    private Label mileAVGLast10String_Label;
     @FXML
     private ImageView bkGrnd_ImageView;
     @FXML
@@ -57,6 +65,7 @@ public class ResultsController implements Initializable {
         try {
             setDate_Label();
             setMileAVG_Label();
+            updateMileageText();
             setTableProperties();
             updateTotalMileage();
             checkFor_HighMileage();
@@ -65,6 +74,18 @@ public class ResultsController implements Initializable {
         }
         catch ( IOException | GeneralSecurityException | MessagingException exception )
         { exception.printStackTrace(); }
+    }
+
+    private void updateMileageText() throws IOException, GeneralSecurityException {
+        if ( sbmtSheet.getBkGrndIndex().equals( "1" ) ) {
+             mileAVG_Label.setTextFill( Color.WHITE );
+             totalMileage_Label.setTextFill( Color.WHITE );
+             mileAVGLast10_Label.setTextFill( Color.WHITE );
+             startDate_Label.setTextFill( Color.WHITE );
+             mileAVGLast10String_Label.setTextFill( Color.WHITE );
+             mileAvgString_Label.setTextFill( Color.WHITE );
+             totalMileageString_Label.setTextFill( Color.WHITE );
+        }
     }
 
     private void setTableProperties() throws IOException, GeneralSecurityException {
