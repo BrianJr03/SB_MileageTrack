@@ -26,6 +26,7 @@ public class  SendWarning {
     public void writeNotification() throws IOException, GeneralSecurityException {
         FileWriter writer = new FileWriter(file);
         writer.write( "\nYou've added " + sbmt_sheet.getStored_MileageWarningThreshold() + "+ miles! Time for a belt change." );
+        writer.write( "\n\nhttps://momentum-boards.com/products/vestar-mini-belts-2-day-shipping-500-mi-full-warranty" );
         writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
         writer.write( "\n\nTeam SB MileageTrack" );
         writer.close();

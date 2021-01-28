@@ -78,13 +78,13 @@ public class ResultsController implements Initializable {
 
     private void updateMileageText() throws IOException, GeneralSecurityException {
         if ( sbmtSheet.getBkGrndIndex().equals( "1" ) ) {
-             mileAVG_Label.setTextFill( Color.WHITE );
-             totalMileage_Label.setTextFill( Color.WHITE );
-             mileAVGLast10_Label.setTextFill( Color.WHITE );
-             startDate_Label.setTextFill( Color.WHITE );
-             mileAVGLast10String_Label.setTextFill( Color.WHITE );
-             mileAvgString_Label.setTextFill( Color.WHITE );
-             totalMileageString_Label.setTextFill( Color.WHITE );
+             mileAVG_Label.setTextFill( Color.BLACK );
+             totalMileage_Label.setTextFill( Color.BLACK );
+             mileAVGLast10_Label.setTextFill( Color.BLACK );
+             startDate_Label.setTextFill( Color.BLACK );
+             mileAVGLast10String_Label.setTextFill( Color.BLACK );
+             mileAvgString_Label.setTextFill( Color.BLACK );
+             totalMileageString_Label.setTextFill( Color.BLACK );
         }
     }
 
