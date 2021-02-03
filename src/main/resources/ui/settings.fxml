@@ -87,7 +87,7 @@
         <Image url="@../png/checkMark.png" />
     </ImageView>
    <Label fx:id="carrierUpdated_Label" layoutX="249.0" layoutY="200.0" text="Phone Carrier Updated!" textFill="WHITE" />
-   <Button layoutX="79.0" layoutY="271.0" mnemonicParsing="false" onAction="#newBackground" prefHeight="24.0" prefWidth="120.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="New Background">
+   <Button fx:id="loadingNewBckGrnd" layoutX="79.0" layoutY="271.0" mnemonicParsing="false" onAction="#newBackground" prefHeight="24.0" prefWidth="120.0" styleClass="nextBtn" stylesheets="@../stylesheets/mainUI_stylesheet.css" text="New Background">
       <font>
          <Font name="Franklin Gothic Heavy" size="12.0" />
       </font>

@@ -159,7 +159,6 @@ public class SettingsController {
             clearFields(); hideCheckMarks();
             mileThreshold_CheckMarkImage.setVisible( false );
             sbmt_sheet.resetSheet();
-            sbmt_sheet.resetMileageThresholds();
         }
     }
 
@@ -167,7 +166,6 @@ public class SettingsController {
         clearFields(); hideCheckMarks();
         if ( sbmt_sheet.canSheetBeReset() ) {
             sbmt_sheet.resetSheet();
-            sbmt_sheet.resetMileageThresholds();
             displayPromptFor3secs( sheetReset_Label );
         }
         else displayPromptFor3secs( sheetAlreadyReset_Label );
@@ -289,12 +287,30 @@ public class SettingsController {
     private void loadingPhoneReset()
     { new LoadingPhoneReset_Label().start(); }
 
+    @FXML
+    private void loadingNewBckGrnd()
+    { new LoadingNewBckGrnd_Label().start(); }
+
     class LoadingSheetReset_Label extends Thread {
         public void run() {
             loading_Label.setVisible(true);
             try { Thread.sleep( 100 );
                 Platform.runLater( () -> {
                     try { resetSheet(); }
+                    catch ( IOException | GeneralSecurityException exception )
+                    { exception.printStackTrace(); }
+                    loading_Label.setVisible(false); } ); }
+            catch ( InterruptedException e )
+            { e.printStackTrace(); }
+        }
+    }
+
+    class LoadingNewBckGrnd_Label extends Thread {
+        public void run() {
+            loading_Label.setVisible(true);
+            try { Thread.sleep( 100 );
+                Platform.runLater( () -> {
+                    try { newBackground(); }
                     catch ( IOException | GeneralSecurityException exception )
                     { exception.printStackTrace(); }
                     loading_Label.setVisible(false); } ); }

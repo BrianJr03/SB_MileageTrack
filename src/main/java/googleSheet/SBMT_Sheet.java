@@ -28,7 +28,7 @@ import org.decimal4j.util.DoubleRounder;
 public class SBMT_Sheet {
 
     private Sheets sheetService;
-    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy h.mm aa");
+    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy @ h.mm aa");
     private final String currentDate = dateFormat.format( new Date() );
     private final static String APPLICATION_NAME = "SB Mileage Track";
     private final static String SPREADSHEET_ID= "1IbU92yUWtT9w_kG3iCt8HTw5rmYbwgpwHPE6TUPVXIg";
@@ -37,7 +37,7 @@ public class SBMT_Sheet {
     final File blueMtn_bkGrnd_File = new File("src/main/resources/png/blueMtn.png");
     final File purple_bkGrnd_File = new File("src/main/resources/png/purpleAndBlue.png");
     final Image blueMtn_bkGrnd = new Image(blueMtn_bkGrnd_File.toURI().toString());
-    final Image purpleAndBlue_bkGrnd = new Image( purple_bkGrnd_File.toURI().toString());
+    final Image purpleAndBlue_bkGrnd = new Image(purple_bkGrnd_File.toURI().toString());
     ArrayList< Image > bkGrndImages = new ArrayList <>();
 
     public SBMT_Sheet() throws IOException, GeneralSecurityException { populateBkGrndImages_Array(); }
@@ -64,14 +64,12 @@ public class SBMT_Sheet {
     }
 
     public List<List<Object>> getSheetData() throws IOException, GeneralSecurityException {
-        sheetService = getSheetService();
-        String range = "sbMileage";
+        sheetService = getSheetService(); String range = "sbMileage";
         ValueRange response = sheetService.spreadsheets().values().get( SPREADSHEET_ID, range ).execute();
         return response.getValues();
     }
 
-    private ObservableList<String> getSheetData_AsObservableList( int index ) throws IOException,
-            GeneralSecurityException {
+    private ObservableList<String> getSheetData_AsObservableList( int index ) throws IOException, GeneralSecurityException {
         ObservableList<String> sheetDataAsObservableList = FXCollections.observableArrayList();
         List<List<Object>> sheet = getSheetData();
         for ( List<Object> row : sheet )
@@ -205,11 +203,6 @@ public class SBMT_Sheet {
              { resetSheetFromIndex( 5 ); }
     }
 
-    public void resetMileageThresholds() throws IOException, GeneralSecurityException {
-        updateSheet( "sbMileage!A1", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!A5", String.valueOf( 0 ) );
-    }
-
     public boolean isSheetCellEmpty( int index ) throws IOException, GeneralSecurityException {
         return !getEntryDates_AsObservableList().get( index ).equals( "empty" )
                 &&  !getEntryDates_AsObservableList().get( index ).equals( String.valueOf( 0 ) );
@@ -235,7 +228,7 @@ public class SBMT_Sheet {
         if ( bkGrnd_Index.equals( "0" ) ) {
             bkGrnd_ImageView.setImage( purpleAndBlue_bkGrnd );
             updateSheet( "sbMileage!B1", "1" ); }
-        if ( bkGrnd_Index.equals( "1" ) ) {
+       else if ( bkGrnd_Index.equals( "1" ) ) {
             bkGrnd_ImageView.setImage( blueMtn_bkGrnd );
             updateSheet( "sbMileage!B1", "0" ); }
     }
