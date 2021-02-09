@@ -20,11 +20,11 @@ public class  SendWarning {
     private final String startDate = sbmt_sheet.getStartDate();
     private final double totalMileage = sbmt_sheet.getTotalMileage();
     private final File file = new File( "src/main/resources/txt/mileageWarning.txt" );
+    FileWriter writer = new FileWriter(file);
 
     public SendWarning() throws IOException, GeneralSecurityException {}
 
-    public void writeNotification() throws IOException, GeneralSecurityException {
-        FileWriter writer = new FileWriter(file);
+    public void writeMileNotification() throws IOException, GeneralSecurityException {
         writer.write( "\nYou've added " + sbmt_sheet.getStored_MileageWarningThreshold() + "+ miles! Time for a belt change." );
         writer.write( "\n\nhttps://momentum-boards.com/products/vestar-mini-belts-2-day-shipping-500-mi-full-warranty" );
         writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
@@ -32,8 +32,16 @@ public class  SendWarning {
         writer.close();
     }
 
-    public void sendNotificationAsEmail(String userEmail) throws MessagingException, IOException, GeneralSecurityException {
-        writeNotification();
+    public void writeWheelNotification() throws IOException, GeneralSecurityException {
+        writer.write( "\nYou've added " + sbmt_sheet.getStored_MileageWarningThreshold() + "+ miles! Time for" +
+                " a wheel set change." );
+        writer.write( "\n\nhttps://vestarboard.com/products/accessory-pu-wheel-set" );
+        writer.write( "\n\nCurrent mileage since " + startDate + " : " + totalMileage + " mi" );
+        writer.write( "\n\nTeam SB MileageTrack" );
+        writer.close();
+    }
+
+    public void sendNotificationAsEmail(String userEmail) throws MessagingException {
         Multipart emailContent = new MimeMultipart();
         MimeBodyPart textBodyPart = new MimeBodyPart();
         MimeMessage msg = new MimeMessage(establishEmailSession());
@@ -49,8 +57,7 @@ public class  SendWarning {
         Transport.send(msg);
     }
 
-    public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException, IOException, GeneralSecurityException {
-        writeNotification();
+    public void sendNotificationAsTextMSG(String phoneNumber, String userCarrier) throws MessagingException {
         switch ( userCarrier ) {
             case "AT&T":
                 sendNotificationAsEmail( phoneNumber + "@mms.att.net" );

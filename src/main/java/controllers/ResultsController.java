@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import googleSheet.SBMT_Sheet;
 import javafx.scene.paint.Color;
-
 import javax.mail.MessagingException;
 import java.io.IOException;
 import java.net.URL;
@@ -129,22 +128,39 @@ public class ResultsController implements Initializable {
         if ( totalMileage >= Double.parseDouble( sbmtSheet.getMileageWarningThreshold() )
                 && !sbmtSheet.getMileageWarningThreshold().equals( String.valueOf( 0 ) ) ) {
             sbmtSheet.updateSheet( A1, Double.toString(  mileWarningThreshold_AsDouble + sbmtSheet.getTotalMileage() ));
-            sendHighMileage_Warning();  }
+            sendHighMileage_Warning(); }
+        if ( totalMileage >= 700 )
+        { sendWheelWarning(); }
     }
 
     private void updateTotalMileage() throws IOException, GeneralSecurityException
     { sbmtSheet.updateSheet( "sbMileage!C1", String.valueOf(sbmtSheet.getTotalMileage() )); }
 
-    private void sendWarningToUserAsText( String phoneNumber, String carrier ) throws IOException, MessagingException, GeneralSecurityException
+    private void sendWarningToUserAsText( String phoneNumber, String carrier ) throws  MessagingException
     { sendWarning.sendNotificationAsTextMSG( phoneNumber, carrier ); }
 
-    private void sendWarningToUserAsEmail( String email ) throws IOException, MessagingException, GeneralSecurityException
+    private void sendWarningToUserAsEmail( String email ) throws MessagingException
     { sendWarning.sendNotificationAsEmail( email ); }
 
+    private boolean phoneFields_NotEmpty() throws IOException, GeneralSecurityException
+    { return !sbmtSheet.getUserPhoneNum().equals( "empty" ) && !sbmtSheet.getUserCarrier().equals( "empty" ); }
+
+    private boolean emailField_NotEmpty() throws IOException, GeneralSecurityException
+    { return !sbmtSheet.getUserEmail().equals( "empty" ); }
+
+    private void sendWheelWarning() throws IOException, GeneralSecurityException, MessagingException {
+        sendWarning.writeWheelNotification();
+        if ( phoneFields_NotEmpty() )
+        { sendWarning.sendNotificationAsEmail( sbmtSheet.getUserPhoneNum() ); }
+        if ( emailField_NotEmpty() )
+        { sendWarningToUserAsEmail( sbmtSheet.getUserEmail() ); }
+    }
+
     private void sendHighMileage_Warning() throws IOException, GeneralSecurityException, MessagingException {
-        if (!sbmtSheet.getUserPhoneNum().equals( "empty" ) && !sbmtSheet.getUserCarrier().equals( "empty" ))
+        sendWarning.writeMileNotification();
+        if ( phoneFields_NotEmpty() )
         { sendWarningToUserAsText( sbmtSheet.getUserPhoneNum(), sbmtSheet.getUserCarrier()); }
-        if (!sbmtSheet.getUserEmail().equals( "empty" ))
+        if ( emailField_NotEmpty() )
         { sendWarningToUserAsEmail( sbmtSheet.getUserEmail() ); }
     }
 }

@@ -19,14 +19,16 @@ public class Main extends Application implements EventHandler <ActionEvent> {
     public static Stage stage;
     private final String icon
             = String.valueOf(getClass().getResource("/png/sb_Logo.png" ));
+    final Parent root = FXMLLoader.load(getClass().getResource( "/ui/welcome.fxml" ));
+
+    public Main() throws IOException {}
 
     public static void main( String[] args )
     { launch( args );  }
 
     @Override
-    public void start( Stage primaryStage ) throws Exception {
+    public void start( Stage primaryStage ) {
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource( "/ui/welcome.fxml" ));
         stage.setResizable( false );
         stage.getIcons().add( new Image( icon ));
         stage.setTitle( "SB Mileage Track");

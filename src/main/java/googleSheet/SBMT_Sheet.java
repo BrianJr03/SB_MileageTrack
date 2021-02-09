@@ -36,7 +36,7 @@ public class SBMT_Sheet {
 
     final File blueMtn_bkGrnd_File = new File("src/main/resources/png/blueMtn.png");
     final File purple_bkGrnd_File = new File("src/main/resources/png/purpleAndBlue.png");
-    final Image blueMtn_bkGrnd = new Image(blueMtn_bkGrnd_File.toURI().toString());
+    final Image blueMtn_bkGrnd = new  Image(blueMtn_bkGrnd_File.toURI().toString());
     final Image purpleAndBlue_bkGrnd = new Image(purple_bkGrnd_File.toURI().toString());
     ArrayList< Image > bkGrndImages = new ArrayList <>();
 
