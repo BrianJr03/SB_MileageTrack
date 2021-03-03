@@ -29,4 +29,18 @@ public class GenericTestClass {
         sendWarning.sendNotificationAsEmail( "bkwalker@bsu.edu" );
         sendWarning.sendNotificationAsTextMSG( "219-359-6331", "Sprint" );
     }
+
+    @Test
+    public void getLastElement() {
+        ObservableList<String> listOfStrings = FXCollections.observableArrayList();
+        int count = 0;
+        System.out.print("\n");
+        for ( int i = 0; i < 5; i++ )
+        { count++;listOfStrings.add( "Element " + ( i+1 )); }
+        String lastEntry = listOfStrings.get( listOfStrings.size() - 1 );
+        for ( String element : listOfStrings )
+        { System.out.println( element ); }
+        System.out.println("\nLast Element: " + lastEntry);
+        Assertions.assertEquals( "Element " + count, lastEntry );
+    }
 }

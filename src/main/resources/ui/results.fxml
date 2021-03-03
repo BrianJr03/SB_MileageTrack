@@ -9,11 +9,11 @@
    <ImageView fx:id="bkGrnd_ImageView" fitHeight="315.0" fitWidth="615.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../png/blueMtn.png" />
    </ImageView>
-   <Label fx:id="totalMileageString_Label" layoutX="21.0" layoutY="58.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
+   <Label fx:id="totalMileageString_Label" layoutX="21.0" layoutY="46.0" prefHeight="27.0" prefWidth="177.0" text="Total Mileage Since :  ">
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="startDate_Label" layoutX="193.0" layoutY="60.0" prefHeight="24.0" prefWidth="86.0" text="Date">
+   <Label fx:id="startDate_Label" layoutX="190.0" layoutY="48.0" prefHeight="24.0" prefWidth="86.0" text="Date" textFill="#6500fd">
       <font>
          <Font size="14.0" />
       </font></Label>
@@ -28,24 +28,33 @@
          <TableColumn fx:id="mileColumn" prefWidth="73.0" text="Mileage" />
      </columns>
    </TableView>
-   <Label fx:id="totalMileage_Label" layoutX="21.0" layoutY="84.0" prefHeight="27.0" prefWidth="133.0" text="9999" textFill="#6500fd">
+   <Label fx:id="totalMileage_Label" layoutX="21.0" layoutY="72.0" prefHeight="27.0" prefWidth="133.0" text="9999" textFill="#6500fd">
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="mileAVGLast10String_Label" layoutX="21.0" layoutY="145.0" prefHeight="27.0" prefWidth="227.0" text="Last 10 entries : ">
+   <Label fx:id="mileAVGLast10String_Label" layoutX="21.0" layoutY="131.0" prefHeight="27.0" prefWidth="227.0" text="Last 10 entries : ">
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="mileAVGLast10_Label" layoutX="155.0" layoutY="145.0" prefHeight="27.0" prefWidth="109.0" text="9999" textFill="#6500fd" wrapText="true">
+   <Label fx:id="lastDateConst_Label" layoutX="21.0" layoutY="158.0" prefHeight="27.0" prefWidth="227.0" text="Last Entry Date : ">
       <font>
          <Font size="18.0" />
       </font></Label>
-   <Label fx:id="mileAvgString_Label" layoutX="21.0" layoutY="117.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
+   <Label fx:id="mileAVGLast10_Label" layoutX="158.0" layoutY="131.0" prefHeight="27.0" prefWidth="109.0" text="9999" textFill="#6500fd" wrapText="true">
+      <font>
+         <Font size="18.0" />
+      </font></Label>
+   <Label fx:id="mileAvgString_Label" layoutX="21.0" layoutY="99.0" prefHeight="27.0" prefWidth="86.0" text="Mile Avg : ">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Label fx:id="mileAVG_Label" layoutX="110.0" layoutY="117.0" prefHeight="27.0" prefWidth="116.0" text="9999" textFill="#6500fd">
+   <Label fx:id="mileAVG_Label" layoutX="110.0" layoutY="99.0" prefHeight="27.0" prefWidth="116.0" text="9999" textFill="#6500fd">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Label fx:id="lastDate_Label" layoutX="155.0" layoutY="158.0" prefHeight="27.0" prefWidth="116.0" text="Date" textFill="#6500fd" wrapText="true">
       <font>
          <Font size="18.0" />
       </font>

@@ -25,6 +25,10 @@ import java.util.ResourceBundle;
 public class ResultsController implements Initializable {
 
     @FXML
+    private Label lastDateConst_Label;
+    @FXML
+    private Label lastDate_Label;
+    @FXML
     private Label totalMileageString_Label;
     @FXML
     private Label mileAvgString_Label;
@@ -62,7 +66,7 @@ public class ResultsController implements Initializable {
     @Override
     public void initialize( URL location , ResourceBundle resources ) {
         try {
-            setDate_Label();
+            setDate_Labels();
             setMileAVG_Label();
             updateMileageText();
             setTableProperties();
@@ -76,7 +80,7 @@ public class ResultsController implements Initializable {
     }
 
     private void updateMileageText() throws IOException, GeneralSecurityException {
-        if ( sbmtSheet.getBkGrndIndex().equals( "1" ) ) {
+        if ( sbmtSheet.isAltBkGrnd() ) {
              mileAVG_Label.setTextFill( Color.BLACK );
              totalMileage_Label.setTextFill( Color.BLACK );
              mileAVGLast10_Label.setTextFill( Color.BLACK );
@@ -84,6 +88,8 @@ public class ResultsController implements Initializable {
              mileAVGLast10String_Label.setTextFill( Color.BLACK );
              mileAvgString_Label.setTextFill( Color.BLACK );
              totalMileageString_Label.setTextFill( Color.BLACK );
+             lastDate_Label.setTextFill( Color.BLACK );
+             lastDateConst_Label.setTextFill( Color.BLACK );
         }
     }
 
@@ -116,8 +122,10 @@ public class ResultsController implements Initializable {
     private void setTotalMileage_Label()
     { totalMileage_Label.setText( sbmtSheet.getTotalMileage() + " mi"); }
 
-    private void setDate_Label() throws IOException, GeneralSecurityException
-    { startDate_Label.setText( sbmtSheet.getStartDate()); }
+    private void setDate_Labels() throws IOException, GeneralSecurityException {
+        startDate_Label.setText( sbmtSheet.getStartDate());
+        lastDate_Label.setText( sbmtSheet.getLastEntryDate() );
+    }
 
     @FXML
     private void launchMainUI() throws IOException

@@ -168,7 +168,7 @@ public class SBMT_Sheet {
     { return getSheetDataCol1_AsObservableList().get( 0 ); }
 
     public String getUserPhoneNum() throws IOException, GeneralSecurityException
-    { return getEntryDates_AsObservableList().get( 1 ); }
+    { return getEntryDates_AsObservableList().get( 4 ); }
 
     public String getUserEmail() throws IOException, GeneralSecurityException
     { return getEntryDates_AsObservableList().get( 2 ); }
@@ -177,7 +177,7 @@ public class SBMT_Sheet {
     { return getEntryDates_AsObservableList().get( 3 ); }
 
     public String getStored_MileageWarningThreshold() throws IOException, GeneralSecurityException
-    { return getEntryDates_AsObservableList().get( 4 ); }
+    { return getEntryDates_AsObservableList().get( 1 ); }
 
     public String getBkGrndIndex() throws IOException, GeneralSecurityException
     { return getSheetDataCol2_AsObservableList().subList( 0, 1 ).get( 0 ); }
@@ -187,19 +187,32 @@ public class SBMT_Sheet {
         return startDateAndTime.substring(0, Math.min(startDateAndTime.length(), 10));
     }
 
+    public String getLastEntryDate() throws IOException, GeneralSecurityException {
+        String lastDateAndTime = getEntryDates_AsObservableList().get( getEntryDates_AsObservableList().size() - 1 );
+        return lastDateAndTime.substring(0, Math.min(lastDateAndTime.length(), 10));
+    }
+
+    private void resetColumn_A_Defaults() throws IOException, GeneralSecurityException {
+        for ( int i = 0; i < 2; i++ )
+        { updateSheet( "sbMileage!A" + ( i+1 ), String.valueOf( 0 ) ); }
+        for ( int i = 2; i < 5; i++ )
+        { updateSheet( "sbMileage!A" + ( i+1 ), "empty" ); }
+    }
+
+    private void resetColumn_B_Defaults() throws IOException, GeneralSecurityException {
+        for ( int i = 0; i < 5; i++ )
+        { updateSheet( "sbMileage!B" + ( i+1 ) , String.valueOf( 0 ) ); }
+    }
+
+    private void resetColumn_C_Defaults() throws IOException, GeneralSecurityException
+    { updateSheet( "sbMileage!C1", String.valueOf( 0 ) ); }
+
+    private void resetAll_Defaults() throws IOException, GeneralSecurityException
+    { resetColumn_A_Defaults(); resetColumn_B_Defaults(); resetColumn_C_Defaults(); }
+
     public void resetSheet() throws IOException, GeneralSecurityException {
-        updateSheet( "sbMileage!A1", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!A2", "empty" );
-        updateSheet( "sbMileage!A3", "empty" );
-        updateSheet( "sbMileage!A4", "empty" );
-        updateSheet( "sbMileage!A5", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!B1", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!B2", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!B3", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!B4", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!B5", String.valueOf( 0 ) );
-        updateSheet( "sbMileage!C1", String.valueOf( 0 ) );
-        if ( canSheetBeReset() )
+        resetAll_Defaults();
+        if ( sheetAllowsForReset() )
              { resetSheetFromIndex( 5 ); }
     }
 
@@ -208,7 +221,7 @@ public class SBMT_Sheet {
                 &&  !getEntryDates_AsObservableList().get( index ).equals( String.valueOf( 0 ) );
     }
 
-    public boolean canSheetBeReset() throws IOException, GeneralSecurityException {
+    public boolean sheetAllowsForReset() throws IOException, GeneralSecurityException {
         return getSheetData().size() > 5
                 || !getMileageWarningThreshold().equals( String.valueOf( 0 ) )
                 || !getUserPhoneNum().equals( "empty" )
@@ -232,4 +245,7 @@ public class SBMT_Sheet {
             bkGrnd_ImageView.setImage( blueMtn_bkGrnd );
             updateSheet( "sbMileage!B1", "0" ); }
     }
+
+    public boolean isAltBkGrnd() throws IOException, GeneralSecurityException
+    { return getBkGrndIndex().equals( "1" ); }
 }
