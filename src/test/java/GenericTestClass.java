@@ -4,9 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.GeneralSecurityException;
 
 public class GenericTestClass {
@@ -42,5 +43,16 @@ public class GenericTestClass {
         { System.out.println( element ); }
         System.out.println("\nLast Element: " + lastEntry);
         Assertions.assertEquals( "Element " + count, lastEntry );
+    }
+
+    @Test
+    public void testConnection() {
+        try {
+            URL url = new URL("http://www.google.com");
+            URLConnection connection = url.openConnection();
+            connection.connect();
+            System.out.println("Internet is connected"); }
+        catch (IOException e)
+        { System.out.println("Internet is not connected"); }
     }
 }

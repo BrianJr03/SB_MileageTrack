@@ -13,6 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class Main extends Application implements EventHandler <ActionEvent> {
 
@@ -23,8 +25,10 @@ public class Main extends Application implements EventHandler <ActionEvent> {
 
     public Main() throws IOException {}
 
-    public static void main( String[] args )
-    { launch( args );  }
+    public static void main( String[] args ) {
+        if ( isOnline() ) launch( args );
+        else System.exit( 0 );
+    }
 
     @Override
     public void start( Stage primaryStage ) {
@@ -50,5 +54,22 @@ public class Main extends Application implements EventHandler <ActionEvent> {
         FXMLLoader loader = new FXMLLoader( Main.class.getResource( uiPath ) );
         Parent root = loader.load();
         rootPane.getChildren().setAll( root );
+    }
+
+    private static boolean isOnline() {
+        try { establishConnection(); return true; }
+        catch ( IOException e )
+        { printNoConnection_MSG(); return false; }
+    }
+
+    private static void establishConnection() throws IOException {
+        URL url = new URL("http://www.google.com");
+        URLConnection connection = url.openConnection();
+        connection.connect();
+    }
+
+    private static void printNoConnection_MSG() {
+        System.out.println("\nInternet is not connected." +
+            "\nPlease check your connection and try again.");
     }
 }
